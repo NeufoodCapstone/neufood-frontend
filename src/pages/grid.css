@@ -1,0 +1,16 @@
+.grandparent{
+    display:flex;
+    flex-direction:column;
+   }
+   .parent{
+     display:flex; 
+   }
+   
+   .child{
+     background-color:#f8f9fb;
+     width:224px;
+     border:1px solid blue;
+     text-align:center;
+     color:black;
+     font-size:20px;
+   }

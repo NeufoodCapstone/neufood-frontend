@@ -1,0 +1,108 @@
+diff --git a/node_modules/react-dev-utils/FileSizeReporter.js b/node_modules/react-dev-utils/FileSizeReporter.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/ForkTsCheckerWarningWebpackPlugin.js b/node_modules/react-dev-utils/ForkTsCheckerWarningWebpackPlugin.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/ForkTsCheckerWebpackPlugin.js b/node_modules/react-dev-utils/ForkTsCheckerWebpackPlugin.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/InlineChunkHtmlPlugin.js b/node_modules/react-dev-utils/InlineChunkHtmlPlugin.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/InterpolateHtmlPlugin.js b/node_modules/react-dev-utils/InterpolateHtmlPlugin.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/LICENSE b/node_modules/react-dev-utils/LICENSE
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/ModuleNotFoundPlugin.js b/node_modules/react-dev-utils/ModuleNotFoundPlugin.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/ModuleScopePlugin.js b/node_modules/react-dev-utils/ModuleScopePlugin.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/README.md b/node_modules/react-dev-utils/README.md
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/WebpackDevServerUtils.js b/node_modules/react-dev-utils/WebpackDevServerUtils.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/browsersHelper.js b/node_modules/react-dev-utils/browsersHelper.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/chalk.js b/node_modules/react-dev-utils/chalk.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/checkRequiredFiles.js b/node_modules/react-dev-utils/checkRequiredFiles.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/clearConsole.js b/node_modules/react-dev-utils/clearConsole.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/crossSpawn.js b/node_modules/react-dev-utils/crossSpawn.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/errorOverlayMiddleware.js b/node_modules/react-dev-utils/errorOverlayMiddleware.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/eslintFormatter.js b/node_modules/react-dev-utils/eslintFormatter.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/evalSourceMapMiddleware.js b/node_modules/react-dev-utils/evalSourceMapMiddleware.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/formatWebpackMessages.js b/node_modules/react-dev-utils/formatWebpackMessages.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/getCSSModuleLocalIdent.js b/node_modules/react-dev-utils/getCSSModuleLocalIdent.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/getCacheIdentifier.js b/node_modules/react-dev-utils/getCacheIdentifier.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/getProcessForPort.js b/node_modules/react-dev-utils/getProcessForPort.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/getPublicUrlOrPath.js b/node_modules/react-dev-utils/getPublicUrlOrPath.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/globby.js b/node_modules/react-dev-utils/globby.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/ignoredFiles.js b/node_modules/react-dev-utils/ignoredFiles.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/immer.js b/node_modules/react-dev-utils/immer.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/launchEditor.js b/node_modules/react-dev-utils/launchEditor.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/launchEditorEndpoint.js b/node_modules/react-dev-utils/launchEditorEndpoint.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/noopServiceWorkerMiddleware.js b/node_modules/react-dev-utils/noopServiceWorkerMiddleware.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/openBrowser.js b/node_modules/react-dev-utils/openBrowser.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/openChrome.applescript b/node_modules/react-dev-utils/openChrome.applescript
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/printBuildError.js b/node_modules/react-dev-utils/printBuildError.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/printHostingInstructions.js b/node_modules/react-dev-utils/printHostingInstructions.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/redirectServedPathMiddleware.js b/node_modules/react-dev-utils/redirectServedPathMiddleware.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/refreshOverlayInterop.js b/node_modules/react-dev-utils/refreshOverlayInterop.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-dev-utils/webpackHotDevClient.js b/node_modules/react-dev-utils/webpackHotDevClient.js
+old mode 100644
+new mode 100755

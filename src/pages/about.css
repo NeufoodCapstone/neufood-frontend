@@ -1,0 +1,74 @@
+h3 {
+  overflow: hidden;
+  text-align: center;
+  font-weight: bold;
+  padding: 10%;
+}
+
+h3:before,
+h3:after {
+  background-color: rgb(109, 163, 77);
+  content: "";
+  display: inline-block;
+  height: 7px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+h3:before {
+  right: 0.5em;
+  margin-left: -50%;
+  font-weight: bold;
+}
+
+h3:after {
+  left: 0.5em;
+  margin-right: -50%;
+  font-weight: bold;
+}
+
+.button {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  color: black;
+  border-radius: 40px;
+}
+
+/* Green */
+.signin {
+  border-color: rgb(109, 163, 77);
+  border-radius: "90px";
+  color: black;
+}
+
+.signin:hover {
+  background-color: rgb(109, 163, 77);
+  color: white;
+}
+/* 
+.backgrounddiv {
+  display: flex;
+  justify-content: center;
+  align-items: Right;
+  background-color: rgb(245, 239, 237);
+}
+
+.imgdiv {
+  position: "absolute";
+  top: "10%";
+  right: "50%";
+  width: "250px";
+  padding: "10px";
+}
+
+.containerdiv {
+  /* weight: "100%"; */
+/* position: "relative";
+  height: "200px";
+  display: "table";
+} */

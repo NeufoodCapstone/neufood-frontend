@@ -1,0 +1,153 @@
+.pantry-card-style{
+    background-color: blanchedalmond;
+}
+
+.header-img-ctn{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    height: 20vh;
+    width: auto;
+    border-radius: 40px;
+}
+figcaption{
+    top: 15%;
+    left: 20%;
+    color: #394032;
+    width: 20vw;
+    height: auto;
+    position: absolute;
+    font-size: 52px;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+
+.pantry-img-ctn{
+   height: 30vh;
+   width: 30vw;
+   padding-left: 10%;
+   padding-right: 10%;
+
+  }
+
+.pantry-name{
+    padding-top: 8%;
+    justify-content: center;
+    font-size:24px;
+    text-align: center;
+}
+
+.trash-btn-style{
+    position:absolute;
+    top: 10%;
+    right: 5%;
+    color:#771f1f;
+    border: 1px solid #771f1f;
+    border-radius: 15%;
+}
+
+.rect-outline{
+    left: 15%;
+    top: 20%;
+    border: 4px solid #6DA34D;
+    position: absolute;
+    height: 10vh;
+    width: 30vh;
+    border-radius: 50px;
+    background-color: white;
+    text-align: center;
+    overflow: hidden;
+
+}
+
+.rect-info-ctn{
+
+    position: absolute;
+    left: 50%;
+    height: 28vh;
+    width: 40vh;
+    border-radius: 50px;
+    background-color: #F5EFED;
+    top: 15%;
+    font-size: 16px;
+
+}
+
+.card-info-txt{
+    padding-top: 40%;
+
+}
+
+   .btn-create-new-ctn{
+    justify-content: left;
+    padding-left: 70%;
+    padding-top: 3%;
+    padding-bottom:15%;
+   }
+
+   .border-ctn{
+    box-sizing: border-box;
+    position: absolute;
+    width: 35vw;
+    height: 25vh;
+    right: 0px; /*need this to put it at the side of the screen */
+    top: 12%;
+    border: 4px solid #394032;
+    border-radius: 50px 0px 0px 50px;
+    padding-bottom: 5%;
+   }
+
+
+  /* Green */
+  .signin {
+    /* border-color: rgb(109, 163, 77); */
+    transform: translate(0%, 180%);
+    border-radius: "90px";
+    color: black;
+  }
+  
+  .signin:hover {
+    background-color: #955E42; /*fill in button color on the hover */
+    color: white; /*color of the ;*/
+  }
+
+  .button {
+
+    border: 2px solid #955E42; /*border color*/
+    background-color: #F5EFED;
+    color: black;
+    padding: 14px 48px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    border-radius: 40px;
+  }
+  
+  .txt-ctn{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-size: 24px;
+    text-align: center;
+
+  }
+
+  .txt-font-style{
+    font-size: 24px;
+    text-align: center;
+    font-family: Urbanist;
+    font-weight: 300;
+  }
+
+  .add-new-membr-btn{
+    top: 10%;
+    right: 5%;
+    color: #394032;
+    border: 1px solid #394032;
+    border-radius: 50px;
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+
+
