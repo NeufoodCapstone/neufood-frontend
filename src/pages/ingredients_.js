@@ -1,29 +1,17 @@
-import React from "react";
-import { useState } from "react";
-import axios from "axios";
-import {
-  Box,
-  Button,
-  Snackbar,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-import AddBoxIcon from "@material-ui/icons/AddBox";
-import DoneIcon from "@material-ui/icons/Done";
-import ClearIcon from "@material-ui/icons/Clear";
-import CreateIcon from "@material-ui/icons/Create";
-import { makeStyles } from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
+import { Box, Button, TableCell, TableRow } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
+import AddBoxIcon from "@material-ui/icons/AddBox";
+import ClearIcon from "@material-ui/icons/Clear";
+import CreateIcon from "@material-ui/icons/Create";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import DoneIcon from "@material-ui/icons/Done";
+import axios from "axios";
+import React, { useState } from "react";
+import { config } from "../Constants";
 /*
  * Hey Yiqun
  * All you have to do is change the recipeList variable to the JSON object from the backend
@@ -31,6 +19,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
  */
 
 export default function Ingredients() {
+  var baseURL = config.url.API_HOME;
   //defining a state named rows
   //which we can update by calling on setRows function
   //const[rows, setRows] = useState([{id: 1, ingredientname: "", price: "", category: ""},]);
@@ -76,7 +65,7 @@ export default function Ingredients() {
     console.log("saved : ", post[post.length - 1].name);
     console.log("apiiiiiiiiiiiiiiiiiiiiiiiiiii");
     console.log(
-      "http://localhost:8080/ingredients/" +
+      `${baseURL}/ingredients/` +
         post[post.length - 1].name +
         "/" +
         post[post.length - 1].price +
@@ -87,7 +76,7 @@ export default function Ingredients() {
     );
 
     const res = await fetch(
-      "http://localhost:8080/ingredients/b/b/b/107998420216333899280",
+      `${baseURL}/ingredients/b/b/b/107998420216333899280`,
       {
         method: "POST",
         mode: "no-cors",
@@ -130,7 +119,7 @@ export default function Ingredients() {
     setSubmitted(false);
   };
   // authenticate user first
-  const authURL = "http://localhost:8080/auth";
+  const authURL = `${baseURL}/auth`;
 
   const logout = () => {
     axios.get(url + "/logout").then((response) => {
@@ -171,14 +160,13 @@ export default function Ingredients() {
 
   const user = localStorage.getItem("loginID");
   console.log(user);
-  const baseURL =
-    "http://localhost:8080/" +
+  const usedUrl =
+    `${baseURL}/` +
     encodeURIComponent(user).replace("%22", "").replace("%22", "") +
     "/ingredients";
-  console.log(baseURL);
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
+    axios.get(usedUrl).then((response) => {
       setPost(response.data);
       console.log(response.data);
     });

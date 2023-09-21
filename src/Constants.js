@@ -1,8 +1,8 @@
 import { env } from "./env";
 const prod = {
   url: {
-    API_URL: "https://neufood.herokuapp.com",
-    API_HOME: "https://neufood.herokuapp.com",
+    API_URL: "https://fair-lime-harp-seal-gown.cyclic.cloud",
+    API_HOME: "https://fair-lime-harp-seal-gown.cyclic.cloud",
   },
 };
 const dev = {
@@ -12,4 +12,4 @@ const dev = {
     API_HOME: "http://localhost:8080",
   },
 };
-export const config = env.REACT_APP_NODE_ENV === "development" ? dev : dev;
+export const config = env.REACT_APP_NODE_ENV === "development" ? dev : prod;

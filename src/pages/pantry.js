@@ -26,10 +26,10 @@ function Pantry() {
   const loginData = JSON.parse(localStorage.getItem("loginData"));
   if (loginData == null) window.location.href = "/signin";
 
-  const goToPantry = e => {
+  const goToPantry = (e) => {
     e.preventDefault();
     window.location.href = "/ingredients";
-  }
+  };
 
   const user = localStorage.getItem("loginID");
   const [pantryList, setPantryList] = useState([]);
@@ -62,8 +62,6 @@ function Pantry() {
     await axios.delete(`${url}/pantry/${id}`);
     setPantryList(pantryList.filter((pantry) => pantry._id !== id));
   };
-
-
 
   //add pantry
   const handleSubmit = (e) => {
@@ -104,15 +102,20 @@ function Pantry() {
   const submitNewMember = (pantry_id) => {
     const temp = [];
 
-    const myRequest = new Request(`http://localhost:8080/pantry/${pantry_id}/${addedUser}/${loginData.getItem("loginID")}`, {
-      method: "POST",
-      mode: "no-cors",
-      credentials: "include",
-      body: "null",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const myRequest = new Request(
+      `${baseURL}/pantry/${pantry_id}/${addedUser}/${loginData.getItem(
+        "loginID"
+      )}`,
+      {
+        method: "POST",
+        mode: "no-cors",
+        credentials: "include",
+        body: "null",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     fetch(myRequest)
       .then(function (response) {
@@ -139,7 +142,8 @@ function Pantry() {
             <div className="txt-font-style">
               {" "}
               Create and edit pantries to{" "}
-              <span style={{ fontWeight: 1000 }}>track </span> your ingredients, or join a new!
+              <span style={{ fontWeight: 1000 }}>track </span> your ingredients,
+              or join a new!
             </div>
           </div>
           <button
@@ -201,9 +205,7 @@ function Pantry() {
         </Container>
       </Menu>
 
-    
-
-    {/* end to add a new member */}
+      {/* end to add a new member */}
 
       {pantryList.map((data) => (
         <p>
@@ -218,7 +220,6 @@ function Pantry() {
             }}
           >
             <Card
-
               style={{
                 width: "60vw",
                 paddingRight: "30%",
@@ -232,77 +233,78 @@ function Pantry() {
                 borderRadius: "50px",
               }}
             >
-
               {/* start to add a new member */}
-     <Menu {...bindMenu(addNewMember)}>
-        <Container
-          style={{
-            padding: "20px",
-            display: "flex",
-            width: "100%",
-            "justify-content": "center",
-            "align-items": "center",
-          }}
-        >
-          <Card
-            style={{
-              width: "18rem",
-              "justify-content": "center",
-              "align-items": "center",
-              "flex-wrap": "wrap",
-              "z-index": 0,
-            }}
-          >
-            <Card.Body>
-              <form onSubmit={() => submitNewMember(data._id)}>
-                <Form.Control
-                  type="text"
-                  name="name"
+              <Menu {...bindMenu(addNewMember)}>
+                <Container
                   style={{
-                    width: 200,
-                    left: "15%",
-                    margin: 5,
-                    borderRadius: "50px",
+                    padding: "20px",
+                    display: "flex",
+                    width: "100%",
+                    "justify-content": "center",
+                    "align-items": "center",
                   }}
-                  placeholder="Enter Valid Email:"
-                />
-                <button
-                  class="button-3"
-                  style={{
-                    justifyContent: "center",
-                    margin: 5,
-                    width: "10vw",
-                    left: "15%",
-                    borderRadius: "50px",
-                  }}
-                  type="submit"
                 >
-                  Add Member
-                </button>
-              </form>
-            </Card.Body>
-          </Card>
-        </Container>
-      </Menu>
-             
-   
-                <img class="pantry-img-ctn" src={defaultImg} alt="default pantry img"/>
-      
-           
+                  <Card
+                    style={{
+                      width: "18rem",
+                      "justify-content": "center",
+                      "align-items": "center",
+                      "flex-wrap": "wrap",
+                      "z-index": 0,
+                    }}
+                  >
+                    <Card.Body>
+                      <form onSubmit={() => submitNewMember(data._id)}>
+                        <Form.Control
+                          type="text"
+                          name="name"
+                          style={{
+                            width: 200,
+                            left: "15%",
+                            margin: 5,
+                            borderRadius: "50px",
+                          }}
+                          placeholder="Enter Valid Email:"
+                        />
+                        <button
+                          class="button-3"
+                          style={{
+                            justifyContent: "center",
+                            margin: 5,
+                            width: "10vw",
+                            left: "15%",
+                            borderRadius: "50px",
+                          }}
+                          type="submit"
+                        >
+                          Add Member
+                        </button>
+                      </form>
+                    </Card.Body>
+                  </Card>
+                </Container>
+              </Menu>
+
+              <img
+                class="pantry-img-ctn"
+                src={defaultImg}
+                alt="default pantry img"
+              />
+
               <div className="rect-info-ctn">
                 <div className="rect-outline" onClick={goToPantry}>
                   <div className="pantry-name">{data.name}</div>
                 </div>
                 <div className="card-info-txt">
-                  Owner: {data.owner} <br></br> Contributors: 2 <br></br>     {/* contributors 2 needs to be changed to acutally do a call with a data. something */}
-                    <button
-                      class="add-new-membr-btn"
-                      variant="contained"
-                      {...bindTrigger(addNewMember)}
-                    >
-                      Add Member
-                    </button>
-               
+                  Owner: {data.owner} <br></br> Contributors: 2 <br></br>{" "}
+                  {/* contributors 2 needs to be changed to acutally do a call with a data. something */}
+                  <button
+                    class="add-new-membr-btn"
+                    variant="contained"
+                    {...bindTrigger(addNewMember)}
+                  >
+                    Add Member
+                  </button>
                 </div>
               </div>
 

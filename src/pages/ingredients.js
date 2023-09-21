@@ -12,8 +12,10 @@ import {
 import Menu from "@mui/material/Menu";
 import Card from "react-bootstrap/Card";
 import { Tabs, Tab } from "react-bootstrap";
+import { config } from "../Constants";
 
 const Ingredients = () => {
+  var baseURL = config.url.API_HOME;
   const [inputs, setInputs] = useState([]); // initialize as an empty array
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -30,7 +32,7 @@ const Ingredients = () => {
   const uid = loginData.id;
 
   const getInputs = async () => {
-    const response = await fetch(`http://localhost:8080/${uid}/ingredients/`);
+    const response = await fetch(`${baseURL}/${uid}/ingredients/`);
     const jsonData = await response.json();
 
     setInputs(jsonData);
@@ -48,7 +50,7 @@ const Ingredients = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      `http://localhost:8080/ingredients/${name}/${price}/${category}/${quantity}/${uid}`,
+      `${baseURL}/ingredients/${name}/${price}/${category}/${quantity}/${uid}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -57,7 +59,7 @@ const Ingredients = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:8080/ingredients/${id}`);
+    await axios.delete(`${baseURL}/ingredients/${id}`);
     setInputs(inputs.filter((ingredient) => ingredient._id !== id));
   };
 
