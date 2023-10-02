@@ -1,40 +1,217 @@
-import * as React from "react";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
-import GoogleLogin from "react-google-login";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
-import "./button.css";
-import Card from "react-bootstrap/Card";
+import * as React from "react";
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import signin_pic from "./sigin.png";
-import logo from "./logo-no-text.png";
+import Card from "react-bootstrap/Card";
+import GoogleLogin from "react-google-login";
+import Pill from "../components/Pill";
 import { config } from "../Constants";
 import "./about.css";
-import { FaGoogle } from "react-icons/fa";
-import { makeStyles } from "@material-ui/core/styles";
-import {Tabs, Tab} from "@material-ui/core";
+import "./button.css";
+import logo from "./logo-no-text.png";
+import signin_pic from "./sigin.png";
 
 var url = config.url.API_HOME;
 
 const theme = createTheme();
 
 export default function SignIn() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [currentError, setCurrentError] = useState("");
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const allergies = [
+    "Peanuts",
+    "Tree Nuts",
+    "Milk",
+    "Eggs",
+    "Wheat",
+    "Soy",
+    "Fish",
+    "Shellfish",
+    "Gluten",
+    "Sesame",
+    "Lactose",
+    "Pollen",
+    "Grass Pollen",
+    "Tree Pollen",
+    "Weed Pollen",
+    "Dust Mites",
+    "Animal Dander",
+    "Cockroach",
+    "Latex",
+    "Mold",
+    "Pollen from Alder Trees",
+    "Pollen from Birch Trees",
+    "Pollen from Cedar Trees",
+    "Pollen from Oak Trees",
+    "Pollen from Maple Trees",
+    "Pollen from Pine Trees",
+    "Pollen from Poplar Trees",
+    "Pollen from Elm Trees",
+    "Pollen from Ragweed",
+    "Pollen from Sagebrush",
+    "Pollen from Timothy Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+    "Pollen from Ryegrass",
+    "Pollen from Bahia Grass",
+    "Pollen from Orchard Grass",
+    "Pollen from Redtop Grass",
+    "Pollen from Sweet Vernal Grass",
+    "Pollen from Johnson Grass",
+    "Pollen from Fescue Grass",
+    "Pollen from Meadow Fescue",
+    "Pollen from Perennial Rye",
+    "Pollen from Brome Grass",
+    "Pollen from Timothy Meadow Grass",
+    "Pollen from Bermuda Grass",
+    "Pollen from Kentucky Bluegrass",
+  ];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -113,6 +290,7 @@ export default function SignIn() {
     });
 
     const data = await res.json();
+    console.log(data);
     localStorage.setItem("loginData", JSON.stringify(data));
     localStorage.setItem("picture", JSON.stringify(data.picture));
     sessionStorage.setItem("token", googleData.tokenId);
@@ -125,12 +303,27 @@ export default function SignIn() {
     alert(response);
   };
 
-  //tab
-  const [activeTab, setActiveTab] = useState("first");
+  console.log("Login Data", loginData);
+  const uid = localStorage.getItem("loginId");
+  console.log("uid", uid);
 
-  const handleTabChange = (tabKey) => {
-    setActiveTab(tabKey);
+  const [allergens, setAllergens] = useState([]);
+
+  useEffect(async () => {
+    const response = await axios.get(`${url}/user/allergy/${loginData.id}`);
+    setAllergens(response.data.allergens);
+  }, []);
+
+  console.log("allergens", allergens);
+
+  const handleSelectChange = (e) => {
+    axios.post(`${url}/user/allergy/${loginData.id}`, {
+      uid: loginData.id,
+      allergens: [...allergens, e.target.value],
+    });
   };
+
+  const [selectedOption, setSelectedOption] = useState("");
 
   return (
     <div
@@ -140,37 +333,43 @@ export default function SignIn() {
       data-testid="signin-1"
     >
       <Container>
-        <img className = "logo-img" src = {logo} 
-          style= {{
+        <img
+          className="logo-img"
+          src={logo}
+          style={{
             position: "absolute",
             top: "10%",
             left: "10%",
             height: "20vh",
             width: "auto",
             borderRadius: "40px",
-          }}/>
+          }}
+        />
         {loginData != null && (
-        <figcaption className = "pageTitle" 
-          style = {{
-            top: "15%",
-            left: "20%",
-            color: "#394032",
-            width: "20vw",
-            height: "auto",
-            position: "absolute",
-            fontSize: "52px",
-            fontFamily: "Urbanist",
-            fontWeight: "300",
-
-          }}>Profile</figcaption>
+          <figcaption
+            className="pageTitle"
+            style={{
+              top: "15%",
+              left: "20%",
+              color: "#394032",
+              width: "20vw",
+              height: "auto",
+              position: "absolute",
+              fontSize: "52px",
+              fontFamily: "Urbanist",
+              fontWeight: "300",
+            }}
+          >
+            Profile
+          </figcaption>
         )}
-      </Container> 
-  
+      </Container>
+
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth ="100%" >
+        <Container component="main" maxWidth="100%">
           {loginData ? (
             <div style={{ paddingTop: "15%", paddingBottom: "10%" }}>
-              <Container 
+              <Container
                 style={{
                   width: "60%",
                   borderRadius: "20px",
@@ -195,20 +394,22 @@ export default function SignIn() {
                   }}
                 >
                   <Card.Body>
-                    <div 
-                        style={{ 
-                          width: "300px",
-                          height: "100px",
-                          borderRadius: "10px",
-                          backgroundColor: "#fff",
-                          marginLeft: "120px",
-                          alignContent: "center",
-                          boxShadow: "0px 1px 3px rgba(0,0,0,0.12), 0px 1px 2px rgba(0,0,0,0.24)"
-                        }}>
+                    <div
+                      style={{
+                        width: "300px",
+                        height: "100px",
+                        borderRadius: "10px",
+                        backgroundColor: "#fff",
+                        marginLeft: "120px",
+                        alignContent: "center",
+                        boxShadow:
+                          "0px 1px 3px rgba(0,0,0,0.12), 0px 1px 2px rgba(0,0,0,0.24)",
+                      }}
+                    >
                       <div
                         class="avatar-big"
                         style={{
-                          width: "15rem", 
+                          width: "15rem",
                           height: "15rem",
                         }}
                       >
@@ -248,117 +449,164 @@ export default function SignIn() {
                         }}
                       >
                         <div>
-                        <Card.Title>{loginData.name}</Card.Title>
-                        <Card.Text style={{ fontSize: "15px" }}>
-                          Email: {loginData.email}
-                        </Card.Text>
-                        {loginData.provider === "google.com" && (
-                          <img
-                            src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-google-circle-512.png"
-                            alt="Google icon"
-                            style={{ width: "20px", height: "20px" }}
-                          />
-                        )}
-                      </div>
+                          <Card.Title>{loginData.name}</Card.Title>
+                          <Card.Text style={{ fontSize: "15px" }}>
+                            Email: {loginData.email}
+                          </Card.Text>
+                          {loginData.provider === "google.com" && (
+                            <img
+                              src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-google-circle-512.png"
+                              alt="Google icon"
+                              style={{ width: "20px", height: "20px" }}
+                            />
+                          )}
+                        </div>
                       </figcaption>
                     </div>
                   </Card.Body>
                 </Card>
               </Container>
               <Container style={{ width: "60%", marginTop: "50px" }}>
-              <Tabs activeKey={activeTab} onSelect={handleTabChange}>
-              <Tab eventKey="first" 
-                  title="Pantries"
+                <div
                   style={{
-                      backgroundColor: 'green',
-                      borderTopLeftRadius: '30px',
-                      borderTopRightRadius: '30px',
-                      marginRight: '3%',
-                      marginLeft: '3%',
-                      color: 'white'
-                  }}>
-                  <h2>Content for Tab 1 goes here</h2>
-              </Tab>
-              <Tab eventKey="second"  
-                style={{
-                  backgroundColor: 'green',
-                  borderTopLeftRadius: '30px',
-                  borderTopRightRadius: '30px',
-                  }}>
-                <h2>Content for Tab 2 goes here</h2>
-              </Tab>
-            </Tabs>
-            <div
-              style={{
-                width: "100%",
-                height: "auto",
-                borderRadius: "20px",
-                backgroundColor: "#F1F1F1",
-                border: "none",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#fff",
-                flexDirection: "column",
-                gap: "20px",
-                padding: "20px",
-              }}
-            >
-              <div
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: "20px",
-                  border: "3px solid #8B0000",
-                  display: "flex",
-                  justifyContent: "left",
-                  alignItems: "center",
-                  padding: "20px",
-                  textAlign: "left",
-                  fontWeight: "bold",
-                  fontFamily: "Urbanist",
-                }}
-              >
-                <p>Recipe Recommendation</p>
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: "20px",
-                  border: "3px solid #8B0000",
-                  display: "flex",
-                  justifyContent: "left",
-                  alignItems: "center",
-                  padding: "20px",
-                  textAlign: "left",
-                  fontWeight: "bold",
-                  fontFamily: "Urbanist",
-                }}
-              >
-                <p>Allergies/Diet</p>
-              </div>
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "20px",
+                    backgroundColor: "#F1F1F1",
+                    border: "none",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#fff",
+                    flexDirection: "column",
+                    gap: "20px",
+                    padding: "20px",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      borderRadius: "20px",
+                      border: "3px solid #8B0000",
+                      display: "flex",
+                      justifyContent: "left",
+                      alignItems: "center",
+                      padding: "20px",
+                      textAlign: "left",
+                      fontWeight: "bold",
+                      fontFamily: "Urbanist",
+                    }}
+                  >
+                    <p>Recipe Recommendation</p>
+                  </div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      borderRadius: "20px",
+                      border: "3px solid #8B0000",
+                      display: "block",
+                      justifyContent: "left",
+                      alignItems: "center",
+                      padding: "20px",
+                      textAlign: "left",
+                      fontWeight: "bold",
+                      fontFamily: "Urbanist",
+                    }}
+                  >
+                    <p>Allergies/Diet</p>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                      }}
+                    >
+                      {allergens.map((allergy) => (
+                        <Pill title={allergy} />
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => setShowPopup(!showPopup)}
+                      className="button"
+                    >
+                      +
+                    </button>
+                    {showPopup && (
+                      <select
+                        id="dropdown"
+                        value={selectedOption}
+                        onChange={handleSelectChange}
+                      >
+                        <option value="">Select an allergy</option>
+                        <option key={-1} value={"Water"}>
+                          Water
+                        </option>
+                        {allergies.map((allergy, index) =>
+                          !allergens.includes(allergy) ? (
+                            <option key={index} value={allergy}>
+                              {allergy}
+                            </option>
+                          ) : null
+                        )}
+                      </select>
+                    )}
+                  </div>
 
-              <div
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: "20px",
-                  border: "3px solid #8B0000",
-                  display: "flex",
-                  justifyContent: "left",
-                  alignItems: "center",
-                  padding: "20px",
-                  textAlign: "left",
-                  fontWeight: "bold",
-                  fontFamily: "Urbanist",
-                }}
-              >
-                <p>Badges</p>
-              </div>
-            </div>
-
-            </Container>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      borderRadius: "20px",
+                      border: "3px solid #8B0000",
+                      display: "flex",
+                      justifyContent: "left",
+                      alignItems: "center",
+                      padding: "20px",
+                      textAlign: "left",
+                      fontWeight: "bold",
+                      fontFamily: "Urbanist",
+                    }}
+                  >
+                    <p>Badges</p>
+                  </div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      borderRadius: "20px",
+                      border: "3px solid #8B0000",
+                      display: "flex",
+                      justifyContent: "left",
+                      alignItems: "center",
+                      padding: "20px",
+                      textAlign: "left",
+                      fontWeight: "bold",
+                      fontFamily: "Urbanist",
+                    }}
+                  >
+                    <p>Friends</p>
+                  </div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      borderRadius: "20px",
+                      border: "3px solid #8B0000",
+                      display: "flex",
+                      justifyContent: "left",
+                      alignItems: "center",
+                      padding: "20px",
+                      textAlign: "left",
+                      fontWeight: "bold",
+                      fontFamily: "Urbanist",
+                    }}
+                  >
+                    <p>Notifications</p>
+                  </div>
+                </div>
+              </Container>
               <button
                 class="button signin"
                 role="button"
@@ -370,7 +618,7 @@ export default function SignIn() {
           ) : (
             <div>
               <CssBaseline />
-              
+
               <Box
                 sx={{
                   backgroundColor: "rgb(245, 239, 237)",
