@@ -290,7 +290,6 @@ export default function SignIn() {
     });
 
     const data = await res.json();
-    console.log(data);
     localStorage.setItem("loginData", JSON.stringify(data));
     localStorage.setItem("picture", JSON.stringify(data.picture));
     sessionStorage.setItem("token", googleData.tokenId);
@@ -303,10 +302,6 @@ export default function SignIn() {
     alert(response);
   };
 
-  console.log("Login Data", loginData);
-  const uid = localStorage.getItem("loginId");
-  console.log("uid", uid);
-
   const [allergens, setAllergens] = useState([]);
 
   useEffect(async () => {
@@ -314,16 +309,19 @@ export default function SignIn() {
     setAllergens(response.data.allergens);
   }, []);
 
-  console.log("allergens", allergens);
-
   const handleSelectChange = (e) => {
-    axios.post(`${url}/user/allergy/${loginData.id}`, {
-      uid: loginData.id,
-      allergens: [...allergens, e.target.value],
-    });
+    try {
+      axios.post(`${url}/user/allergy/${loginData.id}`, {
+        uid: loginData.id,
+        allergen: e.target.value,
+      });
+      setAllergens([...allergens, e.target.value]);
+    } catch (err) {
+      console.err(err);
+    }
   };
 
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, _] = useState("");
 
   return (
     <div
