@@ -82,6 +82,17 @@ export default class NavbarComp extends Component {
                       Profile
                     </Nav.Link>
                   )}
+                   {this.isLoggedIn() && (
+                    <Nav.Link
+                      eventKey="signin"
+                      as={Link}
+                      to="/reciperec"
+                      onClick={() => this.setState({ tag: "Profile" })}
+                      className="tab-profile"
+                    >
+                      Recipe Recommender
+                    </Nav.Link>
+                  )}
                   {!this.isLoggedIn() && (
                     <Nav.Link
                       eventKey="signin"
