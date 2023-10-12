@@ -33,6 +33,7 @@ export default function SignIn() {
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showFriendPopup, setShowFriendPopup] = useState(false);
 
   const allergies = [
     "Peanuts",
@@ -303,10 +304,38 @@ export default function SignIn() {
   };
 
   const [allergens, setAllergens] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const [addFriendValue, setAddFriendValue] = useState("");
+  const [addFriendSuccess, setAddFriendSuccess] = useState(0);
 
   useEffect(async () => {
-    const response = await axios.get(`${url}/user/allergy/${loginData.id}`);
-    setAllergens(response.data.allergens);
+    try {
+      const response = await axios.get(`${url}/user/allergy/${loginData.id}`);
+      setAllergens(response.data.allergens);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  useEffect(async () => {
+    try {
+      const response = await axios.get(`${url}/user/friends/${loginData.id}`);
+      setFriends(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  useEffect(async () => {
+    try {
+      const response = await axios.get(
+        `${url}/notifications/${loginData.email}`
+      );
+      setNotifications(response.data.notifications);
+    } catch (err) {
+      console.error(err);
+    }
   }, []);
 
   const handleSelectChange = (e) => {
@@ -317,8 +346,52 @@ export default function SignIn() {
       });
       setAllergens([...allergens, e.target.value]);
     } catch (err) {
-      console.err(err);
+      console.error(err);
     }
+  };
+
+  const handleAddFriend = () => {
+    setShowFriendPopup(false);
+    try {
+      axios.post(`${url}/notifications/add`, {
+        type: "friend-request",
+        senderEmail: loginData.email,
+        receiverEmail: addFriendValue,
+      });
+    } catch (err) {
+      console.error(err);
+      setAddFriendSuccess(-1);
+      return;
+    }
+    setAddFriendSuccess(1);
+  };
+
+  const handleDeclineFriendRequest = async (id) => {
+    try {
+      await axios.put(`${url}/notifications/read`, { notificationId: id });
+    } catch (err) {
+      return console.error(err);
+    }
+    const newNotifications = notifications.filter(
+      (notification) => notification._id !== id
+    );
+    setNotifications(newNotifications);
+  };
+
+  const handleAcceptFriendRequest = async (id, email) => {
+    try {
+      await axios.post(
+        `${url}/user/${loginData.id}/${email}/${loginData.email}`
+      );
+      await axios.put(`${url}/notifications/read`, { notificationId: id });
+    } catch (err) {
+      return console.error(err);
+    }
+    const newNotifications = notifications.filter(
+      (notification) => notification._id !== id
+    );
+    setNotifications(newNotifications);
+    setFriends([...friends, email]);
   };
 
   const [selectedOption, _] = useState("");
@@ -575,7 +648,7 @@ export default function SignIn() {
                       height: "auto",
                       borderRadius: "20px",
                       border: "3px solid #8B0000",
-                      display: "flex",
+                      display: "block",
                       justifyContent: "left",
                       alignItems: "center",
                       padding: "20px",
@@ -585,6 +658,44 @@ export default function SignIn() {
                     }}
                   >
                     <p>Friends</p>
+                    {addFriendSuccess === 1 && (
+                      <p style={{ color: "green" }}>Friend Request Sent</p>
+                    )}
+                    {addFriendSuccess === -1 && (
+                      <p style={{ color: "red" }}>
+                        Friend Request Failed to Send. Please Try Again Later.
+                      </p>
+                    )}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                      }}
+                    >
+                      {friends.map((friend) => (
+                        <Pill title={friend.email} />
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => setShowFriendPopup(!showFriendPopup)}
+                      className="button"
+                    >
+                      +
+                    </button>
+                    {showFriendPopup && (
+                      <>
+                        <input
+                          type="text"
+                          placeholder="Enter Email"
+                          value={addFriendValue}
+                          onChange={(e) => setAddFriendValue(e.target.value)}
+                        />
+                        <button onClick={handleAddFriend} className="button">
+                          Send Request
+                        </button>
+                      </>
+                    )}
                   </div>
                   <div
                     style={{
@@ -592,7 +703,7 @@ export default function SignIn() {
                       height: "auto",
                       borderRadius: "20px",
                       border: "3px solid #8B0000",
-                      display: "flex",
+                      display: "block",
                       justifyContent: "left",
                       alignItems: "center",
                       padding: "20px",
@@ -602,6 +713,54 @@ export default function SignIn() {
                     }}
                   >
                     <p>Notifications</p>
+                    {notifications &&
+                      notifications.map((notification) => {
+                        debugger;
+                        if (notification.read) return;
+                        switch (notification.type) {
+                          default:
+                            return (
+                              <Pill
+                                title={
+                                  <>
+                                    <div>
+                                      Friend Request From {notification.sender}
+                                    </div>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <button
+                                        className="button"
+                                        onClick={() =>
+                                          handleAcceptFriendRequest(
+                                            notification._id,
+                                            notification.sender
+                                          )
+                                        }
+                                      >
+                                        Accept
+                                      </button>
+                                      <button
+                                        className="button"
+                                        onClick={() =>
+                                          handleDeclineFriendRequest(
+                                            notification._id
+                                          )
+                                        }
+                                      >
+                                        Decline
+                                      </button>
+                                    </div>
+                                  </>
+                                }
+                              />
+                            );
+                        }
+                      })}
                   </div>
                 </div>
               </Container>
