@@ -291,6 +291,7 @@ export default function SignIn() {
     });
 
     const data = await res.json();
+    console.log(data);
     localStorage.setItem("loginData", JSON.stringify(data));
     localStorage.setItem("picture", JSON.stringify(data.picture));
     sessionStorage.setItem("token", googleData.tokenId);
