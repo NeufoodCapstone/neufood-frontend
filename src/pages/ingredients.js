@@ -1,17 +1,16 @@
-import axios from "axios";
-import React, { Fragment, useState, useEffect } from "react";
-import logo from "../imgs/logo-no-text.png";
-import { Container } from "react-bootstrap";
-import { config } from "../Constants";
-import "./ingredients.css";
-import {
-  usePopupState,
-  bindTrigger,
-  bindMenu,
-} from "material-ui-popup-state/hooks";
 import Menu from "@mui/material/Menu";
+import axios from "axios";
+import {
+  bindMenu,
+  bindTrigger,
+  usePopupState,
+} from "material-ui-popup-state/hooks";
+import React, { Fragment, useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { Tabs, Tab } from "react-bootstrap";
+import { config } from "../Constants";
+import logo from "../imgs/logo-no-text.png";
+import "./ingredients.css";
 
 const Ingredients = () => {
   const [inputs, setInputs] = useState([]); // initialize as an empty array
@@ -24,7 +23,7 @@ const Ingredients = () => {
   const [displayedPantry, setDisplayedPantry] = useState("All");
   const [changePantryId, setChangePantryId] = useState(null);
   const [changeSelectedPantry, _] = useState("");
-  const [hasChangedPantry, setHasChangedPantry] = useState(false);
+  const [hasChangedIngredient, setHasChangedIngredient] = useState(false);
 
   const url = process.env.MONGODB_URL;
   var urlB = config.url.API_HOME;
@@ -55,17 +54,26 @@ const Ingredients = () => {
 
   useEffect(() => {
     getInputs();
-  }, [displayedPantry, hasChangedPantry]);
+  }, [displayedPantry, hasChangedIngredient]);
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-    const response = await fetch(
-      `${urlB}/ingredients/${name}/${price}/${category}/${quantity}/${uid}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    try {
+      await fetch(
+        `${urlB}/ingredients/${name ? name : "Ingredient Name"}/${
+          price !== "" ? price : 0
+        }/${category ? category : "Dairy"}/${
+          quantity !== "" ? quantity : 1
+        }/${uid}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      setHasChangedIngredient(!hasChangedIngredient);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleSelectChange = async (ingredients_id, pantry_id) => {
@@ -75,7 +83,7 @@ const Ingredients = () => {
           pantry_id ? pantry_id : "null"
         }`
       );
-      setHasChangedPantry(!hasChangedPantry);
+      setHasChangedIngredient(!hasChangedIngredient);
       setChangePantryId("");
     } catch (err) {
       console.error(err);
@@ -83,34 +91,38 @@ const Ingredients = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`${urlB}/ingredients/${id}`);
-    setInputs(inputs.filter((ingredient) => ingredient._id !== id));
+    try {
+      await axios.delete(`${urlB}/ingredients/${id}`);
+      setHasChangedIngredient(!hasChangedIngredient);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleIncrement = async (_id, currentAmount) => {
-    ++currentAmount;
-
-    axios
-      .put(`${urlB}/ingredients/${_id}/${currentAmount}`)
-      .then((response) => {})
-      .catch((error) => {
-        console.error("Error updating ingredient:", error);
-      });
-
-    window.location.reload();
+  const handleIncrement = async (_id, newAmount) => {
+    try {
+      await axios.put(`${urlB}/ingredients/${_id}/${newAmount}`);
+      setHasChangedIngredient(!hasChangedIngredient);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleDecrement = async (_id, currentAmount) => {
-    --currentAmount;
-
-    axios
-      .put(`${urlB}/ingredients/${_id}/${currentAmount}`)
-      .then((_) => {})
-      .catch((error) => {
-        console.error("Error updating ingredient:", error);
-      });
-
-    window.location.reload();
+  const handleDecrement = async (_id, newAmount) => {
+    if (newAmount <= 0) {
+      try {
+        await axios.delete(`${urlB}/ingredients/${_id}`);
+        setHasChangedIngredient(!hasChangedIngredient);
+      } catch (err) {
+        return console.error(err);
+      }
+    }
+    try {
+      await axios.put(`${urlB}/ingredients/${_id}/${newAmount}`);
+      setHasChangedIngredient(!hasChangedIngredient);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const user = localStorage.getItem("loginID");
@@ -251,13 +263,15 @@ const Ingredients = () => {
                 <span className="amount">{input.quantity}</span>
                 <button
                   className="arrow-button"
-                  onClick={() => handleDecrement(input._id, input.quantity)}
+                  onClick={() => handleDecrement(input._id, input.quantity - 1)}
                 >
                   &#8722;
                 </button>
                 <button
                   className="arrow-button"
-                  onClick={() => handleIncrement(input._id, input.quantity)}
+                  onClick={() =>
+                    handleIncrement(input._id, Number(input.quantity) + 1)
+                  }
                 >
                   &#43;
                 </button>
