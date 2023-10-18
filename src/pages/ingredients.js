@@ -21,6 +21,10 @@ const Ingredients = () => {
   const [quantity, setQuantity] = useState("");
   const [activeTab, setActiveTab] = useState("first");
   const [pantryList, setPantryList] = useState([]);
+  const [displayedPantry, setDisplayedPantry] = useState("All");
+  const [changePantryId, setChangePantryId] = useState(null);
+  const [changeSelectedPantry, _] = useState("");
+  const [hasChangedPantry, setHasChangedPantry] = useState(false);
 
   const url = process.env.MONGODB_URL;
   var urlB = config.url.API_HOME;
@@ -36,8 +40,12 @@ const Ingredients = () => {
   const getInputs = async () => {
     const response = await fetch(`${urlB}/${uid}/ingredients/`);
     const jsonData = await response.json();
-
-    setInputs(jsonData);
+    setInputs(
+      jsonData.filter(
+        (input) =>
+          displayedPantry === "All" || input.related_pantry === displayedPantry
+      )
+    );
   };
 
   const popupState2 = usePopupState({
@@ -47,7 +55,7 @@ const Ingredients = () => {
 
   useEffect(() => {
     getInputs();
-  }, []);
+  }, [displayedPantry, hasChangedPantry]);
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -58,6 +66,20 @@ const Ingredients = () => {
         headers: { "Content-Type": "application/json" },
       }
     );
+  };
+
+  const handleSelectChange = async (ingredients_id, pantry_id) => {
+    try {
+      await axios.put(
+        `${urlB}/ingredients/pantry/${ingredients_id}/${
+          pantry_id ? pantry_id : "null"
+        }`
+      );
+      setHasChangedPantry(!hasChangedPantry);
+      setChangePantryId("");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -83,9 +105,7 @@ const Ingredients = () => {
 
     axios
       .put(`${urlB}/ingredients/${_id}/${currentAmount}`)
-      .then((response) => {
-        console.log("Ingredient updated:", response.data);
-      })
+      .then((_) => {})
       .catch((error) => {
         console.error("Error updating ingredient:", error);
       });
@@ -101,8 +121,6 @@ const Ingredients = () => {
     encodeURIComponent(user).replace("%22", "").replace("%22", "") +
     "/pantry";
 
-  console.log(baseURL);
-
   useEffect(() => {
     axios.get(baseURL).then((response) => {
       setPantryList(response.data);
@@ -110,6 +128,11 @@ const Ingredients = () => {
   }, []);
 
   if (!pantryList) setPantryList([]);
+
+  const getPantryName = (pantry_id) => {
+    const foundPantry = pantryList.find((pantry) => pantry._id === pantry_id);
+    return foundPantry ? foundPantry.name : "None";
+  };
 
   return (
     <Fragment>
@@ -195,53 +218,95 @@ const Ingredients = () => {
             </Card>
           </Container>
         </Menu>
-        <Tabs
+        <div
           className="custom-tabs"
           activeKey={activeTab}
           onSelect={handleTabChange}
         >
+          <button
+            className="button"
+            title="All Ingredients"
+            onClick={() => setDisplayedPantry("All")}
+          >
+            All Ingredients
+          </button>
           {pantryList.map((pantry) => (
-            <Tab title={pantry.name}></Tab>
+            <button
+              className="button"
+              onClick={() => setDisplayedPantry(pantry._id)}
+              key={pantry._id}
+            >
+              {pantry.name}
+            </button>
           ))}
-        </Tabs>
+        </div>
         <div className="flex-container">
-          {inputs.map((input) => {
-            return (
-              <div className="ingredient-flex">
-                <div className="ingredient-name">{input.name}</div>
-                <br></br>
-                <div>Owner: {input.owner}</div>
-                <div>
-                  Quantity:
-                  <span className="amount">{input.quantity}</span>
-                  <button
-                    className="arrow-button"
-                    onClick={() => handleDecrement(input._id, input.quantity)}
-                  >
-                    &#8722;
-                  </button>
-                  <button
-                    className="arrow-button"
-                    onClick={() => handleIncrement(input._id, input.quantity)}
-                  >
-                    &#43;
-                  </button>
-                </div>
-                <div>Category: {input.category}</div>
-                <div className="price">Price: ${input.price}</div>
-                <button className="delete-button" variant="contained">
-                  Share
+          {inputs.map((input) => (
+            <div className="ingredient-flex">
+              <div className="ingredient-name">{input.name}</div>
+              <br></br>
+              <div>Owner: {input.owner}</div>
+              <div>
+                Quantity:
+                <span className="amount">{input.quantity}</span>
+                <button
+                  className="arrow-button"
+                  onClick={() => handleDecrement(input._id, input.quantity)}
+                >
+                  &#8722;
                 </button>
                 <button
-                  className="delete-button"
-                  variant="contained"
-                  onClick={() => handleDelete(input._id)}
+                  className="arrow-button"
+                  onClick={() => handleIncrement(input._id, input.quantity)}
                 >
-                  Delete
+                  &#43;
                 </button>
               </div>
-            );
-          })}
+              <div>Category: {input.category}</div>
+              <div>
+                Pantry:{" "}
+                {input.related_pantry
+                  ? getPantryName(input.related_pantry)
+                  : "None"}
+              </div>
+              <div className="price">Price: ${input.price}</div>
+              <button
+                className="delete-button"
+                variant="contained"
+                onClick={() => setChangePantryId(input._id)}
+              >
+                Change Pantry
+              </button>
+              {changePantryId === input._id && (
+                <select
+                  id="dropdown"
+                  value={changeSelectedPantry}
+                  onChange={(e) =>
+                    handleSelectChange(input._id, e.target.value)
+                  }
+                >
+                  <option key={-2} value={""}>
+                    Select a pantry
+                  </option>
+                  <option key={-1} value={""}>
+                    None
+                  </option>
+                  {pantryList.map((pantry) => (
+                    <option key={pantry._id} value={pantry._id}>
+                      {pantry.name}
+                    </option>
+                  ))}
+                </select>
+              )}
+              <button
+                className="delete-button"
+                variant="contained"
+                onClick={() => handleDelete(input._id)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
         </div>
       </div>
     </Fragment>
