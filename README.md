@@ -27,6 +27,8 @@ Isabella Hudson
 Node installation page can be found [here](https://nodejs.org/en/download/)\
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This Project Consists of 2 repositories - [neufood-frontend](https://github.com/NeufoodCapstone/neufood-frontend) and [neufood-backend](https://github.com/NeufoodCapstone/neufood-backend)
+
 ### Available Scripts
 
 See `package.json` under `scripts`
@@ -67,7 +69,7 @@ $> export REACT_APP_NODE_ENV=development
 To change back to making requests to the production server run:
 
 ```bash
-$> export REACT_APP_NODE_ENV=${any-value-that-isn\'t-development}
+$> export REACT_APP_NODE_ENV=${any-value-that-isn't-development}
 ```
 
 #### Running Neufood Frontend
@@ -75,8 +77,8 @@ $> export REACT_APP_NODE_ENV=${any-value-that-isn\'t-development}
 1. Now that everything is up to date we will start the app by navigating to the root directory of the repository (i.e. `~/neufood-frontend`)
 2. To run the app in the development mode type the below into your terminal instance
 
-```
-npm start
+```bash
+$> npm start
 ```
 
 3. Navigate to [http://localhost:3000](http://localhost:3000) to view the website in your browser
