@@ -716,7 +716,6 @@ export default function SignIn() {
                     <p>Notifications</p>
                     {notifications &&
                       notifications.map((notification) => {
-                        debugger;
                         if (notification.read) return;
                         switch (notification.type) {
                           default:
