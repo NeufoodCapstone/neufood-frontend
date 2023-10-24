@@ -24,6 +24,8 @@ const Ingredients = () => {
   const [changePantryId, setChangePantryId] = useState(null);
   const [changeSelectedPantry, _] = useState("");
   const [hasChangedIngredient, setHasChangedIngredient] = useState(false);
+  const [newIngredientExpirationDate, setNewIngredientExpirationDate] =
+    useState(new Date());
 
   const url = process.env.MONGODB_URL;
   var urlB = config.url.API_HOME;
@@ -68,6 +70,9 @@ const Ingredients = () => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            expiration_date: newIngredientExpirationDate,
+          }),
         }
       );
       setHasChangedIngredient(!hasChangedIngredient);
@@ -195,6 +200,17 @@ const Ingredients = () => {
                     className="foodinput"
                   />
                   <input
+                    type="date"
+                    name="Expiration Date"
+                    value={newIngredientExpirationDate}
+                    placeholder="Price"
+                    onChange={(e) =>
+                      setNewIngredientExpirationDate(e.target.value)
+                    }
+                    className="foodinput"
+                  />
+                  <p>Expiration Date</p>
+                  <input
                     type="number"
                     name="quantity"
                     value={quantity}
@@ -277,6 +293,12 @@ const Ingredients = () => {
                 </button>
               </div>
               <div>Category: {input.category}</div>
+              <div>Purchase Date: {input.date.substring(0, 10)}</div>
+              {input.expiration_date && (
+                <div>
+                  Expiration Date: {input.expiration_date.substring(0, 10)}
+                </div>
+              )}
               <div>
                 Pantry:{" "}
                 {input.related_pantry
