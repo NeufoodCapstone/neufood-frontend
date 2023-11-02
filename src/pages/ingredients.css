@@ -284,3 +284,9 @@ body {
 .custom-tabs .nav-link:hover {
   background-color: rgb(109, 163, 77);
 }
+
+/* Add this in your CSS file */
+.button.selected {
+  background-color: rgb(109, 163, 77);
+  font-weight: bold;
+}

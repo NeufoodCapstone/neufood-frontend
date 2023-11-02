@@ -43,6 +43,8 @@ const Ingredients = () => {
     ["Spreads", 90],
     ["Other", 14],
   ]);
+  const [selectedPantry, setSelectedPantry] = useState(null); // New state for selected pantry
+
 
   const url = process.env.MONGODB_URL;
   var urlB = config.url.API_HOME;
@@ -292,8 +294,8 @@ const Ingredients = () => {
           </button>
           {pantryList.map((pantry) => (
             <button
-              className="button"
-              onClick={() => setDisplayedPantry(pantry._id)}
+              className={`button ${selectedPantry === pantry._id ? "selected" : ""}`} // Apply selected class
+              onClick={() => setSelectedPantry(pantry._id)} // Set the selected pantry
               key={pantry._id}
             >
               {pantry.name}
