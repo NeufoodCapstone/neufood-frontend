@@ -29,7 +29,7 @@ export default class NavbarComp extends Component {
     localStorage.removeItem("loginData");
     // Perform any other necessary actions after logout
     // For example, redirect to the login page
-    window.location.href = '/signin'; // Redirect to the signin page
+    window.location.href = "/signin"; // Redirect to the signin page
   };
 
   render() {
@@ -93,6 +93,15 @@ export default class NavbarComp extends Component {
                   {!this.isLoggedIn() && (
                     <>
                       <Nav.Link
+                        eventKey="signup"
+                        as={Link}
+                        to="/signup"
+                        onClick={() => this.setState({ tag: "Register" })}
+                        className="tab-profile"
+                      >
+                        Sign Up
+                      </Nav.Link>
+                      <Nav.Link
                         eventKey="signin"
                         as={Link}
                         to="/signin"
@@ -100,15 +109,6 @@ export default class NavbarComp extends Component {
                         className="tab-profile"
                       >
                         Login
-                      </Nav.Link>
-                      <Nav.Link
-                        eventKey="register"
-                        as={Link}
-                        to="/signup"
-                        onClick={() => this.setState({ tag: "Register" })}
-                        className="tab-profile"
-                      >
-                        Register
                       </Nav.Link>
                     </>
                   )}
