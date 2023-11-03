@@ -288,5 +288,18 @@ body {
 /* Add this in your CSS file */
 .button.selected {
   background-color: rgb(109, 163, 77);
+  font-weight: bold; /* to make it bold */
+}
+
+.loading-icon {
+  text-align: center;
+  color: green;
+  margin-top: 20px; /* Adjust margin-top as needed */
   font-weight: bold;
+  /* center on screen */
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
 }

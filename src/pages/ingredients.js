@@ -44,6 +44,7 @@ const Ingredients = () => {
     ["Other", 14],
   ]);
   const [selectedPantry, setSelectedPantry] = useState(null); // New state for selected pantry
+  const [loading, setLoading] = useState(false); // New state for loading indicator
 
 
   const url = process.env.MONGODB_URL;
@@ -86,6 +87,7 @@ const Ingredients = () => {
       : 0;
     defaultExpirationDate.setDate(currentDate.getDate() + daysToAdd);
     try {
+      setLoading(true); // Set loading state to true when ingredient addition starts
       await fetch(
         `${urlB}/ingredients/${name ? name : "Ingredient Name"}/${
           price !== "" ? price : 0
@@ -111,6 +113,8 @@ const Ingredients = () => {
       setHasSetExpirationDate(false);
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false); // Set loading state to false when ingredient addition ends
     }
   };
 
@@ -303,7 +307,10 @@ const Ingredients = () => {
           ))}
         </div>
         <div className="flex-container">
-          {inputs.map((input) => (
+        {loading ? (
+            <div className="loading-icon">Loading...</div>
+          ) : (
+          inputs.map((input) => (
             <div className="ingredient-flex">
               <div className="ingredient-name">{input.name}</div>
               <br></br>
@@ -376,7 +383,9 @@ const Ingredients = () => {
                 Delete
               </button>
             </div>
-          ))}
+                  
+          ))
+          )}
         </div>
       </div>
     </Fragment>
