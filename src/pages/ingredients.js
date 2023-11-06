@@ -76,6 +76,11 @@ const Ingredients = () => {
         }
       );
       setHasChangedIngredient(!hasChangedIngredient);
+      setName("");
+      setPrice("");
+      setCategory("");
+      setQuantity("");
+      setNewIngredientExpirationDate(new Date());
     } catch (err) {
       console.error(err);
     }
