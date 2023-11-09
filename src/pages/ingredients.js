@@ -43,6 +43,9 @@ const Ingredients = () => {
     ["Spreads", 90],
     ["Other", 14],
   ]);
+  const [selectedPantry, setSelectedPantry] = useState(null); // New state for selected pantry
+  const [loading, setLoading] = useState(false); // New state for loading indicator
+
 
   const url = process.env.MONGODB_URL;
   var urlB = config.url.API_HOME;
@@ -84,6 +87,7 @@ const Ingredients = () => {
       : 0;
     defaultExpirationDate.setDate(currentDate.getDate() + daysToAdd);
     try {
+      setLoading(true); // Set loading state to true when ingredient addition starts
       await fetch(
         `${urlB}/ingredients/${name ? name : "Ingredient Name"}/${
           price !== "" ? price : 0
@@ -109,6 +113,8 @@ const Ingredients = () => {
       setHasSetExpirationDate(false);
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false); // Set loading state to false when ingredient addition ends
     }
   };
 
@@ -292,8 +298,8 @@ const Ingredients = () => {
           </button>
           {pantryList.map((pantry) => (
             <button
-              className="button"
-              onClick={() => setDisplayedPantry(pantry._id)}
+              className={`button ${selectedPantry === pantry._id ? "selected" : ""}`} // Apply selected class
+              onClick={() => setSelectedPantry(pantry._id)} // Set the selected pantry
               key={pantry._id}
             >
               {pantry.name}
@@ -301,7 +307,10 @@ const Ingredients = () => {
           ))}
         </div>
         <div className="flex-container">
-          {inputs.map((input) => (
+        {loading ? (
+            <div className="loading-icon">Loading...</div>
+          ) : (
+          inputs.map((input) => (
             <div className="ingredient-flex">
               <div className="ingredient-name">{input.name}</div>
               <br></br>
@@ -374,7 +383,9 @@ const Ingredients = () => {
                 Delete
               </button>
             </div>
-          ))}
+                  
+          ))
+          )}
         </div>
       </div>
     </Fragment>

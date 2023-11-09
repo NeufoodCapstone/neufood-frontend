@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import { useState } from "react";
 import Home from ".";
 import Recipe from "./recipe";
 import Ingredients from "./ingredients";
@@ -13,12 +12,6 @@ import Pantry2 from "./pantry2";
 import Friend from "./friend";
 import "./NavbarElements.css";
 
-// what does this do
-// const picture =
-//   localStorage.getItem("picture") == null
-//     ? signin_pic
-//     : localStorage.getItem("picture").slice(1, -1);
-
 export default class NavbarComp extends Component {
   constructor(props) {
     super(props);
@@ -26,11 +19,19 @@ export default class NavbarComp extends Component {
       tag: "Home",
     };
   }
+
   isLoggedIn() {
     const loginData = JSON.parse(localStorage.getItem("loginData"));
-    if (loginData == null) return false;
-    return true;
+    return loginData !== null;
   }
+
+  handleLogout = () => {
+    localStorage.removeItem("loginData");
+    // Perform any other necessary actions after logout
+    // For example, redirect to the login page
+    window.location.href = '/signin'; // Redirect to the signin page
+  };
+
   render() {
     return (
       <Router basename={process.env.PUBLIC_URL}>
@@ -48,71 +49,77 @@ export default class NavbarComp extends Component {
                     className="tabs"
                   >
                     About
-                  </Nav.Link>{" "}
+                  </Nav.Link>
                   {this.isLoggedIn() && (
-                    <Nav.Link
-                      eventKey="Ingredients"
-                      as={Link}
-                      to="/Ingredients"
-                      onClick={() => this.setState({ tag: "Ingredients" })}
-                      className="tabs"
-                    >
-                      Ingredients
-                    </Nav.Link>
-                  )}
-                  {this.isLoggedIn() && (
-                    <Nav.Link
-                      eventKey="pantry"
-                      as={Link}
-                      to="/pantry"
-                      onClick={() => this.setState({ tag: "pantry" })}
-                      className="tabs"
-                    >
-                      Pantries
-                    </Nav.Link>
-                  )}
-                  {this.isLoggedIn() && (
-                    <Nav.Link
-                      eventKey="signin"
-                      as={Link}
-                      to="/signin"
-                      onClick={() => this.setState({ tag: "Profile" })}
-                      className="tab-profile"
-                    >
-                      Profile
-                    </Nav.Link>
-                  )}
-                   {this.isLoggedIn() && (
-                    <Nav.Link
-                      eventKey="signin"
-                      as={Link}
-                      to="/reciperec"
-                      onClick={() => this.setState({ tag: "Profile" })}
-                      className="tab-profile"
-                    >
-                      Recipe Recommender
-                    </Nav.Link>
+                    <>
+                      <Nav.Link
+                        eventKey="Ingredients"
+                        as={Link}
+                        to="/Ingredients"
+                        onClick={() => this.setState({ tag: "Ingredients" })}
+                        className="tabs"
+                      >
+                        Ingredients
+                      </Nav.Link>
+                      <Nav.Link
+                        eventKey="pantry"
+                        as={Link}
+                        to="/pantry"
+                        onClick={() => this.setState({ tag: "pantry" })}
+                        className="tabs"
+                      >
+                        Pantries
+                      </Nav.Link>
+                      <Nav.Link
+                        eventKey="signin"
+                        as={Link}
+                        to="/signin"
+                        onClick={() => this.setState({ tag: "Profile" })}
+                        className="tab-profile"
+                      >
+                        Profile
+                      </Nav.Link>
+                      <Nav.Link
+                        eventKey="signin"
+                        as={Link}
+                        to="/reciperec"
+                        onClick={() => this.setState({ tag: "Profile" })}
+                        className="tab-profile"
+                      >
+                        Recipe Recommender
+                      </Nav.Link>
+                    </>
                   )}
                   {!this.isLoggedIn() && (
-                    <Nav.Link
-                      eventKey="signin"
-                      as={Link}
-                      to="/signin"
-                      onClick={() => this.setState({ tag: "Login" })}
-                      className="tab-profile"
-                    >
-                      Login
-                    </Nav.Link>
+                    <>
+                      <Nav.Link
+                        eventKey="signin"
+                        as={Link}
+                        to="/signin"
+                        onClick={() => this.setState({ tag: "Login" })}
+                        className="tab-profile"
+                      >
+                        Login
+                      </Nav.Link>
+                      <Nav.Link
+                        eventKey="register"
+                        as={Link}
+                        to="/signup"
+                        onClick={() => this.setState({ tag: "Register" })}
+                        className="tab-profile"
+                      >
+                        Register
+                      </Nav.Link>
+                    </>
                   )}
-                  {!this.isLoggedIn() && (
+                </Nav>
+                <Nav>
+                  {this.isLoggedIn() && (
                     <Nav.Link
-                      eventKey="register"
-                      as={Link}
-                      to="/signup"
-                      onClick={() => this.setState({ tag: "Register" })}
-                      className="tab-profile"
+                      onClick={this.handleLogout}
+                      className="tab-profile ml-auto"
                     >
-                      Register
+                      Logout
                     </Nav.Link>
                   )}
                 </Nav>
