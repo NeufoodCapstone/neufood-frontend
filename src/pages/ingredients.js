@@ -16,7 +16,7 @@ const Ingredients = () => {
   const [inputs, setInputs] = useState([]); // initialize as an empty array
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Dairy");
   const [quantity, setQuantity] = useState("");
   const [activeTab, setActiveTab] = useState("first");
   const [pantryList, setPantryList] = useState([]);
@@ -26,6 +26,23 @@ const Ingredients = () => {
   const [hasChangedIngredient, setHasChangedIngredient] = useState(false);
   const [newIngredientExpirationDate, setNewIngredientExpirationDate] =
     useState(new Date());
+  const [hasSetExpirationDate, setHasSetExpirationDate] = useState(false);
+
+  const expirationMap = new Map([
+    ["Dairy", 7],
+    ["Fruits", 14],
+    ["Vegetables", 14],
+    ["Grains", 365],
+    ["Protein", 3],
+    ["Oils", 365],
+    ["Condiments", 180],
+    ["Snacks", 30],
+    ["Desserts", 7],
+    ["Drinks", 365],
+    ["Spices", 365],
+    ["Spreads", 90],
+    ["Other", 14],
+  ]);
 
   const url = process.env.MONGODB_URL;
   var urlB = config.url.API_HOME;
@@ -60,6 +77,12 @@ const Ingredients = () => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
+    const currentDate = new Date();
+    const defaultExpirationDate = new Date(currentDate);
+    const daysToAdd = expirationMap.get(category)
+      ? expirationMap.get(category)
+      : 0;
+    defaultExpirationDate.setDate(currentDate.getDate() + daysToAdd);
     try {
       await fetch(
         `${urlB}/ingredients/${name ? name : "Ingredient Name"}/${
@@ -71,16 +94,19 @@ const Ingredients = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            expiration_date: newIngredientExpirationDate,
+            expiration_date: hasSetExpirationDate
+              ? newIngredientExpirationDate
+              : defaultExpirationDate,
           }),
         }
       );
       setHasChangedIngredient(!hasChangedIngredient);
       setName("");
       setPrice("");
-      setCategory("");
+      setCategory("Dairy");
       setQuantity("");
       setNewIngredientExpirationDate(new Date());
+      setHasSetExpirationDate(false);
     } catch (err) {
       console.error(err);
     }
@@ -209,9 +235,10 @@ const Ingredients = () => {
                     name="Expiration Date"
                     value={newIngredientExpirationDate}
                     placeholder="Price"
-                    onChange={(e) =>
-                      setNewIngredientExpirationDate(e.target.value)
-                    }
+                    onChange={(e) => {
+                      setHasSetExpirationDate(true);
+                      setNewIngredientExpirationDate(e.target.value);
+                    }}
                     className="foodinput"
                   />
                   <p>Expiration Date</p>
