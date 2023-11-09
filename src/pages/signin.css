@@ -1,0 +1,231 @@
+.logo-img {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  height: 20vh;
+  width: auto;
+  border-radius: 40px;
+  position: "absolute";
+}
+
+.bckgrnd {
+  background-color: rgb(245, 239, 237);
+}
+
+.pageTitle {
+  top: 15%;
+  left: 20%;
+  color: #394032;
+  width: 20vw;
+  height: auto;
+  position: absolute;
+  font-size: 52px;
+}
+
+.pad {
+  padding-top: 15%;
+  padding-bottom: 10%;
+}
+
+.contain {
+  width: 60%;
+  border-radius: 10px;
+  background-color: #d9d9d9;
+  margin-top: -50px;
+}
+
+.card {
+  width: flex;
+  height: 200px;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  z-index: 0;
+  border-radius: 20px;
+  padding: 30px;
+  font-style: "Regular";
+  font-family: "Urbanist";
+  background-color: #d9d9d9;
+  border: none;
+}
+
+.card-body-div {
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-left: 120px;
+  align-content: center;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.avatar-big {
+  width: 15rem;
+  height: 15rem;
+}
+
+.avatar-img-rounded-circle {
+  position: relative;
+  right: 80%;
+  width: 130px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.figcaption {
+  color: rgba(174, 145, 39, 1);
+  left: 38%;
+  color: rgb(0, 0, 0);
+  width: 250px;
+  height: auto;
+  position: absolute;
+  font-size: 10px;
+  align-self: left;
+  font-style: "Regular";
+  text-align: left;
+  font-family: "Urbanist";
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.card-text {
+  font-size: 15px;
+}
+
+.google-img {
+  width: 20px;
+  height: 20px;
+}
+
+.contain-1 {
+  width: 60%;
+  margin-top: 50px;
+}
+
+.card-body-div-1 {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  background-color: #f1f1f1;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card-body-div-2 {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 3px solid #8b0000;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 20px;
+  text-align: left;
+  font-weight: bold;
+  font-family: "Urbanist";
+}
+
+.card-body-div-3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.typo {
+  font-size: 20px;
+  align-self: auto;
+  font-style: "Regular";
+  text-align: center;
+  font-family: "Urbanist";
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  /* Apply mobile-specific styles here */
+  .logo-img {
+    top: 5%;
+    left: 5%;
+    height: auto;
+    width: 60%;
+    border-radius: 20px;
+  }
+
+  .pageTitle {
+    top: 10%;
+    left: 10%;
+    font-size: 36px;
+    width: 80vw;
+  }
+
+  .pad {
+    padding-top: 10%;
+    padding-bottom: 5%;
+  }
+
+  .contain {
+    width: 80%;
+    margin-top: -30px;
+  }
+
+  .card {
+    width: flex;
+    height: 150px;
+    padding: 20px;
+  }
+
+  .card-body-div {
+    width: 200px;
+    height: 80px;
+    margin-left: 60px;
+  }
+
+  .avatar-big {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .avatar-img-rounded-circle {
+    right: 60%;
+    width: 90px;
+  }
+
+  .figcaption {
+    left: 15%;
+    font-size: 16px;
+    width: 180px;
+    margin-top: 10px;
+  }
+
+  .card-text {
+    font-size: 12px;
+  }
+
+  .contain-1 {
+    width: 80%;
+    margin-top: 30px;
+  }
+
+  .card-body-div-1 {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .card-body-div-2 {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .card-body-div-3 {
+    gap: 10px;
+  }
+
+  .typo {
+    font-size: 16px;
+  }
+}

@@ -20,6 +20,7 @@ import "./about.css";
 import "./button.css";
 import logo from "./logo-no-text.png";
 import signin_pic from "./sigin.png";
+import "./signin.css";
 
 var url = config.url.API_HOME;
 
@@ -242,93 +243,23 @@ export default function SignIn() {
   const [selectedOption, _] = useState("");
 
   return (
-    <div
-      style={{
-        backgroundColor: "rgb(245, 239, 237)",
-      }}
-      data-testid="signin-1"
-    >
+    <div className="bckgrnd" data-testid="signin-1">
       <Container>
-        <img
-          className="logo-img"
-          src={logo}
-          style={{
-            position: "absolute",
-            top: "10%",
-            left: "10%",
-            height: "20vh",
-            width: "auto",
-            borderRadius: "40px",
-          }}
-        />
+        <img className="logo-img" src={logo} />
         {loginData != null && (
-          <figcaption
-            className="pageTitle"
-            style={{
-              top: "15%",
-              left: "20%",
-              color: "#394032",
-              width: "20vw",
-              height: "auto",
-              position: "absolute",
-              fontSize: "52px",
-              fontFamily: "Urbanist",
-              fontWeight: "300",
-            }}
-          >
-            Profile
-          </figcaption>
+          <figcaption className="pageTitle">Profile</figcaption>
         )}
       </Container>
 
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="100%">
           {loginData ? (
-            <div style={{ paddingTop: "15%", paddingBottom: "10%" }}>
-              <Container
-                style={{
-                  width: "60%",
-                  borderRadius: "20px",
-                  backgroundColor: "#D9D9D9",
-                  marginTop: "-50px",
-                }}
-              >
-                <Card
-                  style={{
-                    width: "flex",
-                    height: "200px",
-                    justifyContent: "center",
-                    alignContent: "center",
-                    flexWrap: "wrap",
-                    zIndex: 0,
-                    borderRadius: "20px",
-                    padding: "30px",
-                    fontStyle: "Regular",
-                    fontFamily: "Urbanist",
-                    backgroundColor: "#D9D9D9",
-                    border: "none",
-                  }}
-                >
+            <div className="pad">
+              <Container className="contain">
+                <Card className="card">
                   <Card.Body>
-                    <div
-                      style={{
-                        width: "300px",
-                        height: "100px",
-                        borderRadius: "10px",
-                        backgroundColor: "#fff",
-                        marginLeft: "120px",
-                        alignContent: "center",
-                        boxShadow:
-                          "0px 1px 3px rgba(0,0,0,0.12), 0px 1px 2px rgba(0,0,0,0.24)",
-                      }}
-                    >
-                      <div
-                        class="avatar-big"
-                        style={{
-                          width: "15rem",
-                          height: "15rem",
-                        }}
-                      >
+                    <div className="card-body-div">
+                      <div class="avatar-big">
                         <img
                           class="avatar-img rounded-circle"
                           referrerpolicy="no-referrer"
@@ -337,43 +268,19 @@ export default function SignIn() {
                               ? signin_pic
                               : localStorage.getItem("picture").slice(1, -1)
                           }
-                          style={{
-                            position: "relative",
-                            right: "80%",
-                            width: "130px",
-                            padding: "10px",
-                            display: "flex",
-                            justifyContent: "center",
-                          }}
                         />
                       </div>
-                      <figcaption
-                        style={{
-                          color: "rgba(174, 145, 39, 1)",
-                          left: "38%",
-                          color: "rgb(0, 0, 0)",
-                          width: "250px",
-                          height: "auto",
-                          position: "absolute",
-                          fontSize: "10px",
-                          alignSelf: "left",
-                          fontStyle: "Regular",
-                          textAlign: "left",
-                          fontFamily: "Urbanist",
-                          padding: "10px",
-                          marginTop: "20px",
-                        }}
-                      >
+                      <figcaption className="figcaption">
                         <div>
                           <Card.Title>{loginData.name}</Card.Title>
-                          <Card.Text style={{ fontSize: "15px" }}>
+                          <Card.Text className="card-text">
                             Email: {loginData.email}
                           </Card.Text>
                           {loginData.provider === "google.com" && (
                             <img
+                              className="google-img"
                               src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-google-circle-512.png"
                               alt="Google icon"
-                              style={{ width: "20px", height: "20px" }}
                             />
                           )}
                         </div>
@@ -382,6 +289,7 @@ export default function SignIn() {
                   </Card.Body>
                 </Card>
               </Container>
+<<<<<<< HEAD
               <Container style={{ width: "60%", marginTop: "50px" }}>
                 <div
                   style={{
@@ -431,14 +339,16 @@ export default function SignIn() {
                       fontFamily: "Urbanist",
                     }}
                   >
+=======
+              <Container className="contain-1">
+                <div className="card-body-div-1">
+                  <div className="card-body-div-2">
+                    <p>Recipe Recommendation</p>
+                  </div>
+                  <div className="card-body-div-2">
+>>>>>>> 0f539c3 (changes to profile logo and responsiveness for signin page)
                     <p>Allergies/Diet</p>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                      }}
-                    >
+                    <div className="card-body-div-3">
                       {allergens.map((allergy) => (
                         <Pill title={allergy} />
                       ))}
@@ -470,23 +380,10 @@ export default function SignIn() {
                     )}
                   </div> */}
 
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      borderRadius: "20px",
-                      border: "3px solid #8B0000",
-                      display: "flex",
-                      justifyContent: "left",
-                      alignItems: "center",
-                      padding: "20px",
-                      textAlign: "left",
-                      fontWeight: "bold",
-                      fontFamily: "Urbanist",
-                    }}
-                  >
+                  <div className="card-body-div-2">
                     <p>Badges</p>
                   </div>
+<<<<<<< HEAD
                   <div
                     style={{
                       width: "100%",
@@ -502,6 +399,9 @@ export default function SignIn() {
                       fontFamily: "Urbanist",
                     }}
                   >
+=======
+                  <div className="card-body-div-2">
+>>>>>>> 0f539c3 (changes to profile logo and responsiveness for signin page)
                     <p>Friends</p>
                     {addFriendSuccess === 1 && (
                       <p style={{ color: "green" }}>Friend Request Sent</p>
@@ -542,6 +442,7 @@ export default function SignIn() {
                       </>
                     )}
                   </div>
+<<<<<<< HEAD
                   <div
                     style={{
                       width: "100%",
@@ -557,6 +458,9 @@ export default function SignIn() {
                       fontFamily: "Urbanist",
                     }}
                   >
+=======
+                  <div className="card-body-div-2">
+>>>>>>> 0f539c3 (changes to profile logo and responsiveness for signin page)
                     <p>Notifications</p>
                     {notifications &&
                       notifications.map((notification) => {
@@ -634,17 +538,7 @@ export default function SignIn() {
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                   <LockOutlinedIcon />
                 </Avatar>
-                <Typography
-                  component="h1"
-                  variant="h5"
-                  style={{
-                    fontSize: "20px",
-                    alignSelf: "auto",
-                    fontStyle: "Regular",
-                    textAlign: "center",
-                    fontFamily: "Urbanist",
-                  }}
-                >
+                <Typography component="h1" variant="h5" className="typo">
                   Sign in
                 </Typography>
                 {currentError && (
