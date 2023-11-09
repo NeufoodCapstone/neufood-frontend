@@ -292,6 +292,7 @@ body {
 }
 
 .loading-icon {
+  font-family: Urbanist;
   text-align: center;
   color: green;
   margin-top: 20px; /* Adjust margin-top as needed */
