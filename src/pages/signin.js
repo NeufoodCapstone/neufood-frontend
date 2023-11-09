@@ -399,7 +399,7 @@ export default function SignIn() {
                     padding: "20px",
                   }}
                 >
-                  <div
+                  {/* <div
                     style={{
                       width: "100%",
                       height: "auto",
@@ -415,8 +415,8 @@ export default function SignIn() {
                     }}
                   >
                     <p>Recipe Recommendation</p>
-                  </div>
-                  <div
+                  </div> */}
+                  {/* <div
                     style={{
                       width: "100%",
                       height: "auto",
@@ -468,7 +468,7 @@ export default function SignIn() {
                         )}
                       </select>
                     )}
-                  </div>
+                  </div> */}
 
                   <div
                     style={{
