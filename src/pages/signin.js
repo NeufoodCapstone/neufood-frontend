@@ -560,7 +560,7 @@ export default function SignIn() {
                     <p>Notifications</p>
                     {notifications &&
                       notifications.map((notification) => {
-                        if (notification.read) return;
+                        if (notification.isRead) return;
                         switch (notification.type) {
                           default:
                             return (
