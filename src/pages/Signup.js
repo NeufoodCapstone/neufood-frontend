@@ -96,7 +96,7 @@ export default function SignUp() {
   return (
     <div
       style={{
-        "background-color": "rgb(255,255,243)",
+        "background-color": "rgb(245, 239, 237)",
       }}
     >
       <ThemeProvider theme={theme}>
