@@ -5,8 +5,46 @@ body {
   margin: 0;
 }
 
+ /* Add this to your CSS file */
+ .button.all-ingredients {
+  background-color: transparent;
+  color: black;
+  font-family: Urbanist;
+  border: 3px solid #6DA34D; /* Add a border for better visibility */
+
+  /* add any other styles you want */
+}
+
+ /* Add this to your CSS file */
+ .button.pantries {
+  background-color: transparent;
+  color: black;
+  font-family: Urbanist;
+  border: 3px solid #6DA34D; /* Add a border for better visibility */
+
+  /* add any other styles you want */
+}
+
+button.signin {
+  background-color: #6DA34D;
+  color: black; 
+  
+}
+
+button.arrow-button{
+  background-color: #6DA34D;
+  color: black; 
+}
+
+button.delete-button{
+  background-color: #6DA34D;
+  color: black; 
+}
+
+
 /* Styles for screens with a maximum width of 768px (e.g. mobile devices) */
 @media (max-width: 768px) {
+
   .border-ctn {
     width: 100%;
     height: auto;
@@ -180,14 +218,14 @@ body {
 
 .ingredient-flex {
   flex-direction: column;
-  height: 300px;
+  height: 380px;
   border-radius: 20px;
   border: 2px solid green;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-basis: 32.333333333333333%;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   text-align: center;
   font-family: Urbanist;
 }
