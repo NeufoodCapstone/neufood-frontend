@@ -28,7 +28,13 @@ body {
 button.signin {
   background-color: #6DA34D;
   color: black; 
-  
+  border: 2px solid #6DA34D; /* Add a border for better visibility */
+  font-family: Urbanist;
+}
+
+.button.signin:hover {
+  background-color: #6DA34D;
+  color: black;
 }
 
 button.arrow-button{
@@ -167,12 +173,13 @@ button.delete-button{
   padding: 20px;
 }
 
-.input-box {
+/* .input-box {
   background-color: #fff;
-  padding: 20px;
+  padding: 30px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   text-align: center;
-}
+  height: 100px;
+} */
 
 .popup {
   display: flex;
