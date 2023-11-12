@@ -104,6 +104,7 @@ const Ingredients = () => {
           }),
         }
       );
+      popupState2.close();
       setHasChangedIngredient(!hasChangedIngredient);
       setName("");
       setPrice("");
