@@ -13,7 +13,7 @@ import logo from "../imgs/logo-no-text.png";
 import "./ingredients.css";
 
 const Ingredients = () => {
-  const [inputs, setInputs] = useState([]); // initialize as an empty array
+  const [inputs, setInputs] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("Dairy");
@@ -27,6 +27,8 @@ const Ingredients = () => {
   const [newIngredientExpirationDate, setNewIngredientExpirationDate] =
     useState(new Date());
   const [hasSetExpirationDate, setHasSetExpirationDate] = useState(false);
+  const [selectedPantry, setSelectedPantry] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const expirationMap = new Map([
     ["Dairy", 7],
@@ -43,12 +45,9 @@ const Ingredients = () => {
     ["Spreads", 90],
     ["Other", 14],
   ]);
-  const [selectedPantry, setSelectedPantry] = useState(null); // New state for selected pantry
-  const [loading, setLoading] = useState(false); // New state for loading indicator
-
 
   const url = process.env.MONGODB_URL;
-  var urlB = config.url.API_HOME;
+  const urlB = config.url.API_HOME;
 
   const handleTabChange = (tabKey) => {
     setActiveTab(tabKey);
@@ -82,12 +81,10 @@ const Ingredients = () => {
     e.preventDefault();
     const currentDate = new Date();
     const defaultExpirationDate = new Date(currentDate);
-    const daysToAdd = expirationMap.get(category)
-      ? expirationMap.get(category)
-      : 0;
+    const daysToAdd = expirationMap.get(category) || 0;
     defaultExpirationDate.setDate(currentDate.getDate() + daysToAdd);
     try {
-      setLoading(true); // Set loading state to true when ingredient addition starts
+      setLoading(true);
       await fetch(
         `${urlB}/ingredients/${name ? name : "Ingredient Name"}/${
           price !== "" ? price : 0
@@ -104,6 +101,7 @@ const Ingredients = () => {
           }),
         }
       );
+      popupState2.close();
       setHasChangedIngredient(!hasChangedIngredient);
       setName("");
       setPrice("");
@@ -114,7 +112,7 @@ const Ingredients = () => {
     } catch (err) {
       console.error(err);
     } finally {
-      setLoading(false); // Set loading state to false when ingredient addition ends
+      setLoading(false);
     }
   };
 
@@ -200,13 +198,12 @@ const Ingredients = () => {
             <div className="border-ctn">
               <div className="txt-ctn">
                 <div className="txt-font-style">
-                  {" "}
                   Ingredients can be private or public <br></br> and shared
                   between pantries
                 </div>
               </div>
               <button
-                class="button signin"
+                className="button signin"
                 variant="contained"
                 {...bindTrigger(popupState2)}
               >
@@ -284,22 +281,24 @@ const Ingredients = () => {
             </Card>
           </Container>
         </Menu>
-        <div
-          className="custom-tabs"
-          activeKey={activeTab}
-          onSelect={handleTabChange}
-        >
+        <div className="custom-tabs" activeKey={activeTab} onSelect={handleTabChange}>
           <button
-            className="button"
+            className={`button all-ingredients ${selectedPantry === null ? 'selected' : ''}`}
             title="All Ingredients"
-            onClick={() => setDisplayedPantry("All")}
+            onClick={() => {
+              setSelectedPantry(null);
+              setDisplayedPantry("All");
+            }}
           >
             All Ingredients
           </button>
           {pantryList.map((pantry) => (
             <button
-              className={`button ${selectedPantry === pantry._id ? "selected" : ""}`} // Apply selected class
-              onClick={() => setSelectedPantry(pantry._id)} // Set the selected pantry
+              className={`button pantries ${selectedPantry === pantry._id ? "selected" : ""}`}
+              onClick={() => {
+                setSelectedPantry(pantry._id);
+                setDisplayedPantry(pantry._id);
+              }}
               key={pantry._id}
             >
               {pantry.name}
@@ -307,84 +306,91 @@ const Ingredients = () => {
           ))}
         </div>
         <div className="flex-container">
-        {loading ? (
+          {loading ? (
             <div className="loading-icon">Loading...</div>
           ) : (
-          inputs.map((input) => (
-            <div className="ingredient-flex">
-              <div className="ingredient-name">{input.name}</div>
-              <br></br>
-              <div>Owner: {input.owner}</div>
-              <div>
-                Quantity:
-                <span className="amount">{input.quantity}</span>
-                <button
-                  className="arrow-button"
-                  onClick={() => handleDecrement(input._id, input.quantity - 1)}
-                >
-                  &#8722;
-                </button>
-                <button
-                  className="arrow-button"
-                  onClick={() =>
-                    handleIncrement(input._id, Number(input.quantity) + 1)
-                  }
-                >
-                  &#43;
-                </button>
-              </div>
-              <div>Category: {input.category}</div>
-              <div>Purchase Date: {input.date.substring(0, 10)}</div>
-              {input.expiration_date && (
-                <div>
-                  Expiration Date: {input.expiration_date.substring(0, 10)}
+            inputs
+              .filter(
+                (input) =>
+                  displayedPantry === "All" ||
+                  input.related_pantry === displayedPantry
+              )
+              .map((input) => (
+                <div className="ingredient-flex" key={input._id}>
+                  <div className="ingredient-name">{input.name}</div>
+                  <br></br>
+                  <div>Owner: {input.owner}</div>
+                  <div>
+                    Quantity:
+                    <span className="amount">{input.quantity}</span>
+                    <button
+                      className="arrow-button"
+                      onClick={() =>
+                        handleDecrement(input._id, input.quantity - 1)
+                      }
+                    >
+                      &#8722;
+                    </button>
+                    <button
+                      className="arrow-button"
+                      onClick={() =>
+                        handleIncrement(input._id, Number(input.quantity) + 1)
+                      }
+                    >
+                      &#43;
+                    </button>
+                  </div>
+                  <div>Category: {input.category}</div>
+                  <div>Purchase Date: {input.date.substring(0, 10)}</div>
+                  {input.expiration_date && (
+                    <div>
+                      Expiration Date: {input.expiration_date.substring(0, 10)}
+                    </div>
+                  )}
+                  <div>
+                    Pantry:{" "}
+                    {input.related_pantry
+                      ? getPantryName(input.related_pantry)
+                      : "None"}
+                  </div>
+                  <div className="price">Price: ${input.price}</div>
+                  <button
+                    className="delete-button"
+                    variant="contained"
+                    onClick={() => setChangePantryId(input._id)}
+                  >
+                    Change Pantry
+                  </button>
+                  {changePantryId === input._id && (
+                    <select
+                      id="dropdown"
+                      value={changeSelectedPantry}
+                      onChange={(e) =>
+                        handleSelectChange(input._id, e.target.value)
+                      }
+                    >
+                      <option key={-2} value={""}>
+                        Select a pantry
+                      </option>
+                      <option key={-1} value={""}>
+                        None
+                      </option>
+                      {pantryList.map((pantry) => (
+                        <option key={pantry._id} value={pantry._id}>
+                          {pantry.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  <button
+                    className="delete-button"
+                    variant="contained"
+                    onClick={() => handleDelete(input._id)}
+                  >
+                    Delete
+                  </button>
                 </div>
-              )}
-              <div>
-                Pantry:{" "}
-                {input.related_pantry
-                  ? getPantryName(input.related_pantry)
-                  : "None"}
-              </div>
-              <div className="price">Price: ${input.price}</div>
-              <button
-                className="delete-button"
-                variant="contained"
-                onClick={() => setChangePantryId(input._id)}
-              >
-                Change Pantry
-              </button>
-              {changePantryId === input._id && (
-                <select
-                  id="dropdown"
-                  value={changeSelectedPantry}
-                  onChange={(e) =>
-                    handleSelectChange(input._id, e.target.value)
-                  }
-                >
-                  <option key={-2} value={""}>
-                    Select a pantry
-                  </option>
-                  <option key={-1} value={""}>
-                    None
-                  </option>
-                  {pantryList.map((pantry) => (
-                    <option key={pantry._id} value={pantry._id}>
-                      {pantry.name}
-                    </option>
-                  ))}
-                </select>
-              )}
-              <button
-                className="delete-button"
-                variant="contained"
-                onClick={() => handleDelete(input._id)}
-              >
-                Delete
-              </button>
-            </div>
-                  
-          ))
+              ))
           )}
         </div>
       </div>
