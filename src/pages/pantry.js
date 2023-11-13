@@ -133,70 +133,42 @@ function Pantry() {
         "background-color": "#F5EFED",
       }}
     >
-      <img class="header-img-ctn" src={neufoodLogo} />
-      <figcaption> Pantries</figcaption>
-
-      <div className="btn-create-new-ctn">
-        <div className="border-ctn">
-          <div className="txt-ctn">
-            <div className="txt-font-style">
-              {" "}
-              Create and edit pantries to{" "}
-              <span style={{ fontWeight: 1000 }}>track </span> your ingredients,
-              or join a new!
-            </div>
+      <div
+        style={{
+          display: "inline-block",
+          marginBottom: "150px",
+        }}
+      >
+        <img class="header-img-ctn" src={neufoodLogo} />
+        <br />
+        <figcaption>Pantries</figcaption>
+        <br></br>
+        <div className="txt-ctn">
+          <div className="txt-font-style">
+            {" "}
+            Create a new pantry + add your housemates!
           </div>
-          <button
-            class="button signin"
-            variant="contained"
-            {...bindTrigger(popupstate)}
-          >
-            Join New
-          </button>
         </div>
+        <button
+          class="button signin"
+          variant="contained"
+          {...bindTrigger(popupstate)}
+        >
+          Add Pantry
+        </button>
       </div>
       <Menu {...bindMenu(popupstate)}>
-        <Container
-          style={{
-            padding: "20px",
-            display: "flex",
-            width: "100%",
-            "justify-content": "center",
-            "align-items": "center",
-          }}
-        >
-          <Card
-            style={{
-              width: "18rem",
-              "justify-content": "center",
-              "align-items": "center",
-              "flex-wrap": "wrap",
-              "z-index": 0,
-            }}
-          >
+        <Container className="join-container">
+          <Card className="join-card">
             <Card.Body>
               <form onSubmit={handleSubmit}>
                 <Form.Control
                   type="text"
                   name="name"
-                  style={{
-                    width: 200,
-                    left: "15%",
-                    margin: 5,
-                    borderRadius: "50px",
-                  }}
+                  className="join-form"
                   placeholder="Pantry name"
                 />
-                <button
-                  class="button-3"
-                  style={{
-                    margin: 5,
-                    width: "10vw",
-                    left: "15%",
-                    borderRadius: "50px",
-                  }}
-                  type="submit"
-                >
+                <button className="button-3 join-btn" type="submit">
                   Add New Pantry
                 </button>
               </form>
@@ -205,78 +177,29 @@ function Pantry() {
         </Container>
       </Menu>
 
+      <br />
+      <br />
+      <br />
+
       {/* end to add a new member */}
 
       {pantryList.map((data) => (
         <p>
           {" "}
-          <Container
-            style={{
-              display: "flex",
-              width: "100%",
-              "justify-content": "center",
-              padding: 5,
-              color: "green",
-            }}
-          >
-            <Card
-              style={{
-                width: "60vw",
-                paddingRight: "30%",
-                justifyContent: "center",
-                alightContent: "center",
-                flexWrap: "wrap",
-                zIndex: 0,
-                height: "40vh" /* main card */,
-                paddingBottom: "2%",
-                paddingTop: "2%",
-                borderRadius: "50px",
-              }}
-            >
-              {/* start to add a new member */}
+          <Container className="pantry-container">
+            <div className="pantry-card">
               <Menu {...bindMenu(addNewMember)}>
-                <Container
-                  style={{
-                    padding: "20px",
-                    display: "flex",
-                    width: "100%",
-                    "justify-content": "center",
-                    "align-items": "center",
-                  }}
-                >
-                  <Card
-                    style={{
-                      width: "18rem",
-                      "justify-content": "center",
-                      "align-items": "center",
-                      "flex-wrap": "wrap",
-                      "z-index": 0,
-                    }}
-                  >
+                <Container className="inner-pantry-container">
+                  <Card className="inner-pantry-card">
                     <Card.Body>
                       <form onSubmit={() => submitNewMember(data._id)}>
                         <Form.Control
                           type="text"
                           name="name"
-                          style={{
-                            width: 200,
-                            left: "15%",
-                            margin: 5,
-                            borderRadius: "50px",
-                          }}
+                          className="join-form"
                           placeholder="Enter Valid Email:"
                         />
-                        <button
-                          class="button-3"
-                          style={{
-                            justifyContent: "center",
-                            margin: 5,
-                            width: "10vw",
-                            left: "15%",
-                            borderRadius: "50px",
-                          }}
-                          type="submit"
-                        >
+                        <button class="button-3 join-btn" type="submit">
                           Add Member
                         </button>
                       </form>
@@ -284,42 +207,32 @@ function Pantry() {
                   </Card>
                 </Container>
               </Menu>
-
-              <img
-                class="pantry-img-ctn"
-                src={defaultImg}
-                alt="default pantry img"
-              />
-
               <div className="rect-info-ctn">
-                <div className="rect-outline" onClick={goToPantry}>
-                  <div className="pantry-name">{data.name}</div>
+                <div className="pantry-name" onClick={goToPantry}>
+                  {data.name}
                 </div>
-                <div className="card-info-txt">
-                  Owner: {data.owner} <br></br> Contributors: 2 <br></br>{" "}
-                  {/* contributors 2 needs to be changed to acutally do a call with a data. something */}
+                Owner: {data.owner} <br></br> Collaborators:{" "}
+                {data.member_list.length} <br></br>{" "}
+                <button
+                  class="add-new-membr-btn"
+                  variant="contained"
+                  {...bindTrigger(addNewMember)}
+                >
+                  Add Member
+                </button>
+                <div className="mb-3">
                   <button
-                    class="add-new-membr-btn"
-                    variant="contained"
-                    {...bindTrigger(addNewMember)}
+                    class="button-3"
+                    className="trash-btn-style"
+                    onClick={() => handleDelete(data._id)}
+                    name="btn2"
+                    value="supposed to delete"
                   >
-                    Add Member
+                    <BsTrashFill />
                   </button>
                 </div>
               </div>
-
-              <div className="mb-3">
-                <button
-                  class="button-3"
-                  className="trash-btn-style"
-                  onClick={() => handleDelete(data._id)}
-                  name="btn2"
-                  value="supposed to delete"
-                >
-                  <BsTrashFill />
-                </button>
-              </div>
-            </Card>
+            </div>
           </Container>
         </p>
       ))}
