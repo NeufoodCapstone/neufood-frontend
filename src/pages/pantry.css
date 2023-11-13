@@ -1,120 +1,302 @@
-.pantry-card-style{
-    background-color: blanchedalmond;
+.pantry-card-style {
+  background-color: blanchedalmond;
 }
 
-.header-img-ctn{
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    height: 20vh;
-    width: auto;
-    border-radius: 40px;
+.header-img-ctn {
+  width: 100px;
+  border-radius: 40px;
 }
-figcaption{
-    top: 15%;
-    left: 20%;
+figcaption {
+  color: #394032;
+  height: 50px;
+  font-size: 52px;
+  font-family: Urbanist;
+  font-weight: 300;
+}
+
+.pantry-img-ctn {
+  height: 30vh;
+  width: 30vw;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.pantry-name {
+  padding-top: 8%;
+  justify-content: center;
+  font-size: 24px;
+  text-align: center;
+}
+
+.trash-btn-style {
+  top: 10%;
+  right: 5%;
+  color: #771f1f;
+  border: 1px solid #771f1f;
+  border-radius: 15%;
+}
+
+.rect-outline {
+  left: 15%;
+  top: 20%;
+  border: 4px solid #6da34d;
+  height: 10vh;
+  width: 30vh;
+  border-radius: 50px;
+  background-color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.rect-info-ctn {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  border-radius: 50px;
+  border: 4px solid #6da34d;
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  border-radius: 50px;
+  background-color: #f5efed;
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-info-txt {
+  padding-top: 40%;
+}
+
+.btn-create-new-ctn {
+  justify-content: left;
+  /* padding-left: 70%; */
+  padding-top: 3%;
+  padding-bottom: 15%;
+}
+
+.border-ctn {
+  box-sizing: border-box;
+  width: 35vw;
+  height: 25vh;
+  right: 0px; /*need this to put it at the side of the screen */
+  top: 12%;
+  border: 4px solid #394032;
+  border-radius: 50px 0px 0px 50px;
+  padding-bottom: 5%;
+}
+
+/* Green */
+.signin {
+  /* border-color: rgb(109, 163, 77); */
+  transform: translate(0%, 180%);
+  border-radius: "90px";
+  color: black;
+}
+
+.signin:hover {
+  background-color: #955e42; /*fill in button color on the hover */
+  color: white; /*color of the ;*/
+}
+
+.button {
+  border: 2px solid #955e42; /*border color*/
+  background-color: #f5efed;
+  color: black;
+  padding: 14px 48px;
+  font-size: 16px;
+  cursor: pointer;
+  color: black;
+  border-radius: 40px;
+}
+
+.txt-ctn {
+  top: 10%;
+  left: 10%;
+  font-size: 24px;
+  text-align: center;
+}
+
+.txt-font-style {
+  font-size: 24px;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 300;
+}
+
+.add-new-membr-btn {
+  top: 10%;
+  right: 5%;
+  color: #394032;
+  border: 1px solid #394032;
+  border-radius: 50px;
+  padding-right: 5%;
+  padding-left: 5%;
+}
+
+.join-container {
+  padding: 20px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.join-card {
+  width: 18rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 0;
+}
+
+.join-form {
+  width: 200;
+  left: 15%;
+  margin: 5;
+  border-radius: 50px;
+}
+
+.join-btn {
+  margin: 5;
+  width: auto;
+  left: 15%;
+  border-radius: 50px;
+  color: white;
+}
+
+.pantry-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 5;
+  color: green;
+  border-radius: 20px 20px 0px 0px;
+  /* background: #fafefc; */
+  width: 430px;
+  height: auto;
+  flex-shrink: 0;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.pantry-card {
+  width: 60vw;
+  padding-left: 30%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 0;
+  height: 40vh;
+  border-radius: 50px;
+  background: url("../imgs/pantry/pantry-default-img.png"),
+    lightgray 50% / cover no-repeat;
+}
+
+.inner-pantry-container {
+  padding: 20px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-pantry-card {
+  width: 18rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .pantry-card-style {
+    background-color: blanchedalmond;
+  }
+
+  .header-img-ctn {
+    width: 100px;
+    border-radius: 40px;
+  }
+  figcaption {
     color: #394032;
-    width: 20vw;
-    height: auto;
-    position: absolute;
+    height: 50px;
     font-size: 52px;
     font-family: Urbanist;
     font-weight: 300;
-}
-
-.pantry-img-ctn{
-   height: 30vh;
-   width: 30vw;
-   padding-left: 10%;
-   padding-right: 10%;
-
   }
 
-.pantry-name{
+  .pantry-img-ctn {
+    height: 30vh;
+    width: 30vw;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .pantry-name {
     padding-top: 8%;
     justify-content: center;
-    font-size:24px;
+    font-size: 24px;
     text-align: center;
-}
+  }
 
-.trash-btn-style{
-    position:absolute;
-    top: 10%;
-    right: 5%;
-    color:#771f1f;
+  .trash-btn-style {
+    color: #771f1f;
     border: 1px solid #771f1f;
     border-radius: 15%;
-}
+    margin-top: 5px;
+  }
 
-.rect-outline{
-    left: 15%;
-    top: 20%;
-    border: 4px solid #6DA34D;
-    position: absolute;
+  .rect-outline {
+    border: 4px solid #6da34d;
     height: 10vh;
     width: 30vh;
     border-radius: 50px;
     background-color: white;
     text-align: center;
     overflow: hidden;
+  }
 
-}
-
-.rect-info-ctn{
-
-    position: absolute;
-    left: 50%;
-    height: 28vh;
-    width: 40vh;
+  .rect-info-ctn {
+    height: 100%;
+    width: 100%;
     border-radius: 50px;
-    background-color: #F5EFED;
-    top: 15%;
+    background-color: #f5efed;
     font-size: 16px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
 
-}
-
-.card-info-txt{
+  .card-info-txt {
     padding-top: 40%;
+  }
 
-}
-
-   .btn-create-new-ctn{
+  .btn-create-new-ctn {
     justify-content: left;
     padding-left: 70%;
     padding-top: 3%;
-    padding-bottom:15%;
-   }
+    padding-bottom: 15%;
+  }
 
-   .border-ctn{
+  .border-ctn {
     box-sizing: border-box;
-    position: absolute;
+
     width: 35vw;
     height: 25vh;
     right: 0px; /*need this to put it at the side of the screen */
     top: 12%;
-    border: 4px solid #394032;
+    border: 0px solid #394032;
     border-radius: 50px 0px 0px 50px;
     padding-bottom: 5%;
-   }
-
-
-  /* Green */
-  .signin {
-    /* border-color: rgb(109, 163, 77); */
-    transform: translate(0%, 180%);
-    border-radius: "90px";
-    color: black;
-  }
-  
-  .signin:hover {
-    background-color: #955E42; /*fill in button color on the hover */
-    color: white; /*color of the ;*/
   }
 
   .button {
-
-    border: 2px solid #955E42; /*border color*/
-    background-color: #F5EFED;
+    border: 2px solid #955e42; /*border color*/
+    background-color: #f5efed;
     color: black;
     padding: 14px 48px;
     font-size: 16px;
@@ -122,32 +304,113 @@ figcaption{
     color: black;
     border-radius: 40px;
   }
-  
-  .txt-ctn{
-    position: absolute;
+
+  /* Green */
+  .signin {
+    border-radius: 50px;
+    border: 2px solid #394032;
+    background: #394032;
+    width: 216px;
+    height: 60.833px;
+    flex-shrink: 0;
+    color: white;
+  }
+
+  .signin:hover {
+    border-radius: 50px;
+    border: 2px solid #394032;
+    background: #394032;
+    width: 216px;
+    height: 60.833px;
+    flex-shrink: 0;
+    color: white;
+  }
+
+  .txt-ctn {
     top: 10%;
     left: 10%;
     font-size: 24px;
     text-align: center;
-
   }
 
-  .txt-font-style{
+  .txt-font-style {
     font-size: 24px;
     text-align: center;
     font-family: Urbanist;
     font-weight: 300;
   }
 
-  .add-new-membr-btn{
-    top: 10%;
-    right: 5%;
-    color: #394032;
-    border: 1px solid #394032;
+  .add-new-membr-btn {
+    width: auto;
+    height: 28px;
+    flex-shrink: 0;
     border-radius: 50px;
-    padding-right: 5%;
-    padding-left: 5%;
+    border: 2px solid #394032;
+    background: #394032;
+    color: white;
   }
 
+  .join-container {
+    padding: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .join-card {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 0;
+  }
 
+  .join-form {
+    width: 100%;
+    border-radius: 50px;
+  }
+
+  .join-btn {
+    margin: 5;
+    width: auto;
+    left: 15%;
+    border-radius: 50px;
+    color: white;
+  }
+
+  .pantry-container {
+    border-radius: 20px 20px 0px 0px;
+    /* background: #fafefc; */
+    width: 430px;
+    height: auto;
+    flex-shrink: 0;
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+
+  .pantry-card {
+    width: 366px;
+    height: 300px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    background: url("../imgs/pantry/pantry-default-img.png"),
+      lightgray 50% / cover no-repeat;
+  }
+
+  .inner-pantry-container {
+    padding: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inner-pantry-card {
+    width: 18rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 0;
+  }
+}
