@@ -10,6 +10,7 @@ import Signin from "./signin";
 import Pantry from "./pantry";
 import Pantry2 from "./pantry2";
 import Friend from "./friend";
+import FAQ from "./faq";
 import "./NavbarElements.css";
 
 export default class NavbarComp extends Component {
@@ -89,6 +90,9 @@ export default class NavbarComp extends Component {
                         <NavDropdown.Item as={Link} to="/signin" onClick={() => this.setState({ tag: "Login" })}>
                           Login
                         </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/faq" onClick={() => this.setState({ tag: "FAQ" })}>
+                          FAQ
+                        </NavDropdown.Item>
                       </>
                     )}
                     {this.isLoggedIn() && (
@@ -122,6 +126,9 @@ export default class NavbarComp extends Component {
             </Route>
             <Route path="/Recipe">
               <Recipe />
+            </Route>
+            <Route path="/FAQ">
+              <FAQ />
             </Route>
             <Route path="/">
               <Home />
