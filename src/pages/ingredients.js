@@ -217,7 +217,6 @@ const Ingredients = () => {
       return null;
     }
   };
-
   const handlePantryButtonClick = async (pantry_id) => {
     setLoadingPantryChange(true); // Set loading state
     setSelectedPantry(pantry_id);
