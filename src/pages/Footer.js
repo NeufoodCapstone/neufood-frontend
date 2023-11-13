@@ -12,12 +12,12 @@ export default function Footer() {
     >
       <CDBBox
         display="flex"
-        justifyContent="between"
+        justifyContent="center"
         alignItems="center"
         className="mx-auto py-4 flex-wrap"
         style={{ width: "80%" }}
       >
-        <CDBBox display="flex" alignItems="center">
+        <CDBBox display="flex" alignItems="center" justifyContent="center">
           <img alt="logo" src={logo} width="100px" />
         </CDBBox>
         <CDBBox></CDBBox>

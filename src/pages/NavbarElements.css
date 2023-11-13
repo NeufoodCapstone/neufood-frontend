@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Fascinate&family=Kanit:wght@600&family=Kdam+Thmor+Pro&family=Silkscreen&family=Source+Sans+Pro:ital,wght@0,300;1,300&family=Urbanist:wght@500&display=swap");
 
 .backgroundhead {
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(109, 163, 77),
-    rgb(109, 163, 77)
-  );
+  width: auto;
+  height: 104px;
+  flex-shrink: 0;
+  background: #6DA34D;
 }
 
 .tabs {
@@ -19,4 +18,10 @@
   text-decoration: none;
   font-size: 1rem;
   float: right;
+}
+
+.custom-hamburger {
+  font-size: 24px;
+  color: #ffffff;
+  cursor: pointer;
 }

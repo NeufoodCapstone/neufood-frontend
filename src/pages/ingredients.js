@@ -10,6 +10,8 @@ import { Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { config } from "../Constants";
 import logo from "../imgs/logo-no-text.png";
+import dairyImg from "../imgs/ingredients/dairy.jpeg";
+import condimentImg from "../imgs/ingredients/condiments.jpeg";
 import "./ingredients.css";
 
 const Ingredients = () => {
@@ -29,6 +31,12 @@ const Ingredients = () => {
   const [hasSetExpirationDate, setHasSetExpirationDate] = useState(false);
   const [selectedPantry, setSelectedPantry] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingPantryChange, setLoadingPantryChange] = useState(false);
+  const [selectedIngredient, setSelectedIngredient] = useState(null);
+
+    const handleFlip = (_id) => {
+    setSelectedIngredient(_id);
+  };
 
   const expirationMap = new Map([
     ["Dairy", 7],
@@ -118,6 +126,7 @@ const Ingredients = () => {
 
   const handleSelectChange = async (ingredients_id, pantry_id) => {
     try {
+      setLoadingPantryChange(true); // Set loading state
       await axios.put(
         `${urlB}/ingredients/pantry/${ingredients_id}/${
           pantry_id ? pantry_id : "null"
@@ -127,6 +136,8 @@ const Ingredients = () => {
       setChangePantryId("");
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoadingPantryChange(false); // Reset loading state
     }
   };
 
@@ -186,54 +197,91 @@ const Ingredients = () => {
     return foundPantry ? foundPantry.name : "None";
   };
 
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  // Filter inputs based on search input
+  const filteredInputs = inputs.filter((input) =>
+    input.name.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
+  const getIngredientImage = (category) => {
+    // Dynamically import the image based on the category
+    try {
+      const image = require(`../imgs/ingredients/${category.toLowerCase()}.jpeg`);
+      return image; // Use .default because of how require works with ES6 modules
+    } catch (error) {
+      // Handle error (e.g., image not found)
+      console.error(`Error loading image for category ${category}:`, error);
+      return null;
+    }
+  };
+
+  const handlePantryButtonClick = async (pantry_id) => {
+    setLoadingPantryChange(true); // Set loading state
+    setSelectedPantry(pantry_id);
+    setDisplayedPantry(pantry_id);
+    try {
+      const response = await fetch(`${urlB}/${uid}/ingredients/`);
+      const jsonData = await response.json();
+      setInputs(
+        jsonData.filter(
+          (input) =>
+            pantry_id === "All" || input.related_pantry === pantry_id
+        )
+      );
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingPantryChange(false); // Reset loading state
+    }
+  };
+
   return (
     <Fragment>
       <div className="page">
         <Container className="input-box">
           <img className="logo-img" src={logo} />
-          <figcaption className="page-name">Ingredients</figcaption>
+          <figcaption className="page-name">Add your Ingredient details and track your expiration dates</figcaption>
         </Container>
-        <div>
-          <div className="btn-create-new-ctn">
-            <div className="border-ctn">
-              <div className="txt-ctn">
-                <div className="txt-font-style">
-                  Ingredients can be private or public <br></br> and shared
-                  between pantries
-                </div>
-              </div>
+        <div className = "custom-tabs2">
+        
               <button
-                className="button signin"
+                className="button add-ingredient"
                 variant="contained"
                 {...bindTrigger(popupState2)}
               >
                 Add Ingredient
               </button>
-            </div>
-          </div>
+            
         </div>
-        <Menu {...bindMenu(popupState2)}>
-          <Container className="popup">
-            <Card className="popup-one">
-              <Card.Body>
+        <Menu {...bindMenu(popupState2)} className="menu">
+
+              <Card className = "add-ingredient-card custom-card">
+                <h2 className="card-title">Add Ingredient</h2>
                 <form onSubmit={onSubmitForm}>
+                  <label htmlFor="itemName" className="name">Item Name:</label>
                   <input
                     type="text"
+                    id="itemName"
                     name="name"
                     value={name}
-                    placeholder="Ingredient name"
                     onChange={(e) => setName(e.target.value)}
                     className="foodinput"
                   />
+                  <label htmlFor="price" className="name">Price ($):</label>
+
                   <input
                     type="number"
                     name="price"
                     value={price}
-                    placeholder="Price"
                     onChange={(e) => setPrice(e.target.value)}
                     className="foodinput"
                   />
-                  <input
+                  {/* <input
                     type="date"
                     name="Expiration Date"
                     value={newIngredientExpirationDate}
@@ -244,19 +292,21 @@ const Ingredients = () => {
                     }}
                     className="foodinput"
                   />
-                  <p>Expiration Date</p>
+                  <p>Expiration Date</p> */}
+                  <label htmlFor="quantity" className="name">Quantity:</label>
                   <input
                     type="number"
                     name="quantity"
                     value={quantity}
-                    placeholder="Quantity"
                     onChange={(e) => setQuantity(e.target.value)}
                     className="foodinput"
                   />
+                  <label htmlFor="Category" className="name">Category:</label>
                   <select
                     className="foodinput"
                     onChange={(e) => setCategory(e.target.value)}
                   >
+                    <option>Select</option>
                     <option>Dairy</option>
                     <option>Fruits</option>
                     <option>Vegetables</option>
@@ -272,33 +322,26 @@ const Ingredients = () => {
                     <option>Other</option>
                   </select>
                   <br></br>
-                  <button className="button-style" type="submit">
+                  <button className="addButton" type="submit">
                     {" "}
                     Add
                   </button>
                 </form>
-              </Card.Body>
-            </Card>
-          </Container>
+              </Card>
         </Menu>
+        
         <div className="custom-tabs" activeKey={activeTab} onSelect={handleTabChange}>
           <button
             className={`button all-ingredients ${selectedPantry === null ? 'selected' : ''}`}
             title="All Ingredients"
-            onClick={() => {
-              setSelectedPantry(null);
-              setDisplayedPantry("All");
-            }}
+            onClick={() => handlePantryButtonClick("All")}
           >
             All Ingredients
           </button>
           {pantryList.map((pantry) => (
             <button
               className={`button pantries ${selectedPantry === pantry._id ? "selected" : ""}`}
-              onClick={() => {
-                setSelectedPantry(pantry._id);
-                setDisplayedPantry(pantry._id);
-              }}
+              onClick={() => handlePantryButtonClick(pantry._id)}
               key={pantry._id}
             >
               {pantry.name}
@@ -306,7 +349,17 @@ const Ingredients = () => {
           ))}
         </div>
         <div className="flex-container">
-          {loading ? (
+          {/* Search bar */}
+          <div className = "search-bar">
+            <input
+              className="search"
+              type="text"
+              placeholder="Search here"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+          </div>
+          {loading || loadingPantryChange ? (
             <div className="loading-icon">Loading...</div>
           ) : (
             inputs
@@ -315,80 +368,35 @@ const Ingredients = () => {
                   displayedPantry === "All" ||
                   input.related_pantry === displayedPantry
               )
+              .filter((input) =>
+                input.name.toLowerCase().includes(searchInput.toLowerCase())
+              )
               .map((input) => (
+                
                 <div className="ingredient-flex" key={input._id}>
+                  <div className="ingredient-buttons">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none" >
+                    <path d="M13.1063 6.90967L13.8134 7.61678L14.5205 6.90967L15.448 5.98217C15.4482 5.98201 15.4483 5.98184 15.4485 5.98167C16.4828 4.9514 17.8833 4.37292 19.3432 4.37292C20.8026 4.37292 22.2026 4.95101 23.2369 5.98065C24.2673 7.01639 24.8458 8.418 24.8458 9.87907C24.8458 11.3404 24.2671 12.7422 23.2363 13.778C23.2361 13.7783 23.2358 13.7786 23.2355 13.7788L13.8134 23.201L4.39127 13.7788C4.391 13.7786 4.39072 13.7783 4.39045 13.778C3.35968 12.7422 2.78101 11.3404 2.78101 9.87907C2.78101 8.41805 3.35945 7.01648 4.38982 5.98075C5.42407 4.95105 6.8241 4.37292 8.28359 4.37292C9.74351 4.37292 11.1439 4.9514 12.1783 5.98167C12.1785 5.98184 12.1786 5.98201 12.1788 5.98217L13.1063 6.90967Z" stroke="black" stroke-width="2"/>
+                  </svg>
+                  </div>
+                  <img
+                    src={getIngredientImage(input.category)}
+                    alt={`${input.category} Image`}
+                    className="ingredient-image"
+                  />
                   <div className="ingredient-name">{input.name}</div>
                   <br></br>
-                  <div>Owner: {input.owner}</div>
-                  <div>
-                    Quantity:
-                    <span className="amount">{input.quantity}</span>
-                    <button
-                      className="arrow-button"
-                      onClick={() =>
-                        handleDecrement(input._id, input.quantity - 1)
-                      }
-                    >
-                      &#8722;
-                    </button>
-                    <button
-                      className="arrow-button"
-                      onClick={() =>
-                        handleIncrement(input._id, Number(input.quantity) + 1)
-                      }
-                    >
-                      &#43;
-                    </button>
-                  </div>
-                  <div>Category: {input.category}</div>
-                  <div>Purchase Date: {input.date.substring(0, 10)}</div>
-                  {input.expiration_date && (
-                    <div>
-                      Expiration Date: {input.expiration_date.substring(0, 10)}
-                    </div>
-                  )}
-                  <div>
-                    Pantry:{" "}
-                    {input.related_pantry
-                      ? getPantryName(input.related_pantry)
-                      : "None"}
-                  </div>
-                  <div className="price">Price: ${input.price}</div>
+                  <div className="amount">
+                    Q:
+                    <span >{input.quantity}</span>
                   <button
-                    className="delete-button"
+                    className="use-button"
                     variant="contained"
-                    onClick={() => setChangePantryId(input._id)}
+                    onClick={() => handleDecrement(input._id, input.quantity - 1)}
                   >
-                    Change Pantry
+                    Use
                   </button>
-                  {changePantryId === input._id && (
-                    <select
-                      id="dropdown"
-                      value={changeSelectedPantry}
-                      onChange={(e) =>
-                        handleSelectChange(input._id, e.target.value)
-                      }
-                    >
-                      <option key={-2} value={""}>
-                        Select a pantry
-                      </option>
-                      <option key={-1} value={""}>
-                        None
-                      </option>
-                      {pantryList.map((pantry) => (
-                        <option key={pantry._id} value={pantry._id}>
-                          {pantry.name}
-                        </option>
-                      ))}
-                    </select>
-                  )}
-                  <button
-                    className="delete-button"
-                    variant="contained"
-                    onClick={() => handleDelete(input._id)}
-                  >
-                    Delete
-                  </button>
+                  </div>
                 </div>
               ))
           )}

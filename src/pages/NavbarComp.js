@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Home from ".";
@@ -17,6 +17,7 @@ export default class NavbarComp extends Component {
     super(props);
     this.state = {
       tag: "Home",
+      showDropdown: false, // Added state to manage dropdown visibility
     };
   }
 
@@ -32,96 +33,70 @@ export default class NavbarComp extends Component {
     window.location.href = "/signin"; // Redirect to the signin page
   };
 
+  handleToggleDropdown = () => {
+    this.setState((prevState) => ({ showDropdown: !prevState.showDropdown }));
+  };
+
   render() {
+    const { showDropdown } = this.state;
+
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <div>
           <Navbar collapseOnSelect className="backgroundhead">
             <Container>
-              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="me-auto">
+                <Nav className="ml-auto"> {/* Use ml-auto to push the items to the right */}
                   <Nav.Link
-                    eventKey="home"
-                    as={Link}
-                    to="/"
-                    onClick={() => this.setState({ tag: "Home" })}
-                    className="tabs"
+                    eventKey="hamburger-menu"
+                    onClick={this.handleToggleDropdown}
+                    className="mr-2" 
                   >
-                    About
+                    ☰
                   </Nav.Link>
-                  {this.isLoggedIn() && (
-                    <>
-                      <Nav.Link
-                        eventKey="Ingredients"
-                        as={Link}
-                        to="/Ingredients"
-                        onClick={() => this.setState({ tag: "Ingredients" })}
-                        className="tabs"
-                      >
-                        Ingredients
-                      </Nav.Link>
-                      <Nav.Link
-                        eventKey="pantry"
-                        as={Link}
-                        to="/pantry"
-                        onClick={() => this.setState({ tag: "pantry" })}
-                        className="tabs"
-                      >
-                        Pantries
-                      </Nav.Link>
-                      <Nav.Link
-                        eventKey="signin"
-                        as={Link}
-                        to="/signin"
-                        onClick={() => this.setState({ tag: "Profile" })}
-                        className="tab-profile"
-                      >
-                        Profile
-                      </Nav.Link>
-                      <Nav.Link
-                        eventKey="signin"
-                        as={Link}
-                        to="/reciperec"
-                        onClick={() => this.setState({ tag: "Profile" })}
-                        className="tab-profile"
-                      >
-                        Recipe Recommender
-                      </Nav.Link>
-                    </>
-                  )}
-                  {!this.isLoggedIn() && (
-                    <>
-                      <Nav.Link
-                        eventKey="signup"
-                        as={Link}
-                        to="/signup"
-                        onClick={() => this.setState({ tag: "Register" })}
-                        className="tab-profile"
-                      >
-                        Sign Up
-                      </Nav.Link>
-                      <Nav.Link
-                        eventKey="signin"
-                        as={Link}
-                        to="/signin"
-                        onClick={() => this.setState({ tag: "Login" })}
-                        className="tab-profile"
-                      >
-                        Login
-                      </Nav.Link>
-                    </>
-                  )}
-                </Nav>
-                <Nav>
-                  {this.isLoggedIn() && (
-                    <Nav.Link
-                      onClick={this.handleLogout}
-                      className="tab-profile ml-auto"
-                    >
-                      Logout
-                    </Nav.Link>
-                  )}
+                  <NavDropdown
+                    title=""
+                    id="basic-nav-dropdown"
+                    align="end"
+                    show={showDropdown}
+                    onClick={this.handleToggleDropdown}
+                    drop="end"
+                  >
+                    <NavDropdown.Item as={Link} to="/" onClick={() => this.setState({ tag: "Home" })}>
+                      Home
+                    </NavDropdown.Item>
+                    {this.isLoggedIn() && (
+                      <>
+                        <NavDropdown.Item as={Link} to="/Ingredients" onClick={() => this.setState({ tag: "Ingredients" })}>
+                          Ingredients
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/pantry" onClick={() => this.setState({ tag: "pantry" })}>
+                          Pantries
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/signin" onClick={() => this.setState({ tag: "Profile" })}>
+                          Profile
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/reciperec" onClick={() => this.setState({ tag: "Profile" })}>
+                          Recipe Recommender
+                        </NavDropdown.Item>
+                      </>
+                    )}
+                    {!this.isLoggedIn() && (
+                      <>
+                        <NavDropdown.Item as={Link} to="/signup" onClick={() => this.setState({ tag: "Register" })}>
+                          Sign Up
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/signin" onClick={() => this.setState({ tag: "Login" })}>
+                          Login
+                        </NavDropdown.Item>
+                      </>
+                    )}
+                    {this.isLoggedIn() && (
+                      <NavDropdown.Item onClick={this.handleLogout}>
+                        Logout
+                      </NavDropdown.Item>
+                    )}
+                  </NavDropdown>
                 </Nav>
               </Navbar.Collapse>
             </Container>
