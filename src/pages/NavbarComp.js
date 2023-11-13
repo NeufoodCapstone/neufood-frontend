@@ -10,6 +10,7 @@ import Signin from "./signin";
 import Pantry from "./pantry";
 import Pantry2 from "./pantry2";
 import Friend from "./friend";
+import FAQ from "./faq";
 import "./NavbarElements.css";
 
 export default class NavbarComp extends Component {
@@ -110,6 +111,16 @@ export default class NavbarComp extends Component {
                       >
                         Login
                       </Nav.Link>
+                      <Nav.Link
+                        eventKey="faq"
+                        as={Link}
+                        to="/faq"
+                        onClick={() => this.setState({ tag: "Login" })}
+                        className="tab-profile"
+                      >
+                        FAQ
+                      </Nav.Link>
+                      
                     </>
                   )}
                 </Nav>
@@ -147,6 +158,9 @@ export default class NavbarComp extends Component {
             </Route>
             <Route path="/Recipe">
               <Recipe />
+            </Route>
+            <Route path="/FAQ">
+              <FAQ />
             </Route>
             <Route path="/">
               <Home />

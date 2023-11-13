@@ -1,0 +1,93 @@
+
+.faq-bg{
+background-color: #f6efec;
+}
+.faq-item {
+    border: 1px solid #312f2f;
+    margin-bottom: 10px;
+    border-radius: 8px; /* Adjust the value to control the roundness of the corners */
+    padding: 10px;
+
+   
+  }
+  
+  .faq-page {
+    max-width: 600px; /* Set your preferred max-width */
+    margin: 0 auto; /* Center the container */
+    /* background-color: #f6efec; */
+
+  }
+  .faq-question {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f6efec;
+    
+  }
+  
+  .faq-question .question-text {
+    flex-grow: 1;
+  }
+  
+  .faq-item.open .icon::before {
+    content: '−'; /* Minus sign when open */
+  }
+  
+  .faq-item .icon::before {
+    content: '+'; /* Plus sign by default */
+  }
+  
+  .faq-answer {
+    padding: 10px;
+    display: none;
+  }
+  
+  .faq-item.open .faq-answer {
+    display: block;
+  }
+
+  .faq-btn{
+    border-radius: 100px;
+    border: 4px solid #955E42;
+    background-color: #955E42;
+    color: #f6efec;
+    width: 40%;
+    height: auto;
+    gap: 8px;
+    font-size: 24px;
+    font-family: Urbanist;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .faq-btn:hover {
+    background-color:#955E42 ;
+    transform: translateY(-5px); /* Move the button 5 pixels up on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Increase the box shadow on hover */
+
+    
+  }
+
+  @media (max-width: 767px) {
+    .faq-btn {
+      padding: 8px 16px; /* Adjust padding for smaller screens */
+      font-size: 14px; /* Adjust font size for smaller screens */
+    
+    }
+    .faq-item {
+        border: 1px solid #312f2f;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 8px; /* Adjust the value to control the roundness of the corners */
+        padding: 10px;
+    
+       
+      }
+
+  
+
+   
+}
