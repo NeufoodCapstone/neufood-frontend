@@ -1,0 +1,352 @@
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+  }
+  
+   /* Add this to your CSS file */
+   .button.all-ingredients {
+    background-color: transparent;
+    color: black;
+    font-family: Urbanist;
+    border: 3px solid #6DA34D; /* Add a border for better visibility */
+  
+    /* add any other styles you want */
+  }
+  
+   /* Add this to your CSS file */
+   .button.pantries {
+    background-color: transparent;
+    color: black;
+    font-family: Urbanist;
+    border: 3px solid #6DA34D; /* Add a border for better visibility */
+  
+    /* add any other styles you want */
+  }
+  
+  button.signin {
+    background-color: #6DA34D;
+    color: black; 
+    border: 2px solid #6DA34D; /* Add a border for better visibility */
+    font-family: Urbanist;
+  }
+  
+  .button.signin:hover {
+    background-color: #6DA34D;
+    color: black;
+  }
+  
+  button.arrow-button{
+    background-color: #6DA34D;
+    color: black; 
+  }
+  
+  button.delete-button{
+    background-color: #6DA34D;
+    color: black; 
+  }
+  
+  
+  /* Styles for screens with a maximum width of 768px (e.g. mobile devices) */
+  /* @media (max-width: 768px) { */
+  
+    .border-ctn {
+      width: 100%;
+      height: auto;
+      top: 10%;
+      right: 0;
+      border-radius: 0;
+    }
+  
+    .btn-create-new-ctn {
+      justify-content: center;
+      padding-left: 0;
+    }
+  
+    .txt-ctn {
+      position: static;
+      top: auto;
+      left: auto;
+      font-size: 18px;
+      text-align: center;
+    }
+  
+    .txt-font-style {
+      font-size: 18px;
+    }
+  
+    .logo-img {
+      top: 10%;
+      left: 10%;
+      height: 100px;
+      border-radius: 0;
+    }
+  
+    .page-name {
+      top: 10%;
+      left: auto;
+      font-size: 36px;
+    }
+  
+    .custom-tabs .nav-link {
+      padding: 5px;
+      border-radius: 0;
+    }
+  /* } */
+  
+  /* Styles for screens with a maximum width of 1024px (e.g. tablets) */
+  /* @media (max-width: 1024px) { */
+    .flex-container {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .ingredient-flex {
+      width: 100%;
+      margin: 10px 0;
+    }
+  /* } */
+  
+  /* Styles for larger screens */
+  /* @media (min-width: 1200px) { */
+    .border-ctn {
+      width: 40vw;
+      height: 25vh;
+      right: 0;
+      top: 12%;
+      border-radius: 50px 0 0 50px;
+    }
+  
+    .btn-create-new-ctn {
+      justify-content: left;
+      padding-left: 70%;
+      padding-top: 3%;
+    }
+  
+    .txt-ctn {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      font-size: 24px;
+      text-align: center;
+    }
+  
+    .txt-font-style {
+      font-size: 24px;
+      text-align: center;
+    }
+  
+    .logo-img {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      height: 20vh;
+      width: auto;
+      border-radius: 40px;
+    }
+  
+    .page-name {
+      top: 15%;
+      left: 20%;
+      color: #394032;
+      width: 20vw;
+      height: auto;
+      position: absolute;
+      font-size: 52px;
+    }
+  
+    .custom-tabs .nav-link {
+      padding-left: 5%;
+      padding-right: 5%;
+      background-color: green;
+      border-radius: 50% 50% 0 0;
+      color: black;
+    }
+  /* } */
+  
+  /* Additional Styles */
+  .page {
+    background-color: rgb(245, 239, 237);
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* .input-box {
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    height: 100px;
+  } */
+  
+  .popup {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-one {
+    width: 18rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 0;
+  }
+  
+  .foodinput {
+    width: 200px;
+    left: 15%;
+    margin: 5px;
+    border-radius: 50px;
+  }
+  
+  .button-style {
+    margin: 5px;
+    width: 10vw;
+    left: 15%;
+    border-radius: 50px;
+  }
+  
+  .table-style {
+    width: 100%;
+  }
+  
+  .flex-container {
+    width: 70%;
+    margin: 3rem auto;
+    padding: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .ingredient-flex {
+    flex-direction: column;
+    height: 380px;
+    border-radius: 20px;
+    border: 2px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 32.333333333333333%;
+    margin-bottom: 50px;
+    text-align: center;
+    font-family: Urbanist;
+  }
+  
+  .delete-button {
+    background-color: rgb(245, 239, 237);
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 40px;
+    border-color: black;
+  }
+  
+  .delete-button:hover {
+    background-color: rgb(109, 163, 77);
+    color: white;
+  }
+  
+  .price {
+    padding-bottom: 10%;
+  }
+  
+  .empty-tab {
+    padding: 50%;
+  }
+  
+  /* Styles for the .button class */
+  .button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  /* Styles for the .ingredient-name class */
+  .ingredient-name {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  /* Styles for the .amount class */
+  .amount {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  /* Styles for the .arrow-button class */
+  .arrow-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  
+  /* Styles for the .price class */
+  .price {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  /* Styles for the .delete-button class */
+  .delete-button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  /* styles.css */
+  .custom-tabs {
+    justify-content: center;
+  }
+  
+  .custom-tabs .nav-link {
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: green;
+    border-radius: 50% 50% 0 0;
+    color: black;
+    font-family: Urbanist;
+    font-weight: 300;
+  }
+  
+  .custom-tabs .nav-link:active {
+    background-color: darkgreen;
+  }
+  
+  .custom-tabs .nav-link:hover {
+    background-color: rgb(109, 163, 77);
+  }
+  
+  /* Add this in your CSS file */
+  .button.selected {
+    background-color: rgb(109, 163, 77);
+    font-weight: bold; /* to make it bold */
+  }
+  
+  .loading-icon {
+    font-family: Urbanist;
+    text-align: center;
+    color: green;
+    margin-top: 20px; /* Adjust margin-top as needed */
+    font-weight: bold;
+    /* center on screen */
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+  } 
