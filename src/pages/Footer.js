@@ -5,7 +5,6 @@ export default function Footer() {
   return (
     <div
       style={{
-        "margin-top": 8,
         backgroundColor: "#6DA34D",
         bottom: "0",
         width: "100%",
