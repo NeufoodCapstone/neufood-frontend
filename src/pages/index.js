@@ -1,13 +1,25 @@
 import React from "react";
-import cook from "./jdoawpiadoioawu.png";
+
 import logo from "./logo-transparent.png";
-import collorate from "./image1131-9sda-300h.png";
-import receipt from "./image2130-vkrr-300h.png";
-import calendar from "./calendar.png";
+
 import Container from "react-bootstrap/Container";
+import BouncingArrow from "../components/BouncingArrow";
 import "./about.css";
+import account from "../imgs/about/account.png";
+import network from "../imgs/about/network.png";
+import recipe from "../imgs/about/recipe.png";
+import time from "../imgs/about/time.png";
+
+import { Link, animateScroll as scroll } from 'react-scroll';
+
+
 
 const Home = () => {
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  };
+
+
   return (
     <div
       style={{
@@ -68,168 +80,64 @@ const Home = () => {
       </Container>
         <Container>
           <h3>Here's How</h3>
+          <Link
+        activeClass="active"
+        to="firstSection"
+        spy={true}
+        smooth={true}
+        offset={-70}
+        duration={500}
+      >
+        <BouncingArrow onClick={scrollToTop} />
+      </Link>
+       
         </Container>
-        <Container
-          style={{
-            width: "100%",
-            position: "relative",
-            height: "200px",
-            display: "table",
-          }}
-        >
-          
-          <img
-            src={collorate}
-            style={{
-              position: "absolute",
-              top: "10%",
-              left: "50%",
-              width: "250px",
-              padding: "10px",
-              borderRadius: "40px",
-            }}
-          />
-          <figcaption
-            style={{
-              top: "10%",
-              color: "rgb(0, 0, 0)",
-              width: "250px",
-              position: "absolute",
-              fontSize: "20px",
-              fontStyle: "Regular",
-              textAlign: "left",
-              fontFamily: "Urbanist",
-              padding: "20px",
-              height: "center",
-              transform: "translate(-60%, 20%)"              
-            }}
-          >
-            Categorize ingredients as shared or private
-          </figcaption>
+
+        <Container name = "firstSection">
+          <h3> 1. Create an Account </h3>
         </Container>
-        <Container
-          style={{
-            width: "100%",
-            position: "relative",
-            height: "200px",
-            display: "table",
-          }}
-        >
-          <img
-            src={receipt}
-            style={{
-              position: "absolute",
-              top: "10%",
-              right: "50%",
-              width: "250px",
-              padding: "10px",
-            }}
-          />
-          <figcaption
-            style={{
-              color: "rgba(174, 145, 39, 1)",
-              top: "10%",
-              left: "50%",
-              color: "rgb(0, 0, 0)",
-              width: "250px",
-              height: "auto",
-              position: "absolute",
-              fontSize: "20px",
-              alignSelf: "auto",
-              fontStyle: "Regular",
-              textAlign: "left",
-              fontFamily: "Urbanist",
-              padding: "10px",
-              transform: "translate(10%, 60%)",
-            }}
-          >
-            Easily edit and view pantry details
-          </figcaption>
+
+        <Container>
+        <img src={account}
+       />
         </Container>
-        <Container
-          style={{
-            width: "100%",
-            position: "relative",
-            height: "200px",
-            display: "table",
-          }}
-        >
-          <img
-            src={calendar}
-            style={{
-              position: "absolute",
-              top: "10%",
-              left: "50%",
-              width: "250px",
-              padding: "10px",
-              borderRadius: "40px",
-            }}
-          />
-          <figcaption
-            style={{
-              color: "rgba(174, 145, 39, 1)",
-              top: "10%",
-              right: "50%",
-              color: "rgb(0, 0, 0)",
-              width: "250px",
-              height: "auto",
-              position: "absolute",
-              fontSize: "20px",
-              alignSelf: "auto",
-              fontStyle: "Regular",
-              textAlign: "left",
-              fontFamily: "Urbanist",
-              padding: "20px",
-              transform: "translate(-60%, 20%)",
-            }}
-          >
-            Keep track of ingredient purchase details
-          </figcaption>
+
+        <Container>
+        <h3>2. Create a pantry and add your household members as contributors </h3>
         </Container>
-        <Container
-          style={{
-            width: "100%",
-            position: "relative",
-            height: "200px",
-            display: "table",
-          }}
-        >
-          <img
-            src={cook}
-            style={{
-              height: "180px",
-              position: "absolute",
-              top: "10%",
-              right: "50%",
-              width: "180px",
-              padding: "10px",
-              borderRadius: "40px",
-            }}
-          />
-          <figcaption
-            style={{
-              top: "10%",
-              left: "50%",
-              color: "rgb(0, 0, 0)",
-              width: "250px",
-              height: "auto",
-              position: "absolute",
-              fontSize: "20px",
-              alignSelf: "auto",
-              fontStyle: "Regular",
-              textAlign: "left",
-              fontFamily: "Urbanist",
-              padding: "10px",
-              transform: "translate(10%, 60%)",
-            }}
-          >
-            Plan meals together and maintain a cleaner fridge!
-          </figcaption>
+
+        <Container>
+        <img src={network}/>
         </Container>
+
+        <Container>
+       < h3> 3. Add your ingredients to your shared Pantry </h3>
+        </Container>
+
+        <Container>
+        <img src={time}/>
+        </Container>
+
+        <Container>
+        <h3> 4. Utilized the Recipe Recommendation </h3>
+        </Container>
+
+        <Container>
+          <img src={recipe}/>
+        </Container>
+
+
+        <Container>
         <h3>Ready to get started?</h3>
         <a href="/signin">
-          <button class="button signin">Sign Up</button>
+          <button class="signIn-btn">Sign Up</button> 
         </a>
+          <br></br>
+          <br></br>
+          <br></br>
+          
+        </Container>
+  
       </figure>
     </div>
   );
