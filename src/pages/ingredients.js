@@ -10,8 +10,6 @@ import { Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { config } from "../Constants";
 import logo from "../imgs/logo-no-text.png";
-import dairyImg from "../imgs/ingredients/dairy.jpeg";
-import condimentImg from "../imgs/ingredients/condiments.jpeg";
 import "./ingredients.css";
 
 const Ingredients = () => {
@@ -211,7 +209,7 @@ const Ingredients = () => {
   const getIngredientImage = (category) => {
     // Dynamically import the image based on the category
     try {
-      const image = require(`../imgs/ingredients/${category.toLowerCase()}.jpeg`);
+      const image = require(`../imgs/ingredients/${category.toLowerCase()}.png`);
       return image; // Use .default because of how require works with ES6 modules
     } catch (error) {
       // Handle error (e.g., image not found)
