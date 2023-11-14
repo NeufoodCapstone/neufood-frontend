@@ -183,6 +183,7 @@ figcaption {
 }
 
 .pantry-card {
+  
   width: 60vw;
   padding-left: 30%;
   justify-content: center;
@@ -209,6 +210,28 @@ figcaption {
   align-items: center;
   flex-wrap: wrap;
   z-index: 0;
+}
+.pantry-card {
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+
+.pantry-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.back-content{
+  background-color: #394032;
+
+}
+
+.block-content.visible {
+  background-color: #394032;
+
 }
 
 @media only screen and (max-width: 500px) {

@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { BsTrashFill } from "react-icons/bs";
 import Form from "react-bootstrap/Form";
@@ -43,6 +42,7 @@ function Pantry() {
   });
 
   const [addedUser, setAddedUser] = useState("");
+  const [flippedCards, setFlippedCards] = useState([]);
 
   const baseURL =
     url +
@@ -63,7 +63,6 @@ function Pantry() {
     setPantryList(pantryList.filter((pantry) => pantry._id !== id));
   };
 
-  //add pantry
   const handleSubmit = (e) => {
     const formData = new FormData(e.currentTarget);
     e.preventDefault();
@@ -98,7 +97,7 @@ function Pantry() {
         console.log(e);
       });
   };
-  //add member
+
   const submitNewMember = (pantry_id) => {
     const temp = [];
 
@@ -130,7 +129,7 @@ function Pantry() {
   return (
     <div
       style={{
-        "background-color": "#F5EFED",
+        backgroundColor: "#F5EFED",
       }}
     >
       <div
@@ -139,7 +138,7 @@ function Pantry() {
           marginBottom: "150px",
         }}
       >
-        <img class="header-img-ctn" src={neufoodLogo} />
+        <img className="header-img-ctn" src={neufoodLogo} />
         <br />
         <figcaption>Pantries</figcaption>
         <br></br>
@@ -150,7 +149,7 @@ function Pantry() {
           </div>
         </div>
         <button
-          class="button signin"
+          className="button signin"
           variant="contained"
           {...bindTrigger(popupstate)}
         >
@@ -181,13 +180,10 @@ function Pantry() {
       <br />
       <br />
 
-      {/* end to add a new member */}
-
       {pantryList.map((data) => (
-        <p>
-          {" "}
+        <p key={data._id}>
           <Container className="pantry-container">
-            <div className="pantry-card">
+            <div className={`pantry-card ${flippedCards.includes(data._id) ? 'flipped' : ''}`} onClick={() => setFlippedCards((prev) => (prev.includes(data._id) ? prev.filter(id => id !== data._id) : [...prev, data._id]))}>
               <Menu {...bindMenu(addNewMember)}>
                 <Container className="inner-pantry-container">
                   <Card className="inner-pantry-card">
@@ -199,22 +195,21 @@ function Pantry() {
                           className="join-form"
                           placeholder="Enter Valid Email:"
                         />
-                        <button class="button-3 join-btn" type="submit">
+                        <button className="button-3 join-btn" type="submit">
                           Add Member
                         </button>
                       </form>
                     </Card.Body>
                   </Card>
                 </Container>
-              </Menu>
+                </Menu>
               <div className="rect-info-ctn">
                 <div className="pantry-name" onClick={goToPantry}>
                   {data.name}
                 </div>
-                Owner: {data.owner} <br></br> Collaborators:{" "}
-                {data.member_list.length} <br></br>{" "}
+                Owner: {data.owner} <br /> Collaborators: {data.member_list.length} <br />{' '}
                 <button
-                  class="add-new-membr-btn"
+                  className="add-new-membr-btn"
                   variant="contained"
                   {...bindTrigger(addNewMember)}
                 >
@@ -222,8 +217,7 @@ function Pantry() {
                 </button>
                 <div className="mb-3">
                   <button
-                    class="button-3"
-                    className="trash-btn-style"
+                    className="button-3 trash-btn-style"
                     onClick={() => handleDelete(data._id)}
                     name="btn2"
                     value="supposed to delete"
@@ -239,4 +233,5 @@ function Pantry() {
     </div>
   );
 }
+
 export default Pantry;
