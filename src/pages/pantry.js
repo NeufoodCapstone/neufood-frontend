@@ -200,6 +200,7 @@ function Pantry() {
           <Container className="pantry-container">
             <div className={`pantry-card ${flippedCards.includes(data._id) ? 'flipped' : ''}`}
               onClick={(e) => handleCardClick(e, data._id)}>
+              <div className="front-content">
               <Menu {...bindMenu(addNewMember)}>
                 <Container className="inner-pantry-container">
                   <Card className="inner-pantry-card">
@@ -251,11 +252,17 @@ function Pantry() {
                   </button>
                 </div>
               </div>
+              <div className={`back-content ${flippedCards.includes(data._id) ? 'visible' : ''}`}>
+              <div className="bcontent">
+                <div className = "pantry-title">Name: {data.name}</div>
+                <div className = "owner">Owner: {data.owner} </div>
+                <div className = "collaborators">Collaborators: {data.member_list} </div>
+                <br />
+              </div>
+            </div>
+            </div>
             </div>
           {/* Back content */}
-          <div className={`back-content ${flippedCards.includes(data._id) ? 'visible' : ''}`}>
-              {}
-            </div>
           </Container>
         </p>
       ))}
