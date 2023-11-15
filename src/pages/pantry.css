@@ -192,6 +192,7 @@ figcaption {
   z-index: 0;
   height: 40vh;
   border-radius: 50px;
+  border-color: green; 
   background: url("../imgs/pantry/pantry-default-img.png"),
     lightgray 50% / cover no-repeat;
 }
@@ -225,12 +226,23 @@ figcaption {
 }
 
 .back-content{
-  background-color: #394032;
 
 }
 
 .block-content.visible {
-  background-color: #394032;
+}
+
+.view-ingredients-btn{
+  border: 2px solid #955e42; /*border color*/
+  background-color: #6da34d;
+  color: black;
+  font-size: 16px;
+  font-family: Urbanist;
+  cursor: pointer;
+  color: black;
+  border-radius: 40px;
+  width: 80%;
+  margin-top: 10px;
 
 }
 
