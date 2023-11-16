@@ -44,7 +44,7 @@ function Pantry() {
     e.stopPropagation(); // Prevent the click event from reaching the parent container
 
     // Add the logic to navigate to the ingredients page for the selected pantry
-    window.location.href = `/ingredients/${pantry_id}`;
+    window.location.href = `/ingredients?pantry=${pantry_id}`;
   };
 
   const user = localStorage.getItem('loginID');
