@@ -13,6 +13,8 @@ import logo from "../imgs/logo-no-text.png";
 import "./ingredients.css";
 
 const Ingredients = () => {
+  const queryParams = new URLSearchParams(window.location.search);
+
   const [inputs, setInputs] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -20,7 +22,9 @@ const Ingredients = () => {
   const [quantity, setQuantity] = useState("");
   const [activeTab, setActiveTab] = useState("first");
   const [pantryList, setPantryList] = useState([]);
-  const [displayedPantry, setDisplayedPantry] = useState("All");
+  const [displayedPantry, setDisplayedPantry] = useState(
+    queryParams.get("pantry") ? queryParams.get("pantry") : "All"
+  );
   const [changePantryId, setChangePantryId] = useState(null);
   const [changeSelectedPantry, _] = useState("");
   const [hasChangedIngredient, setHasChangedIngredient] = useState(false);
@@ -32,7 +36,7 @@ const Ingredients = () => {
   const [loadingPantryChange, setLoadingPantryChange] = useState(false);
   const [selectedIngredient, setSelectedIngredient] = useState(null);
 
-    const handleFlip = (_id) => {
+  const handleFlip = (_id) => {
     setSelectedIngredient(_id);
   };
 
@@ -226,8 +230,7 @@ const Ingredients = () => {
       const jsonData = await response.json();
       setInputs(
         jsonData.filter(
-          (input) =>
-            pantry_id === "All" || input.related_pantry === pantry_id
+          (input) => pantry_id === "All" || input.related_pantry === pantry_id
         )
       );
     } catch (err) {
@@ -242,43 +245,46 @@ const Ingredients = () => {
       <div className="page">
         <Container className="input-box">
           <img className="logo-img" src={logo} />
-          <figcaption className="page-name">Add your Ingredient details and track your expiration dates</figcaption>
+          <figcaption className="page-name">
+            Add your Ingredient details and track your expiration dates
+          </figcaption>
         </Container>
-        <div className = "custom-tabs2">
-        
-              <button
-                className="button add-ingredient"
-                variant="contained"
-                {...bindTrigger(popupState2)}
-              >
-                Add Ingredient
-              </button>
-            
+        <div className="custom-tabs2">
+          <button
+            className="button add-ingredient"
+            variant="contained"
+            {...bindTrigger(popupState2)}
+          >
+            Add Ingredient
+          </button>
         </div>
         <Menu {...bindMenu(popupState2)} className="menu">
+          <Card className="add-ingredient-card custom-card">
+            <h2 className="card-title">Add Ingredient</h2>
+            <form onSubmit={onSubmitForm}>
+              <label htmlFor="itemName" className="name">
+                Item Name:
+              </label>
+              <input
+                type="text"
+                id="itemName"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="foodinput"
+              />
+              <label htmlFor="price" className="name">
+                Price ($):
+              </label>
 
-              <Card className = "add-ingredient-card custom-card">
-                <h2 className="card-title">Add Ingredient</h2>
-                <form onSubmit={onSubmitForm}>
-                  <label htmlFor="itemName" className="name">Item Name:</label>
-                  <input
-                    type="text"
-                    id="itemName"
-                    name="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="foodinput"
-                  />
-                  <label htmlFor="price" className="name">Price ($):</label>
-
-                  <input
-                    type="number"
-                    name="price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="foodinput"
-                  />
-                  {/* <input
+              <input
+                type="number"
+                name="price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="foodinput"
+              />
+              {/* <input
                     type="date"
                     name="Expiration Date"
                     value={newIngredientExpirationDate}
@@ -290,46 +296,56 @@ const Ingredients = () => {
                     className="foodinput"
                   />
                   <p>Expiration Date</p> */}
-                  <label htmlFor="quantity" className="name">Quantity:</label>
-                  <input
-                    type="number"
-                    name="quantity"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    className="foodinput"
-                  />
-                  <label htmlFor="Category" className="name">Category:</label>
-                  <select
-                    className="foodinput"
-                    onChange={(e) => setCategory(e.target.value)}
-                  >
-                    <option>Select</option>
-                    <option>Dairy</option>
-                    <option>Fruits</option>
-                    <option>Vegetables</option>
-                    <option>Grains</option>
-                    <option>Protein</option>
-                    <option>Oils</option>
-                    <option>Condiments</option>
-                    <option>Snacks</option>
-                    <option>Desserts</option>
-                    <option>Drinks</option>
-                    <option>Spices</option>
-                    <option>Spreads</option>
-                    <option>Other</option>
-                  </select>
-                  <br></br>
-                  <button className="addButton" type="submit">
-                    {" "}
-                    Add
-                  </button>
-                </form>
-              </Card>
+              <label htmlFor="quantity" className="name">
+                Quantity:
+              </label>
+              <input
+                type="number"
+                name="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                className="foodinput"
+              />
+              <label htmlFor="Category" className="name">
+                Category:
+              </label>
+              <select
+                className="foodinput"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option>Select</option>
+                <option>Dairy</option>
+                <option>Fruits</option>
+                <option>Vegetables</option>
+                <option>Grains</option>
+                <option>Protein</option>
+                <option>Oils</option>
+                <option>Condiments</option>
+                <option>Snacks</option>
+                <option>Desserts</option>
+                <option>Drinks</option>
+                <option>Spices</option>
+                <option>Spreads</option>
+                <option>Other</option>
+              </select>
+              <br></br>
+              <button className="addButton" type="submit">
+                {" "}
+                Add
+              </button>
+            </form>
+          </Card>
         </Menu>
-        
-        <div className="custom-tabs" activeKey={activeTab} onSelect={handleTabChange}>
+
+        <div
+          className="custom-tabs"
+          activeKey={activeTab}
+          onSelect={handleTabChange}
+        >
           <button
-            className={`button all-ingredients ${selectedPantry === null ? 'selected' : ''}`}
+            className={`button all-ingredients ${
+              selectedPantry === null ? "selected" : ""
+            }`}
             title="All Ingredients"
             onClick={() => handlePantryButtonClick("All")}
           >
@@ -337,7 +353,9 @@ const Ingredients = () => {
           </button>
           {pantryList.map((pantry) => (
             <button
-              className={`button pantries ${selectedPantry === pantry._id ? "selected" : ""}`}
+              className={`button pantries ${
+                selectedPantry === pantry._id ? "selected" : ""
+              }`}
               onClick={() => handlePantryButtonClick(pantry._id)}
               key={pantry._id}
             >
@@ -347,7 +365,7 @@ const Ingredients = () => {
         </div>
         <div className="flex-container">
           {/* Search bar */}
-          <div className = "search-bar">
+          <div className="search-bar">
             <input
               className="search"
               type="text"
@@ -369,12 +387,21 @@ const Ingredients = () => {
                 input.name.toLowerCase().includes(searchInput.toLowerCase())
               )
               .map((input) => (
-                
                 <div className="ingredient-flex" key={input._id}>
                   <div className="ingredient-buttons">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none" >
-                    <path d="M13.1063 6.90967L13.8134 7.61678L14.5205 6.90967L15.448 5.98217C15.4482 5.98201 15.4483 5.98184 15.4485 5.98167C16.4828 4.9514 17.8833 4.37292 19.3432 4.37292C20.8026 4.37292 22.2026 4.95101 23.2369 5.98065C24.2673 7.01639 24.8458 8.418 24.8458 9.87907C24.8458 11.3404 24.2671 12.7422 23.2363 13.778C23.2361 13.7783 23.2358 13.7786 23.2355 13.7788L13.8134 23.201L4.39127 13.7788C4.391 13.7786 4.39072 13.7783 4.39045 13.778C3.35968 12.7422 2.78101 11.3404 2.78101 9.87907C2.78101 8.41805 3.35945 7.01648 4.38982 5.98075C5.42407 4.95105 6.8241 4.37292 8.28359 4.37292C9.74351 4.37292 11.1439 4.9514 12.1783 5.98167C12.1785 5.98184 12.1786 5.98201 12.1788 5.98217L13.1063 6.90967Z" stroke="black" stroke-width="2"/>
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 28 28"
+                      fill="none"
+                    >
+                      <path
+                        d="M13.1063 6.90967L13.8134 7.61678L14.5205 6.90967L15.448 5.98217C15.4482 5.98201 15.4483 5.98184 15.4485 5.98167C16.4828 4.9514 17.8833 4.37292 19.3432 4.37292C20.8026 4.37292 22.2026 4.95101 23.2369 5.98065C24.2673 7.01639 24.8458 8.418 24.8458 9.87907C24.8458 11.3404 24.2671 12.7422 23.2363 13.778C23.2361 13.7783 23.2358 13.7786 23.2355 13.7788L13.8134 23.201L4.39127 13.7788C4.391 13.7786 4.39072 13.7783 4.39045 13.778C3.35968 12.7422 2.78101 11.3404 2.78101 9.87907C2.78101 8.41805 3.35945 7.01648 4.38982 5.98075C5.42407 4.95105 6.8241 4.37292 8.28359 4.37292C9.74351 4.37292 11.1439 4.9514 12.1783 5.98167C12.1785 5.98184 12.1786 5.98201 12.1788 5.98217L13.1063 6.90967Z"
+                        stroke="black"
+                        stroke-width="2"
+                      />
+                    </svg>
                   </div>
                   <img
                     src={getIngredientImage(input.category)}
@@ -385,14 +412,16 @@ const Ingredients = () => {
                   <br></br>
                   <div className="amount">
                     Q:
-                    <span >{input.quantity}</span>
-                  <button
-                    className="use-button"
-                    variant="contained"
-                    onClick={() => handleDecrement(input._id, input.quantity - 1)}
-                  >
-                    Use
-                  </button>
+                    <span>{input.quantity}</span>
+                    <button
+                      className="use-button"
+                      variant="contained"
+                      onClick={() =>
+                        handleDecrement(input._id, input.quantity - 1)
+                      }
+                    >
+                      Use
+                    </button>
                   </div>
                 </div>
               ))
