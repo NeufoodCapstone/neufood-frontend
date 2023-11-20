@@ -9,13 +9,14 @@ const Modal = ({
   actionButtonText,
   actionDescription,
   closeButtonText,
+  dialogTitle,
   open,
   onAction,
   onClose,
 }) => {
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Delete Item</DialogTitle>
+      <DialogTitle>{dialogTitle}</DialogTitle>
       <DialogContent>
         <DialogContentText>{actionDescription}</DialogContentText>
       </DialogContent>
