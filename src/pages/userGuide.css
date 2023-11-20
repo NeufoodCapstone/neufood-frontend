@@ -1,0 +1,120 @@
+.header-container {
+    background-color: #f6efec; /* Add your desired background color */
+    padding: 10px; /* Add padding as needed */ 
+}
+
+.logo-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.img-logo-position {
+    max-width: 150px; /* Adjust the maximum width of the logo as needed */
+    height: auto;
+}
+
+.userguide-page {
+    max-width: 600px; /* Set your preferred max-width */
+    margin: 0 auto; 
+    font-family: Urbanist;
+    background-color: #f6efec;
+      
+}
+
+hr.divider {
+    border: 1px solid #6da34d;
+    margin: 20px 0;
+}
+
+hr{
+   color: #6da34d
+}
+
+
+.section-content .bullet-list {
+    list-style-type: none; 
+    padding: 0;
+}
+  
+.section-content .bullet-list li {
+    margin-bottom: 8px; /* Adjust the margin between list items */
+}
+
+.section-content .bullet-list li::before {
+    content: '-'; /* Use a bullet point character */
+    color: #6da34d;
+    font-size: 1.5em;
+    display: inline-block;
+    width: 1em; /* Adjust the width of the space between the bullet point and the text */
+    margin-left: -1em; /* Negative margin to bring the bullet point closer to the text */
+    margin-right: 0.5em; /* Adjust the space between the bullet point and the text */
+}
+
+.section-content {
+    text-align: left; /* Align text to the left */
+    color:#585858;
+    font-family: Urbanist;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
+}
+
+h2{
+    font-family: Urbanist;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-align: left;
+}
+
+.help-btn{
+    border-radius: 100px;
+    border: 4px solid #955E42;
+    background-color: #955E42;
+    color: #f6efec;
+    width: 40%;
+    height: auto;
+    gap: 8px;
+    font-size: 24px;
+    font-family: Urbanist;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .help-btn:hover {
+    background-color:#955E42 ;
+    transform: translateY(-5px); /* Move the button 5 pixels up on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Increase the box shadow on hover */
+
+    
+  }
+
+
+@media screen and (max-width: 600px) {
+    .header-container {
+        padding: 5px;
+    }
+
+    .img-logo-position {
+        max-width: 100px;
+    }
+
+    .userguide-page {
+        max-width: 80%;
+    }
+
+    hr.divider {
+        margin: 10px 0;
+    }
+
+    .section-content .bullet-list li::before {
+        font-size: 1.2em;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}
