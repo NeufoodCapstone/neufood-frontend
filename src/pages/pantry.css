@@ -179,7 +179,6 @@ figcaption {
 }
 
 .pantry-card {
-  
   width: 60vw;
   padding-left: 30%;
   justify-content: center;
@@ -188,7 +187,7 @@ figcaption {
   z-index: 0;
   height: 100%;
   border-radius: 50px;
-  border-color: green; 
+  border-color: green;
   background: url("../imgs/pantry/pantry-default-img.png"),
     lightgray 50% / cover no-repeat;
 }
@@ -209,7 +208,7 @@ figcaption {
   z-index: 0;
 }
 
-.view-ingredients-btn{
+.view-ingredients-btn {
   border: 2px solid #955e42; /*border color*/
   background-color: #6da34d;
   color: black;
@@ -237,7 +236,6 @@ figcaption {
   transform: rotateY(180deg);
 }
 
-
 .back-content {
   display: none;
   position: absolute;
@@ -251,7 +249,7 @@ figcaption {
   border-radius: 50px;
   font-family: Urbanist;
 }
-.bcontent{
+.bcontent {
   color: black;
   font-size: 24px;
   justify-content: left;
@@ -262,7 +260,7 @@ figcaption {
 }
 
 .visible {
-  display: block; 
+  display: block;
 }
 
 .back-content-overlay {
@@ -275,15 +273,15 @@ figcaption {
   background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
 }
 
-.pantry-title, .owner, .collaborators{
+.pantry-title,
+.owner,
+.collaborators {
   font-size: 18px;
   font-family: Urbanist;
   font-weight: 300;
   text-align: left;
   margin-left: 10%;
 }
-
-
 
 @media only screen and (max-width: 500px) {
   .pantry-card-style {
@@ -488,7 +486,7 @@ figcaption {
     z-index: 0;
   }
 
-  .view-ingredients-btn{
+  .view-ingredients-btn {
     border: 2px solid #955e42; /*border color*/
     background-color: #6da34d;
     color: black;
@@ -501,5 +499,4 @@ figcaption {
     margin-top: 10px;
     margin-bottom: 10px;
   }
-
 }
