@@ -263,6 +263,13 @@ figcaption {
   display: block;
 }
 
+.delete-button {
+  width: 75%;
+  font-size: 15px;
+  border-radius: 30px;
+  background-color: #6da34d;
+}
+
 .back-content-overlay {
   /* Additional overlay styling if needed */
   position: absolute;

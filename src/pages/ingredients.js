@@ -476,7 +476,41 @@ const Ingredients = () => {
                           Expiration Date:{" "}
                           {input.expiration_date.substring(0, 10)}{" "}
                         </div>
-                        <button>Delete</button>
+                        <button
+                          className="delete-button"
+                          variant="contained"
+                          onClick={() => setChangePantryId(input._id)}
+                        >
+                          Change Pantry
+                        </button>
+                        {changePantryId === input._id && (
+                          <select
+                            id="dropdown"
+                            value={changeSelectedPantry}
+                            onChange={(e) => {
+                              handleSelectChange(input._id, e.target.value);
+                              handleCardClick(e, input._id);
+                            }}
+                          >
+                            <option key={-2} value={""}>
+                              Select a pantry
+                            </option>
+                            <option key={-1} value={""}>
+                              None
+                            </option>
+                            {pantryList.map((pantry) => (
+                              <option key={pantry._id} value={pantry._id}>
+                                {pantry.name}
+                              </option>
+                            ))}
+                          </select>
+                        )}
+                        <button
+                          className="delete-button"
+                          onClick={() => handleDelete(input._id)}
+                        >
+                          Delete
+                        </button>
                         <br />
                       </div>
                     </div>
