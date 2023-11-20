@@ -294,17 +294,21 @@ const Ingredients = () => {
                 onChange={(e) => setName(e.target.value)}
                 className="foodinput"
               />
-              <label htmlFor="price" className="name">
-                Price ($):
-              </label>
 
+              <label htmlFor="itemName" className="name">
+                Price (In Dollars):
+              </label>
               <input
                 type="number"
+                id="price"
                 name="price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 className="foodinput"
               />
+              <label htmlFor="price" className="name">
+                Expiration Date:
+              </label>
               <input
                 type="date"
                 name="Expiration Date"
@@ -316,7 +320,6 @@ const Ingredients = () => {
                 }}
                 className="foodinput"
               />
-              <p>Expiration Date</p>
               <label htmlFor="quantity" className="name">
                 Quantity:
               </label>
@@ -460,18 +463,54 @@ const Ingredients = () => {
                       }`}
                     >
                       <div className="bcontent">
-                        <div className="pantry-title">Name: {input.name}</div>
-                        <div className="owner">Owner: {input.owner} </div>
+                        <div className="owner">
+                          Owner: {input.owner.split(" ")[0]}{" "}
+                        </div>
                         <div className="collaborators">
                           Quantity: {input.quantity}{" "}
                         </div>
                         <div className="collaborators">
-                          Price: {input.price}{" "}
+                          Price: ${input.price}{" "}
                         </div>
                         <div className="collaborators">
                           Expiration Date:{" "}
                           {input.expiration_date.substring(0, 10)}{" "}
                         </div>
+                        <button
+                          className="delete-button"
+                          variant="contained"
+                          onClick={() => setChangePantryId(input._id)}
+                        >
+                          Change Pantry
+                        </button>
+                        {changePantryId === input._id && (
+                          <select
+                            id="dropdown"
+                            value={changeSelectedPantry}
+                            onChange={(e) => {
+                              handleSelectChange(input._id, e.target.value);
+                              handleCardClick(e, input._id);
+                            }}
+                          >
+                            <option key={-2} value={""}>
+                              Select a pantry
+                            </option>
+                            <option key={-1} value={""}>
+                              None
+                            </option>
+                            {pantryList.map((pantry) => (
+                              <option key={pantry._id} value={pantry._id}>
+                                {pantry.name}
+                              </option>
+                            ))}
+                          </select>
+                        )}
+                        <button
+                          className="delete-button"
+                          onClick={() => handleDelete(input._id)}
+                        >
+                          Delete
+                        </button>
                         <br />
                       </div>
                     </div>
