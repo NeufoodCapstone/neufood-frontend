@@ -1,6 +1,7 @@
  
 import React, { useState } from 'react';
 import './faq.css'; // Import the stylesheet
+import logo from "./logo-no-text.png";
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ const FAQItem = ({ question, answer }) => {
   };
 
   return (
+   
     <div className={`faq-item ${isOpen ? 'open' : ''}`}>
       <div className="faq-question" onClick={toggleAccordion}>
         <div className="question-text">{question}</div>
@@ -34,9 +36,14 @@ const FAQ = () => {
   return (
     <div className='faq-bg'>
     <div className="faq-page">
-        <br></br>
-      <h1>Neufood FAQ's</h1>
-      <br></br>
+      <div className="header-container">
+        <div className="logo-title-container">
+          <img className="img-logo-position" src={logo} alt="Logo" />
+          <h1>Neufood FAQ's</h1>
+        </div>
+      </div>
+
+
       {faqData.map((faq, index) => (
         <FAQItem key={index} question={faq.question} answer={faq.answer} />
       ))}
@@ -44,7 +51,7 @@ const FAQ = () => {
       <br></br>
       <p >Still stuck? Help is a mail away!</p>
    
-    <button class="faq-btn">Send a Message</button> 
+      <button class="faq-btn">Send a Message</button> 
        
     </div>
     </div>

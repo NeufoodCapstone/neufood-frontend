@@ -11,6 +11,7 @@ import Pantry from "./pantry";
 import Pantry2 from "./pantry2";
 import Friend from "./friend";
 import FAQ from "./faq";
+import Guide from "./userGuide";
 import "./NavbarElements.css";
 
 export default class NavbarComp extends Component {
@@ -80,6 +81,12 @@ export default class NavbarComp extends Component {
                         <NavDropdown.Item as={Link} to="/reciperec" onClick={() => this.setState({ tag: "Profile" })}>
                           Recipe Recommender
                         </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/faq" onClick={() => this.setState({ tag: "FAQ" })}>
+                          FAQ
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/userGuide" onClick={() => this.setState({ tag: "Guide" })}>
+                          User Guide
+                        </NavDropdown.Item>
                       </>
                     )}
                     {!this.isLoggedIn() && (
@@ -92,6 +99,9 @@ export default class NavbarComp extends Component {
                         </NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/faq" onClick={() => this.setState({ tag: "FAQ" })}>
                           FAQ
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/userGuide" onClick={() => this.setState({ tag: "Guide" })}>
+                          User Guide
                         </NavDropdown.Item>
                       </>
                     )}
@@ -129,6 +139,9 @@ export default class NavbarComp extends Component {
             </Route>
             <Route path="/FAQ">
               <FAQ />
+            </Route>
+            <Route path="/userGuide">
+              <Guide/>
             </Route>
             <Route path="/">
               <Home />

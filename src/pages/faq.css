@@ -1,22 +1,24 @@
 
 .faq-bg{
     background-color: #f6efec;
-    }
-    .faq-item {
-        border: 1px solid #312f2f;
-        margin-bottom: 10px;
-        border-radius: 8px; /* Adjust the value to control the roundness of the corners */
-        padding: 10px;
-      }
-      
-      .faq-page {
-        max-width: 600px; /* Set your preferred max-width */
-        margin: 0 auto; /* Center the container */
-        /* background-color: #f6efec; */
-        font-family: Urbanist;
     
-      }
-      .faq-question {
+}
+.faq-item {
+  border: 1px solid #312f2f;
+  margin-bottom: 10px;
+  border-radius: 8px; /* Adjust the value to control the roundness of the corners */
+  padding: 10px;
+}
+      
+.faq-page {
+  max-width: 600px; /* Set your preferred max-width */
+  margin: 0 auto; /* Center the container */
+        /* background-color: #f6efec; */
+  font-family: Urbanist;
+    
+}
+      
+.faq-question {
         display: flex;
         align-items: center;
         padding: 10px;
@@ -24,7 +26,7 @@
         background-color: #f6efec;
         font-family: Urbanist;
         
-      }
+}
       
       .faq-question .question-text {
         flex-grow: 1;
@@ -70,8 +72,41 @@
     
         
       }
+
+.img-logo-position {
+  max-width: 150px; /* Adjust the maximum width of the logo as needed */
+  height: auto;
+}
+
+.logo-title-container {
+  display: flex;
+  align-items: center;
+}
+
+
+.header-container {
+    background-color: #f6efec; /* Add your desired background color */
+    padding: 10px; /* Add padding as needed */
+  
+}
+
+h1{
+  margin-left: 60px;
+}
+
+
+.pageTitle {
+  top: 25%;
+  left: 20%;
+  color: #394032;
+  width: 20vw;
+  height: auto;
+  position: absolute;
+  font-size: 52px;
+}
+      
     
-      @media (max-width: 767px) {
+      @media (max-width: 600px) {
         .faq-btn {
           padding: 8px 16px; /* Adjust padding for smaller screens */
           font-size: 14px; /* Adjust font size for smaller screens */
