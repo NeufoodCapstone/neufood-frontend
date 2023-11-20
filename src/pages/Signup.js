@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -14,7 +12,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { config } from "../Constants";
-import axios from "axios";
+import logo from "./logo-no-text.png";
+import "./signin.css";
 
 var url = config.url.API_HOME;
 
@@ -99,6 +98,7 @@ export default function SignUp() {
         "background-color": "rgb(245, 239, 237)",
       }}
     >
+      <img className="logo-sign" src={logo} />
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
