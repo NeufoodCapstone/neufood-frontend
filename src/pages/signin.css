@@ -220,10 +220,7 @@
   }
   /* Apply mobile-specific styles here */
   .logo-img {
-    top: 5%;
-    left: 5%;
-    height: 15vh; /* Adjust height for smaller screens */
-    border-radius: 20px;
+    display: none;
   }
 
   .logo-sign {
