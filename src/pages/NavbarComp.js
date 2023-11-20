@@ -80,6 +80,9 @@ export default class NavbarComp extends Component {
                         <NavDropdown.Item as={Link} to="/reciperec" onClick={() => this.setState({ tag: "Profile" })}>
                           Recipe Recommender
                         </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/faq" onClick={() => this.setState({ tag: "FAQ" })}>
+                          FAQ
+                        </NavDropdown.Item>
                       </>
                     )}
                     {!this.isLoggedIn() && (
