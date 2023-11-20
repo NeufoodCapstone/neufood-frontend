@@ -8,6 +8,13 @@
   position: "absolute";
 }
 
+.logo-sign {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 15%;
+}
+
 .bckgrnd {
   background-color: rgb(245, 239, 237);
 }
@@ -164,6 +171,36 @@
   margin: 4px; /* Add some margin for spacing between pills */
 }
 
+/* Add these styles for the tabs */
+.tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.tabs button {
+  background-color: rgb(245, 239, 237); /* Green background color */
+  border: 3px solid #6da34d;
+  padding: 10px 20px;
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background-color: #6da34d; /* Darker green when clicked */
+}
+
+.button-add {
+  display: inline-block;
+  padding: 8px 16px; /* Adjust padding as needed */
+  border-radius: 20px; /* Adjust border-radius to make it rounded */
+  background-color: #dfdfdf; /* Change the background color */
+  color: black; /* Change the text color */
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px; /* Adjust font size */
+  cursor: pointer;
+}
+
 /* Mobile responsive styles */
 @media (max-width: 768px) {
   .spacing {
@@ -187,6 +224,11 @@
     left: 5%;
     height: 15vh; /* Adjust height for smaller screens */
     border-radius: 20px;
+  }
+
+  .logo-sign {
+    max-width: 50%; /* Adjust the max-width for smaller screens */
+    padding-top: 4%; /* Adjust the padding for smaller screens */
   }
 
   .pageTitle {
@@ -277,16 +319,4 @@
     width: 100%; /* Make the pill full width on mobile */
     max-width: 200px; /* Set a maximum width if needed */
   }
-}
-
-.button-add {
-  display: inline-block;
-  padding: 8px 16px; /* Adjust padding as needed */
-  border-radius: 20px; /* Adjust border-radius to make it rounded */
-  background-color: #dfdfdf; /* Change the background color */
-  color: black; /* Change the text color */
-  text-align: center;
-  text-decoration: none;
-  font-size: 14px; /* Adjust font size */
-  cursor: pointer;
 }

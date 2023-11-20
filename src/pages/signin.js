@@ -34,6 +34,8 @@ export default function SignIn() {
   const [showPopup, setShowPopup] = useState(false);
   const [showFriendPopup, setShowFriendPopup] = useState(false);
 
+  const [activeTab, setActiveTab] = useState("tasteProfile");
+
   const allergies = [
     "Peanuts",
     "Tree Nuts",
@@ -52,6 +54,11 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
   };
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
   //google login button functions
   const [loginData, setLoginData] = useState(
     localStorage.getItem("loginData")
@@ -233,17 +240,16 @@ export default function SignIn() {
 
   return (
     <div className="bckgrnd" data-testid="signin-1">
-      <div className="container-logotitle">
-        <img className="logo-img" src={logo} />
-        {loginData != null && (
-          <figcaption className="pageTitle">Profile</figcaption>
-        )}
-      </div>
-
       <ThemeProvider theme={theme}>
         <Container>
           {loginData ? (
             <div className="pad">
+              <div className="container-logotitle">
+                <img className="logo-img" src={logo} />
+                {loginData != null && (
+                  <figcaption className="pageTitle">Profile</figcaption>
+                )}
+              </div>
               <Container className="contain">
                 <Card className="card">
                   <Card.Body>
@@ -282,130 +288,157 @@ export default function SignIn() {
               </Container>
               <Container className="contain-1">
                 <div className="card-body-div-1">
-                  <div className="card-body-div-2">
-                    <p>Allergies/Diet</p>
-                    <div className="card-body-div-3">
-                      {allergens.slice(2).map((allergy) => (
-                        <Pill title={allergy} key={allergy} />
-                      ))}
-                    </div>
+                  <div className="tabs">
                     <button
-                      onClick={() => setShowPopup(!showPopup)}
-                      className="button-add"
+                      onClick={() => handleTabChange("tasteProfile")}
+                      className={activeTab === "tasteProfile" ? "active" : ""}
                     >
-                      +
+                      Taste Profile
                     </button>
-                    {showPopup && (
-                      <select
-                        id="dropdown"
-                        value={selectedOption}
-                        onChange={handleSelectChange}
-                      >
-                        <option value="">Select an allergy</option>
-                        <option key={-1} value={"Water"}>
-                          Water
-                        </option>
-                        {allergies.map((allergy, index) =>
-                          !allergens.includes(allergy) ? (
-                            <option key={index} value={allergy}>
-                              {allergy}
-                            </option>
-                          ) : null
-                        )}
-                      </select>
-                    )}
-                  </div>{" "}
-                  <div className="card-body-div-2">
-                    <p>Badges</p>
+                    <button
+                      onClick={() => handleTabChange("friends")}
+                      className={activeTab === "friends" ? "active" : ""}
+                    >
+                      Friends
+                    </button>
                   </div>
-                  <div className="card-body-div-2">
-                    <p>Friends</p>
-                    {addFriendSuccess === 1 && (
-                      <p style={{ color: "green" }}>Friend Request Sent</p>
-                    )}
-                    {addFriendSuccess === -1 && (
-                      <p style={{ color: "red" }}>
-                        Friend Request Failed to Send. Please Try Again Later.
-                      </p>
-                    )}
-                    <div>
-                      {friends.map((friend) => (
-                        <Pill title={friend.email} />
-                      ))}
-                    </div>
-                    <button
-                      onClick={() => setShowFriendPopup(!showFriendPopup)}
-                      className="button-add"
-                    >
-                      +
-                    </button>
-                    {showFriendPopup && (
-                      <>
-                        <input
-                          type="text"
-                          placeholder="Enter Email"
-                          value={addFriendValue}
-                          onChange={(e) => setAddFriendValue(e.target.value)}
-                        />
+
+                  {activeTab === "tasteProfile" && (
+                    <>
+                      <div className="card-body-div-2">
+                        <p>Allergies/Diet</p>
+                        <div className="card-body-div-3">
+                          {allergens.slice(2).map((allergy) => (
+                            <Pill title={allergy} key={allergy} />
+                          ))}
+                        </div>
                         <button
-                          onClick={handleAddFriend}
+                          onClick={() => setShowPopup(!showPopup)}
                           className="button-add"
                         >
-                          Send Request
+                          +
                         </button>
-                      </>
-                    )}
-                  </div>
-                  <div className="card-body-div-2">
-                    <p>Notifications</p>
-                    {notifications &&
-                      notifications.map((notification) => {
-                        if (notification.isRead) return;
-                        switch (notification.type) {
-                          default:
-                            return (
-                              <Pill
-                                title={
-                                  <>
-                                    <div>
-                                      Friend Request From {notification.sender}
-                                    </div>
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                      }}
-                                    >
-                                      <button
-                                        className="button"
-                                        onClick={() =>
-                                          handleAcceptFriendRequest(
-                                            notification._id,
-                                            notification.sender
-                                          )
-                                        }
-                                      >
-                                        Accept
-                                      </button>
-                                      <button
-                                        className="button"
-                                        onClick={() =>
-                                          handleDeclineFriendRequest(
-                                            notification._id
-                                          )
-                                        }
-                                      >
-                                        Decline
-                                      </button>
-                                    </div>
-                                  </>
-                                }
-                              />
-                            );
-                        }
-                      })}
-                  </div>
+                        {showPopup && (
+                          <select
+                            id="dropdown"
+                            value={selectedOption}
+                            onChange={handleSelectChange}
+                          >
+                            <option value="">Select an allergy</option>
+                            <option key={-1} value={"Water"}>
+                              Water
+                            </option>
+                            {allergies.map((allergy, index) =>
+                              !allergens.includes(allergy) ? (
+                                <option key={index} value={allergy}>
+                                  {allergy}
+                                </option>
+                              ) : null
+                            )}
+                          </select>
+                        )}
+                      </div>{" "}
+                      <div className="card-body-div-2">
+                        <p>Notifications</p>
+                        {notifications &&
+                          notifications.map((notification) => {
+                            if (notification.isRead) return;
+                            switch (notification.type) {
+                              default:
+                                return (
+                                  <Pill
+                                    title={
+                                      <>
+                                        <div>
+                                          Friend Request From{" "}
+                                          {notification.sender}
+                                        </div>
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            flexDirection: "row",
+                                            alignItems: "center",
+                                          }}
+                                        >
+                                          <button
+                                            className="button"
+                                            onClick={() =>
+                                              handleAcceptFriendRequest(
+                                                notification._id,
+                                                notification.sender
+                                              )
+                                            }
+                                          >
+                                            Accept
+                                          </button>
+                                          <button
+                                            className="button"
+                                            onClick={() =>
+                                              handleDeclineFriendRequest(
+                                                notification._id
+                                              )
+                                            }
+                                          >
+                                            Decline
+                                          </button>
+                                        </div>
+                                      </>
+                                    }
+                                  />
+                                );
+                            }
+                          })}
+                      </div>
+                      <div className="card-body-div-2">
+                        <p>Badges</p>
+                      </div>
+                    </>
+                  )}
+                  {activeTab === "friends" && (
+                    <>
+                      <div className="card-body-div-2">
+                        <p>Friends</p>
+                        {addFriendSuccess === 1 && (
+                          <p style={{ color: "green" }}>Friend Request Sent</p>
+                        )}
+                        {addFriendSuccess === -1 && (
+                          <p style={{ color: "red" }}>
+                            Friend Request Failed to Send. Please Try Again
+                            Later.
+                          </p>
+                        )}
+                        <div>
+                          {friends.map((friend) => (
+                            <Pill title={friend.email} />
+                          ))}
+                        </div>
+                        <button
+                          onClick={() => setShowFriendPopup(!showFriendPopup)}
+                          className="button-add"
+                        >
+                          +
+                        </button>
+                        {showFriendPopup && (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="Enter Email"
+                              value={addFriendValue}
+                              onChange={(e) =>
+                                setAddFriendValue(e.target.value)
+                              }
+                            />
+                            <button
+                              onClick={handleAddFriend}
+                              className="button-add"
+                            >
+                              Send Request
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    </>
+                  )}
                 </div>
               </Container>
               <button
@@ -418,6 +451,8 @@ export default function SignIn() {
             </div>
           ) : (
             <div>
+              <img className="logo-sign" src={logo} />
+
               <CssBaseline />
 
               <Box
@@ -428,7 +463,6 @@ export default function SignIn() {
                   flexDirection: "column",
                   alignItems: "center",
                   paddingBottom: "10%",
-                  paddingTop: "8%",
                 }}
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
