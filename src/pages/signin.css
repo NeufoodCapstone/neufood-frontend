@@ -219,6 +219,31 @@ h1{
   cursor: pointer;
 }
 
+.pill {
+  display: inline-block;
+  background-color: #dfdfdf;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin: 4px;
+  font-size: 14px;
+  border: 2px solid #955e42;
+}
+
+.btn-delete {
+  background-color: hsl(9, 100%, 50%);
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.btn-delete:hover {
+  background-color: hsl(1, 44%, 49%);
+}
+
 /* Mobile responsive styles */
 @media (max-width: 768px) {
   .spacing {

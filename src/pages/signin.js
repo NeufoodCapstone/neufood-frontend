@@ -19,6 +19,7 @@ import { config } from "../Constants";
 import logo from "./logo-no-text.png";
 import signin_pic from "./sigin.png";
 import "./signin.css";
+import { BsTrashFill } from "react-icons/bs";
 
 var url = config.url.API_HOME;
 
@@ -192,6 +193,28 @@ export default function SignIn() {
     }
   };
 
+  const handleDeleteAllergy = async (allergen) => {
+    try {
+      const response = await fetch(url + `/user/allergy/${loginData.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ allergen: allergen }),
+      });
+
+      if (response.ok) {
+        // Update your state or perform any other actions
+        console.log("Allergen deleted successfully!");
+        setAllergens(allergens.filter((allergy) => allergy !== allergen));
+      } else {
+        console.error("Failed to delete allergen");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const handleAddFriend = () => {
     setShowFriendPopup(false);
     try {
@@ -234,6 +257,19 @@ export default function SignIn() {
     );
     setNotifications(newNotifications);
     setFriends([...friends, email]);
+  };
+
+  const Pill = ({ title, onDelete }) => {
+    return (
+      <div className="pill">
+        <span>{title}</span>
+        {onDelete && (
+          <button className="btn-delete" onClick={() => onDelete(title)}>
+            <BsTrashFill />
+          </button>
+        )}
+      </div>
+    );
   };
 
   const [selectedOption, _] = useState("");
@@ -312,8 +348,14 @@ export default function SignIn() {
                       <div className="card-body-div-2">
                         <p>Allergies/Diet</p>
                         <div className="card-body-div-3">
-                          {allergens.slice(2).map((allergy) => (
-                            <Pill title={allergy} key={allergy} />
+                          {allergens.map((allergy) => (
+                            <div>
+                              <Pill
+                                title={allergy}
+                                key={allergy}
+                                onDelete={handleDeleteAllergy}
+                              />
+                            </div>
                           ))}
                         </div>
                         <button
