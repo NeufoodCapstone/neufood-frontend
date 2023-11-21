@@ -1,3 +1,20 @@
+.header-container {
+  background-color: #f6efec; 
+  padding: 10px; 
+}
+
+.logo-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.img-logo-position {
+  max-width: 150px; 
+  height: auto;
+}
+
+
+
 .pantry-card-style {
   background-color: blanchedalmond;
 }
@@ -291,6 +308,15 @@ figcaption {
 }
 
 @media only screen and (max-width: 500px) {
+
+  .header-container {
+    padding: 5px;
+}
+
+.img-logo-position {
+    max-width: 100px;
+}
+
   .pantry-card-style {
     background-color: blanchedalmond;
   }
