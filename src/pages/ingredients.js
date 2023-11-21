@@ -10,6 +10,7 @@ import { Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { config } from "../Constants";
 import logo from "../imgs/logo-no-text.png";
+import Modal from "../components/Modal";
 import "./ingredients.css";
 
 const Ingredients = () => {
@@ -37,6 +38,7 @@ const Ingredients = () => {
   const [loading, setLoading] = useState(false);
   const [loadingPantryChange, setLoadingPantryChange] = useState(false);
   const [selectedIngredient, setSelectedIngredient] = useState(null);
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
 
   const [flippedCards, setFlippedCards] = useState([]);
 
@@ -264,6 +266,9 @@ const Ingredients = () => {
   return (
     <Fragment>
       <div className="page">
+        {isHelpModalOpen && (
+          <Modal open={isHelpModalOpen} actionButtonText={"Help"} />
+        )}
         <Container className="input-box">
           <img className="logo-img" src={logo} />
           <figcaption className="page-name">
