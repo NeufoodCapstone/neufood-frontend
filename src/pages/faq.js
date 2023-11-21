@@ -49,9 +49,12 @@ const FAQ = () => {
       ))}
       <br></br>
       <br></br>
+
       <p >Still stuck? Help is a mail away!</p>
-   
-      <button class="faq-btn">Send a Message</button> 
+  
+      <a href="mailto:neufoodcapstone@gmail.com">
+        <button class="help-btn">Send a Message</button> 
+      </a>
        
     </div>
     </div>

@@ -1,3 +1,21 @@
+.header-container {
+  background-color: #f6efec; /* Add your desired background color */
+  padding: 10px; /* Add padding as needed */ 
+}
+
+.logo-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.img-logo-position {
+  max-width: 15px; /* Adjust the maximum width of the logo as needed */
+  height: auto;
+}
+h1{
+  font-family: Urbanist;
+}
+
 .logo-img {
   position: absolute;
   top: 20%;
@@ -30,13 +48,12 @@
 }
 
 .pad {
-  padding-top: 15%;
-  padding-bottom: 10%;
-  max-width: 60%;
+
   margin: 0 auto; /* Center the container horizontally */
   display: flex;
   flex-direction: column; /* Optional: If you want to stack child elements vertically */
   align-items: center; /* Center child elements horizontally */
+ 
 }
 
 .container {
@@ -93,8 +110,9 @@
 }
 
 .card-title {
-  margin-left: 0%;
+  margin-left: 10%;
   white-space: nowrap;
+ 
 }
 
 .card-text {
@@ -316,4 +334,13 @@
     width: 100%; /* Make the pill full width on mobile */
     max-width: 200px; /* Set a maximum width if needed */
   }
+
+  .header-container {
+    /* padding: 5px; */
+}
+
+.img-logo-position {
+    max-width: 100px;
+}
+
 }
