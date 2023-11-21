@@ -267,13 +267,24 @@ const Ingredients = () => {
     <Fragment>
       <div className="page">
         {isHelpModalOpen && (
-          <Modal open={isHelpModalOpen} actionButtonText={"Help"} />
+          <Modal
+            open={isHelpModalOpen}
+            closeButtonText={"Close"}
+            onClose={() => setIsHelpModalOpen(false)}
+          />
         )}
         <Container className="input-box">
           <img className="logo-img" src={logo} />
           <figcaption className="page-name">
             Add your Ingredient details and track your expiration dates
           </figcaption>
+          <br />
+          <button
+            className="help-button"
+            onClick={() => setIsHelpModalOpen(true)}
+          >
+            Help
+          </button>
         </Container>
         <div className="custom-tabs2">
           <button
