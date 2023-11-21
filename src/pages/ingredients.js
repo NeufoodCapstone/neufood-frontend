@@ -271,6 +271,14 @@ const Ingredients = () => {
             open={isHelpModalOpen}
             closeButtonText={"Close"}
             onClose={() => setIsHelpModalOpen(false)}
+            actionContent={
+              <video
+                width="285"
+                src="https://drive.google.com/uc?export=download&id=1XnneYEjER3vb3-Z1ihLZkEHERehyui2H"
+                controls
+              />
+            }
+            dialogTitle={"Help with Ingredients"}
           />
         )}
         <Container className="input-box">
