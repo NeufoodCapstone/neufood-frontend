@@ -48,11 +48,13 @@ export default class NavbarComp extends Component {
           <Navbar collapseOnSelect className="backgroundhead">
             <Container>
               <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="ml-auto"> {/* Use ml-auto to push the items to the right */}
+                <Nav className="ml-auto">
+                  {" "}
+                  {/* Use ml-auto to push the items to the right */}
                   <Nav.Link
                     eventKey="hamburger-menu"
                     onClick={this.handleToggleDropdown}
-                    className="mr-2" 
+                    className="mr-2"
                   >
                     ☰
                   </Nav.Link>
@@ -64,43 +66,83 @@ export default class NavbarComp extends Component {
                     onClick={this.handleToggleDropdown}
                     drop="end"
                   >
-                    <NavDropdown.Item as={Link} to="/" onClick={() => this.setState({ tag: "Home" })}>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/"
+                      onClick={() => this.setState({ tag: "Home" })}
+                    >
                       Home
                     </NavDropdown.Item>
                     {this.isLoggedIn() && (
                       <>
-                        <NavDropdown.Item as={Link} to="/Ingredients" onClick={() => this.setState({ tag: "Ingredients" })}>
-                          Ingredients
-                        </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/pantry" onClick={() => this.setState({ tag: "pantry" })}>
-                          Pantries
-                        </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/signin" onClick={() => this.setState({ tag: "Profile" })}>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/signin"
+                          onClick={() => this.setState({ tag: "Profile" })}
+                        >
                           Profile
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/reciperec" onClick={() => this.setState({ tag: "Profile" })}>
-                          Recipe Recommender
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/pantry"
+                          onClick={() => this.setState({ tag: "pantry" })}
+                        >
+                          Pantries
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/faq" onClick={() => this.setState({ tag: "FAQ" })}>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/Ingredients"
+                          onClick={() => this.setState({ tag: "Ingredients" })}
+                        >
+                          Ingredients
+                        </NavDropdown.Item>
+                        {/* <NavDropdown.Item as={Link} to="/reciperec" onClick={() => this.setState({ tag: "Profile" })}>
+                          Recipe Recommender
+                        </NavDropdown.Item> */}
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/faq"
+                          onClick={() => this.setState({ tag: "FAQ" })}
+                        >
                           FAQ
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/userGuide" onClick={() => this.setState({ tag: "Guide" })}>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/userGuide"
+                          onClick={() => this.setState({ tag: "Guide" })}
+                        >
                           User Guide
                         </NavDropdown.Item>
                       </>
                     )}
                     {!this.isLoggedIn() && (
                       <>
-                        <NavDropdown.Item as={Link} to="/signup" onClick={() => this.setState({ tag: "Register" })}>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/signup"
+                          onClick={() => this.setState({ tag: "Register" })}
+                        >
                           Sign Up
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/signin" onClick={() => this.setState({ tag: "Login" })}>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/signin"
+                          onClick={() => this.setState({ tag: "Login" })}
+                        >
                           Login
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/faq" onClick={() => this.setState({ tag: "FAQ" })}>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/faq"
+                          onClick={() => this.setState({ tag: "FAQ" })}
+                        >
                           FAQ
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/userGuide" onClick={() => this.setState({ tag: "Guide" })}>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/userGuide"
+                          onClick={() => this.setState({ tag: "Guide" })}
+                        >
                           User Guide
                         </NavDropdown.Item>
                       </>
@@ -141,7 +183,7 @@ export default class NavbarComp extends Component {
               <FAQ />
             </Route>
             <Route path="/userGuide">
-              <Guide/>
+              <Guide />
             </Route>
             <Route path="/">
               <Home />
