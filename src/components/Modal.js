@@ -7,6 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 const Modal = ({
   actionButtonText,
+  actionContent,
   actionDescription,
   closeButtonText,
   dialogTitle,
@@ -18,7 +19,10 @@ const Modal = ({
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>{dialogTitle}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{actionDescription}</DialogContentText>
+        {actionDescription && (
+          <DialogContentText>{actionDescription}</DialogContentText>
+        )}
+        {actionContent !== undefined && actionContent}
       </DialogContent>
       <DialogActions>
         <Button onClick={onAction} color="primary">
