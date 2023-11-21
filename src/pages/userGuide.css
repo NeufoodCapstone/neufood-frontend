@@ -1,6 +1,6 @@
 .header-container {
-    background-color: #f6efec; /* Add your desired background color */
-    padding: 10px; /* Add padding as needed */ 
+    background-color: #f6efec; 
+    padding: 10px; 
 }
 
 .logo-title-container {
@@ -9,12 +9,12 @@
 }
 
 .img-logo-position {
-    max-width: 150px; /* Adjust the maximum width of the logo as needed */
+    max-width: 150px; 
     height: auto;
 }
 
 .userguide-page {
-    max-width: 600px; /* Set your preferred max-width */
+    max-width: 600px; 
     margin: 0 auto; 
     font-family: Urbanist;
     background-color: #f6efec;
@@ -37,21 +37,21 @@ hr{
 }
   
 .section-content .bullet-list li {
-    margin-bottom: 8px; /* Adjust the margin between list items */
+    margin-bottom: 8px; 
 }
 
 .section-content .bullet-list li::before {
-    content: '-'; /* Use a bullet point character */
+    content: '-'; 
     color: #6da34d;
     font-size: 1.5em;
     display: inline-block;
-    width: 1em; /* Adjust the width of the space between the bullet point and the text */
-    margin-left: -1em; /* Negative margin to bring the bullet point closer to the text */
-    margin-right: 0.5em; /* Adjust the space between the bullet point and the text */
+    width: 1em; 
+    margin-left: -1em; 
+    margin-right: 0.5em; 
 }
 
 .section-content {
-    text-align: left; /* Align text to the left */
+    text-align: left; 
     color:#585858;
     font-family: Urbanist;
     font-size: 16px;
@@ -69,6 +69,10 @@ h2{
     text-align: left;
 }
 
+a:link {
+    color: #955E42;
+}
+
 .help-btn{
     border-radius: 100px;
     border: 4px solid #955E42;
@@ -84,13 +88,13 @@ h2{
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .help-btn:hover {
-    background-color:#955E42 ;
-    transform: translateY(-5px); /* Move the button 5 pixels up on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Increase the box shadow on hover */
 
-    
-  }
+.help-btn:hover {
+    background-color:#955E42 ;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+
+}
 
 
 @media screen and (max-width: 600px) {

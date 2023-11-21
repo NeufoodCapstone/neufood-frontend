@@ -30,7 +30,7 @@ const Section = ({ title, content, imageSrc }) => (
         <hr className="divider" />
 
         <Section
-          title="Create an account"
+          title="Create an Account"
           content="You can use an existing Google Account so create a Neufood account, or sign up with Neufood with any valid email of your choice"
         //   imageSrc="" -- here for future use
          
@@ -91,7 +91,9 @@ const Section = ({ title, content, imageSrc }) => (
 
       <p >Still stuck? Help is a mail away!</p>
    
-      <button class="help-btn">Send a Message</button> 
+     <a href="mailto:neufoodcapstone@gmail.com">
+        <button class="help-btn">Send a Message</button> 
+      </a>
 
       </div>
       </div>

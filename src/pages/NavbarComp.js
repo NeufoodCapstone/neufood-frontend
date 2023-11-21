@@ -3,7 +3,6 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Home from ".";
-import Recipe from "./recipe";
 import Ingredients from "./ingredients";
 import Signup from "./Signup";
 import Signin from "./signin";
@@ -175,9 +174,6 @@ export default class NavbarComp extends Component {
             </Route>
             <Route path="/Ingredients">
               <Ingredients />
-            </Route>
-            <Route path="/Recipe">
-              <Recipe />
             </Route>
             <Route path="/FAQ">
               <FAQ />

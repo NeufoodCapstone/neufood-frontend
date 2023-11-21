@@ -275,17 +275,21 @@ export default function SignIn() {
   const [selectedOption, _] = useState("");
 
   return (
+
+    
     <div className="bckgrnd" data-testid="signin-1">
       <ThemeProvider theme={theme}>
         <Container>
+      
           {loginData ? (
             <div className="pad">
-              <div className="container-logotitle">
-                <img className="logo-img" src={logo} />
-                {loginData != null && (
-                  <figcaption className="pageTitle">Profile</figcaption>
-                )}
-              </div>
+                <div className="header-container">
+        <div className="logo-title-container">
+          <img className="img-logo-position" src={logo} alt="Logo" />
+              <h1>Profile</h1>
+            </div>
+            </div>
+
               <Container className="contain">
                 <Card className="card">
                   <Card.Body>
