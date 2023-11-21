@@ -273,12 +273,24 @@ const Ingredients = () => {
             onClose={() => setIsHelpModalOpen(false)}
           />
         )}
+        <Container>
+        <div className="header-container">
+        <div className="logo-title-container">
+          <img className="img-logo-position" src={logo} alt="Logo" />
+          <div className='title-space'>Ingredients</div>
+             
+        </div>
+        </div>
+     
+        </Container>
+        
         <Container className="input-box">
-          <img className="logo-img" src={logo} />
+    
+
           <figcaption className="page-name">
             Add your Ingredient details and track your expiration dates
           </figcaption>
-          <br />
+        
           <button
             className="help-button"
             onClick={() => setIsHelpModalOpen(true)}
@@ -295,6 +307,7 @@ const Ingredients = () => {
             Add Ingredient
           </button>
         </div>
+  
         <Menu {...bindMenu(popupState2)} className="menu">
           <Card className="add-ingredient-card custom-card">
             <h2 className="card-title">Add Ingredient</h2>

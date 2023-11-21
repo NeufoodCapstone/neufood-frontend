@@ -160,10 +160,13 @@ function Pantry() {
           marginBottom: "150px",
         }}
       >
-        <img className="header-img-ctn" src={neufoodLogo} />
-        <br />
-        <figcaption>Pantries</figcaption>
-        <br></br>
+        <div className="header-container">
+        <div className="logo-title-container">
+          <img className="img-logo-position" src={neufoodLogo} alt="Logo" />
+          <h1>Pantries</h1>
+        </div>
+      </div>
+
         <div className="txt-ctn">
           <div className="txt-font-style">
             {" "}
