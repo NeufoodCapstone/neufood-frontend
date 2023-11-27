@@ -161,11 +161,11 @@ function Pantry() {
         }}
       >
         <div className="header-container">
-        <div className="logo-title-container">
-          <img className="img-logo-position" src={neufoodLogo} alt="Logo" />
-          <h1>Pantries</h1>
+          <div className="logo-title-container">
+            <img className="img-logo-position" src={neufoodLogo} alt="Logo" />
+            <h1>Pantries</h1>
+          </div>
         </div>
-      </div>
 
         <div className="txt-ctn">
           <div className="txt-font-style">
@@ -219,8 +219,14 @@ function Pantry() {
                   <Container className="inner-pantry-container">
                     <Card className="inner-pantry-card">
                       <Card.Body>
-                        <form onSubmit={() => submitNewMember(data._id)}>
+                        <form
+                          onSubmit={(e) => {
+                            e.stopPropagation();
+                            submitNewMember(data._id);
+                          }}
+                        >
                           <Form.Control
+                            onClick={(e) => e.stopPropagation()}
                             type="text"
                             name="name"
                             className="join-form"
@@ -238,23 +244,31 @@ function Pantry() {
                   <div className="pantry-name">{data.name}</div>
                   Owner: {data.owner} <br /> Collaborators:{" "}
                   {data.member_list.length} <br />{" "}
-                  <button
-                    className="add-new-membr-btn"
-                    variant="contained"
-                    {...bindTrigger(addNewMember)}
-                  >
-                    Add Member
-                  </button>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <button
+                      className="add-new-membr-btn"
+                      variant="contained"
+                      {...bindTrigger(addNewMember)}
+                    >
+                      Add Member
+                    </button>
+                  </div>
                   <button
                     className="view-ingredients-btn"
-                    onClick={(e) => viewIngredients(e, data._id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      viewIngredients(e, data._id);
+                    }}
                   >
                     View Ingredients
                   </button>
                   <div className="mb-3">
                     <button
                       className="button-3 trash-btn-style"
-                      onClick={() => handleDelete(data._id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(data._id);
+                      }}
                       name="btn2"
                       value="supposed to delete"
                     >

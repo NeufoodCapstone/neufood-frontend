@@ -282,23 +282,19 @@ const Ingredients = () => {
           />
         )}
         <Container>
-        <div className="header-container">
-        <div className="logo-title-container">
-          <img className="img-logo-position" src={logo} alt="Logo" />
-          <div className='title-space'>Ingredients</div>
-             
-        </div>
-        </div>
-     
+          <div className="header-container">
+            <div className="logo-title-container">
+              <img className="img-logo-position" src={logo} alt="Logo" />
+              <div className="title-space">Ingredients</div>
+            </div>
+          </div>
         </Container>
-        
-        <Container className="input-box">
-    
 
+        <Container className="input-box">
           <figcaption className="page-name">
             Add your Ingredient details and track your expiration dates
           </figcaption>
-        
+
           <button
             className="help-button"
             onClick={() => setIsHelpModalOpen(true)}
@@ -315,7 +311,7 @@ const Ingredients = () => {
             Add Ingredient
           </button>
         </div>
-  
+
         <Menu {...bindMenu(popupState2)} className="menu">
           <Card className="add-ingredient-card custom-card">
             <h2 className="card-title">Add Ingredient</h2>
@@ -487,9 +483,10 @@ const Ingredients = () => {
                       <button
                         className="use-button"
                         variant="contained"
-                        onClick={() =>
-                          handleDecrement(input._id, input.quantity - 1)
-                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDecrement(input._id, input.quantity - 1);
+                        }}
                       >
                         Use
                       </button>
@@ -516,7 +513,10 @@ const Ingredients = () => {
                         <button
                           className="delete-button"
                           variant="contained"
-                          onClick={() => setChangePantryId(input._id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setChangePantryId(input._id);
+                          }}
                         >
                           Change Pantry
                         </button>
@@ -544,7 +544,10 @@ const Ingredients = () => {
                         )}
                         <button
                           className="delete-button"
-                          onClick={() => handleDelete(input._id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(input._id);
+                          }}
                         >
                           Delete
                         </button>
