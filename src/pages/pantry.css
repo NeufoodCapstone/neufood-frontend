@@ -1,11 +1,23 @@
+
 .header-container {
   background-color: #f6efec; 
   padding: 10px; 
+  justify-content: center;
+  margin-left: 25%;
+
+}
+
+.title-space{
+  font-family: Urbanist;
+  font-size: 34px;
+
 }
 
 .logo-title-container {
   display: flex;
   align-items: center;
+  margin-left: 60px;
+
 }
 
 .img-logo-position {
@@ -14,15 +26,11 @@
 }
 
 
-
 .pantry-card-style {
   background-color: blanchedalmond;
 }
 
-.header-img-ctn {
-  width: 100px;
-  border-radius: 40px;
-}
+
 figcaption {
   color: #394032;
   height: 50px;

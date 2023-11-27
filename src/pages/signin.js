@@ -283,12 +283,12 @@ export default function SignIn() {
       
           {loginData ? (
             <div className="pad">
-                <div className="header-container">
-        <div className="logo-title-container">
-          <img className="img-logo-position" src={logo} alt="Logo" />
-              <h1>Profile</h1>
-            </div>
-            </div>
+              <div className="header-container">
+                <div className="logo-title-container">
+                  <img className="img-logo-position" src={logo} alt="Logo" />
+                  <h1>Profile</h1>
+                </div>
+              </div>
 
               <Container className="contain">
                 <Card className="card">
