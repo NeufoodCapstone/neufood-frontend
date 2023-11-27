@@ -120,32 +120,17 @@ function Pantry() {
       });
   };
 
-  const submitNewMember = (pantry_id) => {
-    const temp = [];
+  const submitNewMember = async (pantry_id, e) => {
+    e.preventDefault();
 
-    const myRequest = new Request(
-      `${baseURL}/pantry/${pantry_id}/${addedUser}/${loginData.getItem(
-        "loginID"
-      )}`,
-      {
-        method: "POST",
-        mode: "no-cors",
-        credentials: "include",
-        body: "null",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    fetch(myRequest)
-      .then(function (response) {
-        window.location.reload();
-        console.log(response);
-      })
-      .catch(function (e) {
-        console.log(e);
-      });
+    try {
+      await axios.put(
+        `${url}/pantry/${pantry_id}/${addedUser}/${loginData.id}`
+      );
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -222,7 +207,7 @@ function Pantry() {
                         <form
                           onSubmit={(e) => {
                             e.stopPropagation();
-                            submitNewMember(data._id);
+                            submitNewMember(data._id, e);
                           }}
                         >
                           <Form.Control
@@ -231,6 +216,7 @@ function Pantry() {
                             name="name"
                             className="join-form"
                             placeholder="Enter Valid Email:"
+                            onChange={(e) => setAddedUser(e.target.value)}
                           />
                           <button className="button-3 join-btn" type="submit">
                             Add Member
