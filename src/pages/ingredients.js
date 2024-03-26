@@ -272,6 +272,7 @@ const Ingredients = () => {
             closeButtonText={"Close"}
             onClose={() => setIsHelpModalOpen(false)}
             actionContent={
+              // NEEDS TO BE FIXED!
               <video
                 width="285"
                 src="https://drive.google.com/uc?export=download&id=1XnneYEjER3vb3-Z1ihLZkEHERehyui2H"
@@ -508,7 +509,7 @@ const Ingredients = () => {
                         </div>
                         <div className="collaborators">
                           Expiration Date:{" "}
-                          {input.expiration_date.substring(0, 10)}{" "}
+                          {input.expiration_date?.substring(0, 10)}{" "}
                         </div>
                         <button
                           className="delete-button"
