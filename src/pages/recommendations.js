@@ -171,11 +171,4 @@ Code 200 ok
     }
   ]
 }
-
-
-for example
-https://api.edamam.com/api/recipes/v2?type=public&q=chickens&app_id=d84bd53e&app_key=f9be135374357a09f3f98d9ea6bbf00c
-aka: curl -X 'GET'   'https://api.edamam.com/api/recipes/v2?type=public&q=chicken+pot+pie&app_id=d84bd53e&app_key=f9be135374357a09f3f98d9ea6bbf00c'   -H 'accept: application/json' > ./response.txt
-goto ./out.txt
-https://prnt.sc/rw-t4H828rz7
  */
