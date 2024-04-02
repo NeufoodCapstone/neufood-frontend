@@ -11,7 +11,9 @@ import Pantry2 from "./pantry2";
 import Friend from "./friend";
 import FAQ from "./faq";
 import Guide from "./userGuide";
+import Recommendations from "./recommendations"
 import "./NavbarElements.css";
+import { Recommend } from "@mui/icons-material";
 
 export default class NavbarComp extends Component {
   constructor(props) {
@@ -95,6 +97,7 @@ export default class NavbarComp extends Component {
                         >
                           Ingredients
                         </NavDropdown.Item>
+
                         {/* <NavDropdown.Item as={Link} to="/reciperec" onClick={() => this.setState({ tag: "Profile" })}>
                           Recipe Recommender
                         </NavDropdown.Item> */}
@@ -174,6 +177,9 @@ export default class NavbarComp extends Component {
             </Route>
             <Route path="/Ingredients">
               <Ingredients />
+            </Route>
+            <Route path="/Recommendations">
+              <Recommendations />
             </Route>
             <Route path="/FAQ">
               <FAQ />
